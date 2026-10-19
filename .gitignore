@@ -7,3 +7,6 @@
 *.log
 /test-results/
 /playwright-report/
+
+# Buraxılış arxivləri
+*.zip

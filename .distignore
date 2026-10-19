@@ -63,3 +63,6 @@
 /.playwright-mcp
 .DS_Store
 *.log
+
+# Buraxılış arxivləri (növbəti arxivə köhnəsi düşməsin)
+*.zip
