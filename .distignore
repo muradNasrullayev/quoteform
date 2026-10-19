@@ -37,11 +37,11 @@
 /.superpowers
 /CLAUDE.md
 
-# Composer manifestləri arxivdə lazım deyil; `vendor/autoload.php` lazımdır.
+# `composer.json` arxivdə QALIR: `vendor/` olan pluginlərdə wp.org onu tələb edir
+# (Plugin Check: missing_composer_json_file). `composer.lock` lazım deyil.
 # ARXİV `composer install --no-dev --optimize-autoloader`-dan SONRA yığılmalıdır —
 # aşağıdakı sətirlər yalnız o addım unudulsa, dev paketlərinin arxivə
 # düşməməsi üçün ikinci müdafiə xəttidir.
-/composer.json
 /composer.lock
 /vendor/bin
 /vendor/doctrine
