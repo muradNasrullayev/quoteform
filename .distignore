@@ -1,0 +1,65 @@
+# wp.org-a gedən arxivdən ÇIXARILAN fayllar (`wp dist-archive` bu faylı oxuyur).
+#
+# Qayda sadədir: arxivdə YALNIZ pluginin işləməsi üçün lazım olanlar qalır —
+# `quoteform.php`, `uninstall.php`, `readme.txt`, `includes/`, `build/`,
+# `languages/` və `vendor/`-un yalnız autoload hissəsi.
+#
+# `build/` repoya daxildir və arxivə də DÜŞMƏLİDİR (spec §20): istifadəçi
+# tərəfində build pipeline yoxdur. Mənbə (`admin-src/`, `frontend-src/`) isə
+# düşmür — o, `build/`-ə çevrilib.
+
+# Mənbə və qurma alətləri
+/admin-src
+/frontend-src
+/bin
+/docker
+/node_modules
+/babel.config.js
+/jest.config.js
+/package.json
+/package-lock.json
+/playwright.config.js
+/docker-compose.yml
+/Makefile
+
+# Testlər və onların nəticələri
+/tests
+/test-results
+/playwright-report
+/phpunit.xml
+/phpunit-integration.xml
+/phpunit-integration-trash-disabled.xml
+/.phpunit.result.cache
+
+# Daxili sənədləşmə və planlar. Bunlar tarixi qeydlərdir, məhsul deyil —
+# arxivə düşsəydi, istifadəçi pluginin özü kimi oxuyardı.
+/docs
+/.superpowers
+/CLAUDE.md
+
+# Composer manifestləri arxivdə lazım deyil; `vendor/autoload.php` lazımdır.
+# ARXİV `composer install --no-dev --optimize-autoloader`-dan SONRA yığılmalıdır —
+# aşağıdakı sətirlər yalnız o addım unudulsa, dev paketlərinin arxivə
+# düşməməsi üçün ikinci müdafiə xəttidir.
+/composer.json
+/composer.lock
+/vendor/bin
+/vendor/doctrine
+/vendor/myclabs
+/vendor/nikic
+/vendor/phar-io
+/vendor/phpunit
+/vendor/sebastian
+/vendor/theseer
+/vendor/yoast
+
+# Versiya nəzarəti və redaktor zibili
+/.git
+/.github
+.gitignore
+/.distignore
+/.idea
+/.junie
+/.playwright-mcp
+.DS_Store
+*.log

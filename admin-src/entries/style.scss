@@ -1,0 +1,7 @@
+// Entries paketi builder ilə eyni əsas stilləri işlədir (kök `.quoteform_builder`),
+// amma builder paketini yükləmir — ona görə partial-lar burada ayrıca import olunur.
+@import "../styles/tokens";
+@import "../styles/base";
+@import "../styles/shell";
+@import "../styles/list";
+@import "./entries";

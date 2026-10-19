@@ -1,0 +1,409 @@
+// --- Fields -------------------------------------------------------------------
+
+.quoteform_builder .quoteform_fields-layout {
+	display: grid;
+	grid-template-columns: minmax( 0, 1fr ) minmax( 0, 1.15fr );
+	gap: 16px;
+	align-items: start;
+}
+
+.quoteform_builder .quoteform_fields-layout__editor {
+	position: sticky;
+	top: calc( var( --wp-admin--admin-bar--height, 32px ) + 76px );
+}
+
+@media ( max-width: 600px ) {
+	.quoteform_builder .quoteform_fields-layout__editor {
+		top: 76px;
+	}
+}
+
+@media ( max-width: 1100px ) {
+	.quoteform_builder .quoteform_fields-layout {
+		grid-template-columns: minmax( 0, 1fr );
+	}
+
+	.quoteform_builder .quoteform_fields-layout__editor {
+		position: static;
+	}
+}
+
+.quoteform_builder .quoteform_fields__add {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: flex-end;
+	gap: 8px;
+
+	label {
+		flex-basis: 100%;
+		font-size: 12px;
+		font-weight: 600;
+	}
+
+	select {
+		flex: 1;
+		min-height: 36px;
+		line-height: normal;
+		border-radius: var( --qf-control-radius );
+	}
+}
+
+.quoteform_builder .quoteform_fields__list {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+
+	> li {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: 6px;
+		margin: 0 0 4px;
+		padding: 4px 4px 4px 0;
+		border: 1px solid transparent;
+		border-radius: var( --qf-control-radius );
+
+		&:hover {
+			background: var( --qf-subtle );
+		}
+
+		&.is-selected {
+			background: var( --qf-accent-soft );
+			border-color: var( --qf-accent );
+		}
+
+		> .quoteform_confirm {
+			flex-basis: 100%;
+		}
+	}
+}
+
+.quoteform_builder .quoteform_fields__name {
+	flex: 1;
+	min-width: 0;
+	padding: 6px 10px;
+	font: inherit;
+	font-weight: 500;
+	color: var( --qf-text );
+	text-align: start;
+	background: none;
+	border: 0;
+	border-radius: var( --qf-control-radius );
+	cursor: pointer;
+
+	&:focus-visible {
+		outline: 2px solid var( --qf-accent );
+	}
+}
+
+.quoteform_builder .quoteform_fields-layout__editor .quoteform_panel {
+	display: grid;
+	gap: 12px;
+}
+
+// Grid `gap` artıq aralığı verir; `.quoteform_panel > * + *` marjı ikiqat etməsin.
+.quoteform_builder .quoteform_fields-layout__editor .quoteform_panel > * + * {
+	margin-top: 0;
+}
+
+// --- Steps --------------------------------------------------------------------
+
+.quoteform_builder .quoteform_step {
+	display: grid;
+	gap: 12px;
+}
+
+.quoteform_builder .quoteform_step__head {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	font-weight: 600;
+}
+
+.quoteform_builder .quoteform_step__number {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 22px;
+	height: 22px;
+	font-size: 11px;
+	color: #50575e;
+	background: var( --qf-bg );
+	border-radius: 50%;
+}
+
+.quoteform_builder .quoteform_step__texts {
+	display: grid;
+	grid-template-columns: minmax( 0, 1fr ) minmax( 0, 1.4fr );
+	gap: 12px;
+}
+
+@media ( max-width: 782px ) {
+	.quoteform_builder .quoteform_step__texts {
+		grid-template-columns: minmax( 0, 1fr );
+	}
+}
+
+.quoteform_builder .quoteform_step__tools {
+	display: flex;
+	align-items: center;
+	gap: 4px;
+}
+
+.quoteform_builder .quoteform_step__fields {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 6px;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.quoteform_builder .quoteform_chip {
+	display: inline-flex;
+	align-items: center;
+	gap: 2px;
+	margin: 0;
+	padding-inline: 10px 2px;
+	font-size: 12px;
+	color: #135e96;
+	background: var( --qf-accent-soft );
+	border: 1px solid #c5d9ed;
+	border-radius: 999px;
+}
+
+.quoteform_builder .quoteform_chip__remove {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 22px;
+	height: 22px;
+	padding: 0;
+	font-size: 10px;
+	color: var( --qf-muted );
+	background: none;
+	border: 0;
+	border-radius: 50%;
+	cursor: pointer;
+
+	&:hover {
+		color: var( --qf-danger );
+		background: var( --qf-danger-soft );
+	}
+
+	&:focus-visible {
+		outline: 2px solid var( --qf-accent );
+	}
+}
+
+.quoteform_builder .quoteform_unplaced {
+	padding: 12px 16px;
+	background: var( --qf-warning-bg );
+	border: 1px dashed var( --qf-warning-border );
+	border-radius: var( --qf-radius );
+
+	ul {
+		display: grid;
+		gap: 8px;
+		margin: 8px 0 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	li {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: 8px;
+		margin: 0;
+	}
+
+	label {
+		font-size: 12px;
+	}
+
+	select {
+		min-height: 36px;
+		line-height: normal;
+		border-radius: var( --qf-control-radius );
+	}
+}
+
+// --- Pricing --------------------------------------------------------------------
+
+.quoteform_builder .quoteform_calculation {
+	display: grid;
+	gap: 12px;
+}
+
+.quoteform_builder .quoteform_calculation__head {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	font-weight: 600;
+}
+
+.quoteform_builder .quoteform_calculation__key {
+	padding: 1px 6px;
+	font-size: 12px;
+	font-weight: 400;
+	color: var( --qf-muted );
+	background: var( --qf-subtle );
+	border-radius: 4px;
+}
+
+.quoteform_builder .quoteform_calculation__pair {
+	display: grid;
+	grid-template-columns: minmax( 0, 1fr ) minmax( 0, 1fr );
+	gap: 8px 12px;
+
+	> .quoteform_warning {
+		grid-column: 1 / -1;
+	}
+}
+
+@media ( max-width: 782px ) {
+	.quoteform_builder .quoteform_calculation__pair {
+		grid-template-columns: minmax( 0, 1fr );
+	}
+}
+
+.quoteform_builder .quoteform_formula {
+	display: grid;
+	gap: 4px;
+
+	> label {
+		font-size: 12px;
+		font-weight: 600;
+	}
+}
+
+.quoteform_builder .quoteform_formula__input {
+	width: 100%;
+	min-height: 56px;
+	padding: 8px 10px;
+	font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+	font-size: 13px;
+	background: var( --qf-subtle );
+	border: 1px solid var( --qf-field );
+	border-radius: var( --qf-control-radius );
+
+	&:focus {
+		background: var( --qf-surface );
+		border-color: var( --qf-accent );
+		outline: 1px solid var( --qf-accent );
+		box-shadow: none;
+	}
+
+	&[aria-invalid="true"] {
+		border-color: var( --qf-danger );
+	}
+}
+
+.quoteform_builder .quoteform_formula__verdict {
+	margin: 0;
+	font-size: 12px;
+
+	&.is-ok {
+		color: var( --qf-success );
+	}
+
+	&.is-error {
+		color: var( --qf-danger );
+	}
+
+	&.is-empty {
+		color: var( --qf-muted );
+	}
+}
+
+.quoteform_builder .quoteform_formula__help {
+	font-size: 12px;
+	color: var( --qf-muted );
+
+	summary {
+		color: var( --qf-accent );
+		cursor: pointer;
+	}
+
+	ul {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 4px;
+		margin: 6px 0 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	li {
+		margin: 0;
+		padding: 1px 6px;
+		font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+		background: var( --qf-subtle );
+		border-radius: 4px;
+	}
+}
+
+// --- Rules --------------------------------------------------------------------
+
+.quoteform_builder .quoteform_rule {
+	display: grid;
+	gap: 10px;
+}
+
+.quoteform_builder .quoteform_rule__sentence,
+.quoteform_builder .quoteform_rule-condition {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 6px 8px;
+
+	.quoteform_control {
+		flex: 0 1 auto;
+		min-width: 140px;
+	}
+
+	.quoteform_field-error,
+	.quoteform_confirm {
+		flex-basis: 100%;
+	}
+}
+
+.quoteform_builder .quoteform_rule-condition {
+	padding: 6px 8px;
+	background: var( --qf-subtle );
+	border-radius: var( --qf-control-radius );
+}
+
+.quoteform_builder .quoteform_rule__word {
+	min-width: 24px;
+	font-size: 12px;
+	color: var( --qf-muted );
+}
+
+// --- Settings -----------------------------------------------------------------
+
+.quoteform_builder .quoteform_settings-group {
+	display: grid;
+	gap: 12px;
+
+	h3 {
+		font-size: 11px;
+		font-weight: 600;
+		letter-spacing: 0.05em;
+		color: var( --qf-muted );
+		text-transform: uppercase;
+	}
+}
+
+.quoteform_builder .quoteform_settings-group__row {
+	display: grid;
+	grid-template-columns: repeat( 3, minmax( 0, 1fr ) );
+	gap: 12px;
+}
+
+@media ( max-width: 782px ) {
+	.quoteform_builder .quoteform_settings-group__row {
+		grid-template-columns: minmax( 0, 1fr );
+	}
+}

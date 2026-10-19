@@ -1,0 +1,421 @@
+.quoteform_builder {
+	max-width: 1280px;
+	color: var( --qf-text );
+
+	*,
+	*::before,
+	*::after {
+		box-sizing: border-box;
+	}
+
+	// WP admininin `.screen-reader-text`-i hər admin səhifəsində var; bu
+	// ehtiyat yalnız o stil nədənsə yüklənməyəndə (məs. testlərdə) işləyir.
+	.screen-reader-text {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		margin: -1px;
+		padding: 0;
+		overflow: hidden;
+		clip: rect( 0 0 0 0 );
+		white-space: nowrap;
+		border: 0;
+	}
+
+	h2 {
+		margin: 0;
+		font-size: 18px;
+		font-weight: 600;
+	}
+
+	h3 {
+		margin: 0;
+		font-size: 14px;
+		font-weight: 600;
+	}
+}
+
+// --- Düymə ---------------------------------------------------------------
+
+.quoteform_builder .quoteform_button,
+.quoteform_block .quoteform_button {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	min-height: 32px;
+	margin: 0;
+	padding: 0 12px;
+	font: inherit;
+	font-size: 13px;
+	font-weight: 500;
+	line-height: 1;
+	color: var( --qf-text );
+	white-space: nowrap;
+	background: var( --qf-surface );
+	border: 1px solid var( --qf-field );
+	border-radius: var( --qf-control-radius );
+	cursor: pointer;
+	transition: background-color 0.12s ease, border-color 0.12s ease, color 0.12s ease;
+
+	&:hover:not( :disabled ) {
+		background: var( --qf-subtle );
+	}
+
+	&:focus-visible {
+		outline: 2px solid var( --qf-accent );
+		outline-offset: 1px;
+	}
+
+	&:disabled {
+		cursor: default;
+		opacity: 0.5;
+	}
+}
+
+.quoteform_builder .quoteform_button--primary {
+	color: #fff;
+	background: var( --qf-accent );
+	border-color: var( --qf-accent );
+
+	&:hover:not( :disabled ) {
+		background: var( --qf-accent-dark );
+		border-color: var( --qf-accent-dark );
+	}
+}
+
+.quoteform_builder .quoteform_button--ghost {
+	color: var( --qf-accent );
+	background: transparent;
+	border-color: transparent;
+
+	&:hover:not( :disabled ) {
+		background: var( --qf-accent-soft );
+	}
+}
+
+.quoteform_builder .quoteform_button--danger {
+	color: var( --qf-danger );
+	background: transparent;
+	border-color: transparent;
+
+	&:hover:not( :disabled ) {
+		background: var( --qf-danger-soft );
+	}
+}
+
+// Saxlama zamanı: mətn "Save" qalır (əlçatan ad dəyişməsin), yanında spinner.
+.quoteform_builder .quoteform_button[aria-busy="true"]::after {
+	content: "";
+	width: 12px;
+	height: 12px;
+	border: 2px solid currentColor;
+	border-inline-end-color: transparent;
+	border-radius: 50%;
+	animation: quoteform-spin 0.7s linear infinite;
+}
+
+@keyframes quoteform-spin {
+	to {
+		transform: rotate( 360deg );
+	}
+}
+
+// --- Kart, nişanlar, boş vəziyyət -----------------------------------------
+
+.quoteform_builder .quoteform_card {
+	padding: 16px;
+	background: var( --qf-surface );
+	border: 1px solid var( --qf-border );
+	border-radius: var( --qf-radius );
+	box-shadow: var( --qf-shadow );
+}
+
+.quoteform_builder .quoteform_badge {
+	display: inline-flex;
+	align-items: center;
+	padding: 2px 8px;
+	font-size: 11px;
+	font-weight: 500;
+	line-height: 1.5;
+	color: #50575e;
+	white-space: nowrap;
+	background: var( --qf-bg );
+	border-radius: 999px;
+}
+
+.quoteform_builder .quoteform_badge--problem {
+	color: var( --qf-danger );
+	background: var( --qf-danger-soft );
+}
+
+.quoteform_builder .quoteform_badge--dirty {
+	color: var( --qf-warning );
+	background: var( --qf-warning-bg );
+}
+
+.quoteform_builder .quoteform_empty {
+	padding: 32px 16px;
+	color: var( --qf-muted );
+	text-align: center;
+}
+
+// --- Ümumi control görünüşü -------------------------------------------------
+
+.quoteform_builder .quoteform_control {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+	min-width: 0;
+
+	> label {
+		font-size: 12px;
+		font-weight: 600;
+	}
+
+	input:not( [type="checkbox"] ),
+	select,
+	textarea {
+		width: 100%;
+		max-width: none;
+		min-height: 36px;
+		margin: 0;
+		padding: 4px 8px;
+		font-size: 13px;
+		border: 1px solid var( --qf-field );
+		border-radius: var( --qf-control-radius );
+		box-shadow: none;
+	}
+
+	// WP nüvəsi select-ə daha böyük `line-height` verir, bu da `min-height`-i
+	// keçib hündürlüyü mətn sahələrindən fərqləndirir; sıfırlayıb bərabərləşdiririk.
+	// `padding-inline-end` nüvənin ox işarəsi üçün yer saxlayır (RTL-də özü çevrilir).
+	select {
+		padding-inline-end: 28px;
+		line-height: normal;
+	}
+
+	textarea {
+		min-height: 64px;
+	}
+
+	input:focus,
+	select:focus,
+	textarea:focus {
+		border-color: var( --qf-accent );
+		outline: 1px solid var( --qf-accent );
+		box-shadow: none;
+	}
+
+	// `:is(...)` specifikliyi yuxarıdakı `input:not([type="checkbox"])`-u
+	// (0,3,1) üstələyir — `!important` olmadan.
+	:is( input, select, textarea )[aria-invalid="true"] {
+		border-color: var( --qf-danger );
+	}
+}
+
+// Görünən qısa etiketin ilk hərfi böyüdülür; CSS çevrilməsi əlçatan ada
+// təsir etmir ("Calculation 1 key" ekranda "Key" görünür).
+.quoteform_builder .quoteform_label-visible {
+	display: inline-block;
+
+	&::first-letter {
+		text-transform: uppercase;
+	}
+}
+
+.quoteform_builder .quoteform_control--toggle {
+	flex-direction: row;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 8px;
+
+	> label {
+		font-size: 13px;
+		font-weight: 400;
+	}
+
+	> .quoteform_help,
+	> .quoteform_field-error {
+		flex-basis: 100%;
+	}
+
+	input[type="checkbox"] {
+		position: relative;
+		width: 32px;
+		height: 18px;
+		margin: 0;
+		appearance: none;
+		background: var( --qf-field );
+		border: 0;
+		border-radius: 9px;
+		box-shadow: none;
+		cursor: pointer;
+		transition: background-color 0.15s ease;
+
+		&::before {
+			content: "";
+			position: absolute;
+			inset-block-start: 2px;
+			inset-inline-start: 2px;
+			width: 14px;
+			height: 14px;
+			margin: 0;
+			background: #fff;
+			border-radius: 50%;
+			transition: transform 0.15s ease;
+		}
+
+		&:checked {
+			background: var( --qf-accent );
+
+			&::before {
+				transform: translateX( 14px );
+			}
+		}
+
+		&:focus-visible {
+			outline: 2px solid var( --qf-accent );
+			outline-offset: 2px;
+		}
+	}
+}
+
+// Məcburi rənglər rejimində fon rəngləri silinir — açar və düymə sistem
+// rəngləri ilə çəkilir ki, hər iki vəziyyət görünsün.
+@media ( forced-colors: active ) {
+	.quoteform_builder .quoteform_control--toggle input[type="checkbox"] {
+		background: Canvas;
+		border: 1px solid CanvasText;
+
+		&::before {
+			background: CanvasText;
+		}
+
+		&:checked {
+			background: Highlight;
+
+			&::before {
+				background: HighlightText;
+			}
+		}
+	}
+}
+
+.quoteform_builder .quoteform_help {
+	margin: 0;
+	font-size: 12px;
+	color: var( --qf-muted );
+}
+
+.quoteform_builder .quoteform_field-error {
+	margin: 0;
+	padding: 0;
+	font-size: 12px;
+	font-weight: 600;
+	color: var( --qf-danger );
+	list-style: none;
+
+	li::before {
+		content: "\26A0\FE0E";
+		margin-inline-end: 4px;
+	}
+}
+
+.quoteform_builder .quoteform_warning,
+.quoteform_builder .quoteform_confirm {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 8px;
+	margin: 0;
+	padding: 8px 12px;
+	font-size: 13px;
+	color: var( --qf-text );
+	background: var( --qf-warning-bg );
+	border-inline-start: 3px solid var( --qf-warning-border );
+	border-radius: var( --qf-control-radius );
+}
+
+.quoteform_builder .quoteform_confirm p {
+	margin: 0;
+}
+
+.quoteform_builder .quoteform_notice {
+	display: flex;
+	align-items: flex-start;
+	gap: 8px;
+	margin: 0 0 var( --qf-gap );
+	padding: 10px 12px;
+	background: var( --qf-surface );
+	border: 1px solid var( --qf-border );
+	border-inline-start: 4px solid var( --qf-accent );
+	border-radius: var( --qf-control-radius );
+
+	&.quoteform_notice--success {
+		border-inline-start-color: var( --qf-success );
+	}
+
+	&.quoteform_notice--warning {
+		border-inline-start-color: var( --qf-warning-border );
+	}
+
+	&.quoteform_notice--error {
+		border-inline-start-color: var( --qf-danger );
+	}
+
+	.quoteform_notice__body {
+		flex: 1;
+
+		p {
+			margin: 0;
+		}
+	}
+
+	.quoteform_notice__dismiss {
+		padding: 0 4px;
+		font-size: 18px;
+		line-height: 1;
+		color: var( --qf-muted );
+		background: none;
+		border: 0;
+		cursor: pointer;
+	}
+}
+
+.quoteform_builder .quoteform_move {
+	display: inline-flex;
+
+	button {
+		width: 28px;
+		min-height: 28px;
+		padding: 0;
+		color: var( --qf-muted );
+		background: transparent;
+		border: 0;
+		border-radius: var( --qf-control-radius );
+		cursor: pointer;
+
+		&:hover:not( :disabled ) {
+			color: var( --qf-accent );
+			background: var( --qf-accent-soft );
+		}
+
+		&:disabled {
+			opacity: 0.35;
+			cursor: default;
+		}
+
+		&:focus-visible {
+			outline: 2px solid var( --qf-accent );
+		}
+	}
+}
+
+@media ( prefers-reduced-motion: reduce ) {
+	.quoteform_builder *,
+	.quoteform_builder *::before,
+	.quoteform_builder *::after {
+		transition: none !important;
+		animation: none !important;
+	}
+}

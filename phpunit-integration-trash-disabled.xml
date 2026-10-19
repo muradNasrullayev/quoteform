@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Separate from phpunit-integration.xml on purpose: this suite boots
+    WordPress with EMPTY_TRASH_DAYS forced to 0 (Trash disabled), which the
+    normal integration bootstrap cannot do because the constant, once
+    core defines it, cannot be redefined mid-process. See
+    tests/integration-trash-disabled/bootstrap.php.
+-->
+<phpunit bootstrap="tests/integration-trash-disabled/bootstrap.php"
+         colors="true"
+         convertDeprecationsToExceptions="false"
+         failOnWarning="true">
+    <testsuites>
+        <testsuite name="integration-trash-disabled">
+            <directory>tests/integration-trash-disabled</directory>
+        </testsuite>
+    </testsuites>
+</phpunit>

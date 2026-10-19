@@ -1,0 +1,137 @@
+{
+  "version": 1,
+  "cases": [
+    {
+      "id": "single-calculation",
+      "calculations": [ { "key": "total", "expression": "{a} * 2" } ],
+      "vars": { "a": 5 },
+      "expect": { "total": 10 }
+    },
+    {
+      "id": "chained-in-order",
+      "calculations": [
+        { "key": "subtotal", "expression": "{a} * 2" },
+        { "key": "total", "expression": "{subtotal} + 10" }
+      ],
+      "vars": { "a": 5 },
+      "expect": { "subtotal": 10, "total": 20 }
+    },
+    {
+      "id": "chained-out-of-order",
+      "calculations": [
+        { "key": "total", "expression": "{subtotal} + 10" },
+        { "key": "subtotal", "expression": "{a} * 2" }
+      ],
+      "vars": { "a": 5 },
+      "expect": { "subtotal": 10, "total": 20 }
+    },
+    {
+      "id": "three-level-chain",
+      "calculations": [
+        { "key": "total", "expression": "round({withTax} + {fee}, 2)" },
+        { "key": "withTax", "expression": "{subtotal} * 1.2" },
+        { "key": "fee", "expression": "5" },
+        { "key": "subtotal", "expression": "{rooms} * 50" }
+      ],
+      "vars": { "rooms": 3 },
+      "expect": { "subtotal": 150, "withTax": 180, "fee": 5, "total": 185 }
+    },
+    {
+      "id": "calculation-overrides-field-of-same-name",
+      "calculations": [
+        { "key": "total", "expression": "99" },
+        { "key": "doubled", "expression": "{total} * 2" }
+      ],
+      "vars": { "total": 5 },
+      "expect": { "total": 99, "doubled": 198 }
+    },
+    {
+      "id": "conditional-surcharge",
+      "calculations": [
+        { "key": "subtotal", "expression": "{rooms} * 50 + {bathrooms} * 120" },
+        { "key": "total", "expression": "round(if({urgency} == \"express\", {subtotal} * 1.3, {subtotal}), 2)" }
+      ],
+      "vars": { "rooms": 3, "bathrooms": 2, "urgency": "express" },
+      "expect": { "subtotal": 390, "total": 507 }
+    },
+    {
+      "id": "hidden-field-counts-as-zero",
+      "calculations": [ { "key": "total", "expression": "{rooms} * 50 + {extra} * 100" } ],
+      "vars": { "rooms": 2, "extra": "" },
+      "expect": { "total": 100 }
+    },
+    {
+      "id": "empty-calculation-list",
+      "calculations": [],
+      "vars": { "a": 1 },
+      "expect": {}
+    },
+    {
+      "id": "error-direct-cycle",
+      "calculations": [
+        { "key": "a", "expression": "{b}" },
+        { "key": "b", "expression": "{a}" }
+      ],
+      "vars": {},
+      "error": "circular_reference"
+    },
+    {
+      "id": "error-self-reference",
+      "calculations": [ { "key": "a", "expression": "{a} + 1" } ],
+      "vars": {},
+      "error": "circular_reference"
+    },
+    {
+      "id": "error-indirect-cycle",
+      "calculations": [
+        { "key": "a", "expression": "{b}" },
+        { "key": "b", "expression": "{c}" },
+        { "key": "c", "expression": "{a}" }
+      ],
+      "vars": {},
+      "error": "circular_reference"
+    },
+    {
+      "id": "error-duplicate-key",
+      "calculations": [
+        { "key": "a", "expression": "1" },
+        { "key": "a", "expression": "2" }
+      ],
+      "vars": {},
+      "error": "duplicate_calculation_key"
+    },
+    {
+      "id": "error-unknown-variable-in-calculation",
+      "calculations": [ { "key": "total", "expression": "{nope} * 2" } ],
+      "vars": { "a": 1 },
+      "error": "unknown_variable"
+    },
+    {
+      "id": "numeric-like-keys-independent",
+      "calculations": [
+        { "key": "2", "expression": "{a} * 2" },
+        { "key": "1", "expression": "{a} + 1" }
+      ],
+      "vars": { "a": 5 },
+      "expect": { "2": 10, "1": 6 }
+    },
+    {
+      "id": "numeric-like-keys-dependency",
+      "calculations": [
+        { "key": "2", "expression": "{a} * 2" },
+        { "key": "1", "expression": "{2} + 1" }
+      ],
+      "vars": { "a": 5 },
+      "expect": { "2": 10, "1": 11 }
+    },
+    {
+      "id": "prototype-key-is-a-normal-key",
+      "calculations": [
+        { "key": "__proto__", "expression": "{a} * 2" },
+        { "key": "doubled", "expression": "{__proto__} + 1" }
+      ],
+      "vars": { "a": 5 },
+      "expect": { "__proto__": 10, "doubled": 11 }
+    }
+  ]
+}

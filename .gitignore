@@ -1,0 +1,9 @@
+/vendor/
+/node_modules/
+/.superpowers/
+/.idea/
+.phpunit.result.cache
+.DS_Store
+*.log
+/test-results/
+/playwright-report/

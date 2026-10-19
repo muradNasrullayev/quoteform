@@ -1,0 +1,2206 @@
+# Copyright (C) 2026 Murad Nasrullayev
+# This file is distributed under the GPL-2.0-or-later.
+msgid ""
+msgstr ""
+"Project-Id-Version: Quoteform 0.1.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/quoteform\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2026-09-25T11:27:24+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.12.0\n"
+"X-Domain: quoteform\n"
+
+#. Plugin Name of the plugin
+#: quoteform.php
+#: includes/Admin/BuilderPage.php:40
+#: includes/Admin/BuilderPage.php:41
+#: includes/Admin/EntriesPage.php:46
+#: includes/Admin/EntriesPage.php:47
+#: admin-src/screens/FormListScreen.js:120
+msgid "Quoteform"
+msgstr ""
+
+#. Plugin URI of the plugin
+#: quoteform.php
+msgid "https://wordpress.org/plugins/quoteform/"
+msgstr ""
+
+#. Description of the plugin
+#: quoteform.php
+msgid "Multi-step quote calculator and conditional logic forms. Free, with no paid upgrade."
+msgstr ""
+
+#. Author of the plugin
+#: quoteform.php
+msgid "Murad Nasrullayev"
+msgstr ""
+
+#: includes/Admin/BuilderPage.php:54
+#: includes/Admin/BuilderPage.php:55
+#: admin-src/screens/EditorScreen.js:259
+msgid "Forms"
+msgstr ""
+
+#: includes/Admin/EntriesExport.php:46
+msgid "Sorry, you are not allowed to export entries."
+msgstr ""
+
+#: includes/Admin/EntriesExport.php:52
+msgid "This export link has expired. Reload the Entries page and try again."
+msgstr ""
+
+#: includes/Admin/EntriesPage.php:60
+#: includes/Admin/EntriesPage.php:61
+#: admin-src/entries/EntriesListScreen.js:379
+msgid "Entries"
+msgstr ""
+
+#. translators: %s: number of unread entries.
+#: includes/Admin/EntriesPage.php:85
+#: admin-src/entries/menuBadge.js:32
+#, php-format,js-format
+msgid "%s unread entry"
+msgid_plural "%s unread entries"
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/Entries/CsvExporter.php:72
+msgid "ID"
+msgstr ""
+
+#: includes/Entries/CsvExporter.php:73
+#: admin-src/entries/EntriesTable.js:21
+#: admin-src/state/fields.js:54
+msgid "Date"
+msgstr ""
+
+#: includes/Entries/CsvExporter.php:74
+#: admin-src/entries/FilterBar.js:165
+msgid "Status"
+msgstr ""
+
+#: includes/Entries/CsvExporter.php:75
+#: includes/Forms/SchemaRepository.php:72
+#: admin-src/entries/EntriesTable.js:21
+#: admin-src/entries/EntryDetailScreen.js:81
+#: frontend-src/dom/submit.js:109
+msgid "Total"
+msgstr ""
+
+#: includes/Entries/CsvExporter.php:76
+#: admin-src/panels/SettingsPanel.js:35
+msgid "Currency"
+msgstr ""
+
+#: includes/Entries/CsvExporter.php:81
+#: admin-src/entries/EntriesTable.js:165
+#: admin-src/entries/FilterBar.js:158
+#: admin-src/screens/FormListScreen.js:151
+msgid "Form"
+msgstr ""
+
+#: includes/Entries/CsvExporter.php:82
+#: admin-src/entries/EntryDetailScreen.js:38
+msgid "Answers"
+msgstr ""
+
+#: includes/Entries/CsvExporter.php:160
+#: admin-src/entries/EntriesTable.js:193
+#: admin-src/entries/EntryDetailScreen.js:361
+#: admin-src/entries/FilterBar.js:169
+msgid "New"
+msgstr ""
+
+#: includes/Entries/CsvExporter.php:160
+#: admin-src/entries/EntryDetailScreen.js:361
+#: admin-src/entries/FilterBar.js:170
+msgid "Read"
+msgstr ""
+
+#: includes/Entries/CsvExporter.php:175
+#: admin-src/entries/EntriesTable.js:65
+#: admin-src/entries/EntryDetailScreen.js:352
+msgid "(deleted form)"
+msgstr ""
+
+#: includes/Entries/EntryPresenter.php:121
+msgid "Yes"
+msgstr ""
+
+#: includes/Entries/EntryPresenter.php:121
+msgid "No"
+msgstr ""
+
+#. translators: %d: form id.
+#: includes/Entries/EntryPresenter.php:155
+#: admin-src/entries/FilterBar.js:113
+#, php-format,js-format
+msgid "Form #%d"
+msgstr ""
+
+#. translators: %d: user id.
+#: includes/Entries/EntryPresenter.php:268
+#, php-format
+msgid "Deleted user #%d"
+msgstr ""
+
+#: includes/Forms/CalculationValidator.php:41
+msgid "Calculations must be a list."
+msgstr ""
+
+#: includes/Forms/CalculationValidator.php:47
+msgid "A form needs at least one calculation."
+msgstr ""
+
+#: includes/Forms/CalculationValidator.php:59
+msgid "A form must have a calculation called \"total\"."
+msgstr ""
+
+#: includes/Forms/CalculationValidator.php:108
+msgid "A calculation must be an object."
+msgstr ""
+
+#: includes/Forms/CalculationValidator.php:115
+msgid "Unknown key in calculation."
+msgstr ""
+
+#: includes/Forms/CalculationValidator.php:121
+#: includes/Forms/FieldValidator.php:83
+#: includes/Forms/RuleValidator.php:93
+#: includes/Forms/RuleValidator.php:143
+#: includes/Forms/RuleValidator.php:205
+#: includes/Forms/SchemaValidator.php:44
+#: includes/Forms/StepValidator.php:59
+msgid "This key is required."
+msgstr ""
+
+#: includes/Forms/CalculationValidator.php:126
+msgid "A calculation needs a label."
+msgstr ""
+
+#: includes/Forms/CalculationValidator.php:130
+msgid "Visible must be true or false."
+msgstr ""
+
+#: includes/Forms/CalculationValidator.php:138
+msgid "A calculation key must be text."
+msgstr ""
+
+#: includes/Forms/CalculationValidator.php:148
+msgid "Calculation keys must be unique."
+msgstr ""
+
+#: includes/Forms/CalculationValidator.php:171
+msgid "An expression must be text."
+msgstr ""
+
+#: includes/Forms/CalculationValidator.php:177
+msgid "A calculation needs an expression."
+msgstr ""
+
+#: includes/Forms/CalculationValidator.php:188
+msgid "This expression is too long."
+msgstr ""
+
+#: includes/Forms/CalculationValidator.php:202
+msgid "This expression could not be understood."
+msgstr ""
+
+#: includes/Forms/CalculationValidator.php:217
+msgid "This expression refers to something that does not exist."
+msgstr ""
+
+#: includes/Forms/CalculationValidator.php:263
+msgid "The calculations reference each other in a loop."
+msgstr ""
+
+#: includes/Forms/CalculationValidator.php:264
+msgid "The calculations could not be ordered."
+msgstr ""
+
+#: includes/Forms/FieldValidator.php:53
+msgid "A field must be an object."
+msgstr ""
+
+#: includes/Forms/FieldValidator.php:64
+msgid "Unknown field type."
+msgstr ""
+
+#: includes/Forms/FieldValidator.php:75
+msgid "This key does not belong to this field type."
+msgstr ""
+
+#: includes/Forms/FieldValidator.php:96
+msgid "The field key must match the key it is stored under."
+msgstr ""
+
+#: includes/Forms/FieldValidator.php:105
+msgid "A field needs a label."
+msgstr ""
+
+#: includes/Forms/FieldValidator.php:111
+msgid "This value must be text."
+msgstr ""
+
+#: includes/Forms/FieldValidator.php:116
+msgid "Required must be true or false."
+msgstr ""
+
+#: includes/Forms/FieldValidator.php:128
+msgid "An HTML block needs content."
+msgstr ""
+
+#: includes/Forms/FieldValidator.php:151
+msgid "This value must be a number."
+msgstr ""
+
+#: includes/Forms/FieldValidator.php:160
+msgid "The minimum cannot be greater than the maximum."
+msgstr ""
+
+#: includes/Forms/FieldValidator.php:166
+msgid "The step must be greater than zero."
+msgstr ""
+
+#: includes/Forms/FieldValidator.php:176
+msgid "Options must be a list."
+msgstr ""
+
+#: includes/Forms/FieldValidator.php:182
+msgid "This field needs at least one option."
+msgstr ""
+
+#: includes/Forms/FieldValidator.php:193
+msgid "An option must be an object."
+msgstr ""
+
+#: includes/Forms/FieldValidator.php:199
+msgid "An option needs a label."
+msgstr ""
+
+#: includes/Forms/FieldValidator.php:205
+msgid "An option needs a value."
+msgstr ""
+
+#: includes/Forms/FieldValidator.php:209
+msgid "An option needs a price."
+msgstr ""
+
+#: includes/Forms/FieldValidator.php:211
+msgid "An option price must be a number."
+msgstr ""
+
+#: includes/Forms/FieldValidator.php:222
+msgid "Option values must be unique within a field."
+msgstr ""
+
+#: includes/Forms/FormPostType.php:27
+msgid "Quote forms"
+msgstr ""
+
+#: includes/Forms/KeyRules.php:55
+msgid "A key must start with a lowercase letter and may contain only lowercase letters, digits and underscores (max 64 characters)."
+msgstr ""
+
+#: includes/Forms/KeyRules.php:66
+msgid "This key is reserved and cannot be used."
+msgstr ""
+
+#: includes/Forms/RuleValidator.php:58
+msgid "Rules must be a list."
+msgstr ""
+
+#: includes/Forms/RuleValidator.php:78
+msgid "A rule must be an object."
+msgstr ""
+
+#: includes/Forms/RuleValidator.php:85
+msgid "Unknown key in rule."
+msgstr ""
+
+#: includes/Forms/RuleValidator.php:105
+msgid "Unknown rule action."
+msgstr ""
+
+#: includes/Forms/RuleValidator.php:110
+msgid "This action can only be applied to a field."
+msgstr ""
+
+#: includes/Forms/RuleValidator.php:116
+msgid "Match must be \"all\" or \"any\"."
+msgstr ""
+
+#: includes/Forms/RuleValidator.php:134
+msgid "A rule target needs a kind and a key."
+msgstr ""
+
+#: includes/Forms/RuleValidator.php:153
+msgid "Target kind must be \"field\" or \"step\"."
+msgstr ""
+
+#: includes/Forms/RuleValidator.php:164
+msgid "This rule targets something that does not exist."
+msgstr ""
+
+#: includes/Forms/RuleValidator.php:181
+msgid "Conditions must be a list."
+msgstr ""
+
+#: includes/Forms/RuleValidator.php:187
+msgid "A rule needs at least one condition."
+msgstr ""
+
+#: includes/Forms/RuleValidator.php:196
+msgid "A condition needs a field and an operator."
+msgstr ""
+
+#: includes/Forms/RuleValidator.php:220
+msgid "This condition tests a field that does not exist."
+msgstr ""
+
+#: includes/Forms/RuleValidator.php:227
+msgid "A rule cannot test the same field it targets — that would loop forever."
+msgstr ""
+
+#: includes/Forms/RuleValidator.php:233
+msgid "Unknown condition operator."
+msgstr ""
+
+#: includes/Forms/RuleValidator.php:239
+msgid "This operator needs a value."
+msgstr ""
+
+#: includes/Forms/SchemaRepository.php:39
+#: includes/Rendering/FormRenderer.php:74
+msgid "Get my quote"
+msgstr ""
+
+#: includes/Forms/SchemaRepository.php:41
+msgid "Thanks — your quote is on the way."
+msgstr ""
+
+#: includes/Forms/SchemaRepository.php:49
+msgid "Your details"
+msgstr ""
+
+#: includes/Forms/SchemaRepository.php:58
+msgid "How many?"
+msgstr ""
+
+#: includes/Forms/SchemaValidator.php:28
+#: includes/Rest/FormsController.php:447
+msgid "A schema must be an object."
+msgstr ""
+
+#: includes/Forms/SchemaValidator.php:35
+msgid "Unknown key in schema."
+msgstr ""
+
+#: includes/Forms/SchemaValidator.php:53
+msgid "Schema version must be a whole number."
+msgstr ""
+
+#: includes/Forms/SchemaValidator.php:62
+msgid "Unsupported schema version."
+msgstr ""
+
+#: includes/Forms/SchemaValidator.php:89
+msgid "Notifications must be a list."
+msgstr ""
+
+#: includes/Forms/SchemaValidator.php:113
+msgid "Fields must be an object."
+msgstr ""
+
+#: includes/Forms/SchemaValidator.php:119
+msgid "A form needs at least one field."
+msgstr ""
+
+#: includes/Forms/SchemaValidator.php:125
+msgid "Fields must be keyed by field key, not a list."
+msgstr ""
+
+#: includes/Forms/SchemaValidator.php:175
+msgid "This field is not placed on any step, so nobody can fill it in."
+msgstr ""
+
+#: includes/Forms/SchemaValidator.php:201
+msgid "A calculation cannot have the same key as a field."
+msgstr ""
+
+#: includes/Forms/SchemaValidator.php:312
+msgid "A rule cannot test a field that lives on the very step it targets — that would loop forever."
+msgstr ""
+
+#: includes/Forms/SettingsValidator.php:48
+msgid "Settings must be an object."
+msgstr ""
+
+#: includes/Forms/SettingsValidator.php:55
+msgid "Unknown setting."
+msgstr ""
+
+#: includes/Forms/SettingsValidator.php:63
+msgid "This setting is required."
+msgstr ""
+
+#: includes/Forms/SettingsValidator.php:73
+msgid "Currency must be a three-letter code such as USD."
+msgstr ""
+
+#: includes/Forms/SettingsValidator.php:77
+msgid "Currency position must be \"before\" or \"after\"."
+msgstr ""
+
+#: includes/Forms/SettingsValidator.php:81
+msgid "Decimals must be a whole number."
+msgstr ""
+
+#: includes/Forms/SettingsValidator.php:86
+msgid "Decimals must be between 0 and 6."
+msgstr ""
+
+#: includes/Forms/SettingsValidator.php:92
+msgid "The submit button needs a label."
+msgstr ""
+
+#: includes/Forms/SettingsValidator.php:96
+msgid "Success action must be \"message\" or \"redirect\"."
+msgstr ""
+
+#: includes/Forms/SettingsValidator.php:99
+msgid "A success message is required."
+msgstr ""
+
+#: includes/Forms/SettingsValidator.php:103
+msgid "A redirect URL is required."
+msgstr ""
+
+#: includes/Forms/SettingsValidator.php:105
+msgid "The redirect URL must start with http:// or https://."
+msgstr ""
+
+#: includes/Forms/SettingsValidator.php:111
+msgid "This setting must be true or false."
+msgstr ""
+
+#: includes/Forms/StepValidator.php:28
+msgid "Steps must be a list."
+msgstr ""
+
+#: includes/Forms/StepValidator.php:34
+msgid "A form needs at least one step."
+msgstr ""
+
+#: includes/Forms/StepValidator.php:46
+msgid "A step must be an object."
+msgstr ""
+
+#: includes/Forms/StepValidator.php:53
+msgid "Unknown key in step."
+msgstr ""
+
+#: includes/Forms/StepValidator.php:67
+msgid "Step keys must be unique."
+msgstr ""
+
+#: includes/Forms/StepValidator.php:73
+msgid "A step key must be text."
+msgstr ""
+
+#: includes/Forms/StepValidator.php:79
+msgid "A step needs a title."
+msgstr ""
+
+#: includes/Forms/StepValidator.php:84
+msgid "The description must be text."
+msgstr ""
+
+#: includes/Forms/StepValidator.php:103
+msgid "Step fields must be a list."
+msgstr ""
+
+#: includes/Forms/StepValidator.php:109
+msgid "A step needs at least one field."
+msgstr ""
+
+#: includes/Forms/StepValidator.php:118
+msgid "A field reference must be text."
+msgstr ""
+
+#: includes/Forms/StepValidator.php:127
+msgid "This step refers to a field that does not exist."
+msgstr ""
+
+#: includes/Forms/StepValidator.php:138
+msgid "A field can appear on only one step."
+msgstr ""
+
+#: includes/Rendering/elementor-widget-class.php:26
+#: admin-src/block/Edit.js:80
+msgid "Quote form"
+msgstr ""
+
+#: includes/Rendering/elementor-widget-class.php:47
+#: admin-src/panels/FieldEditor.js:236
+msgid "Content"
+msgstr ""
+
+#: includes/Rendering/elementor-widget-class.php:54
+msgid "Form ID"
+msgstr ""
+
+#: includes/Rendering/FormRenderer.php:82
+msgid "This quote form needs JavaScript to calculate prices."
+msgstr ""
+
+#: includes/Rest/EntriesAdminController.php:244
+msgid "One of the filters could not be read, so nothing was changed. Reload the page and try again."
+msgstr ""
+
+#: includes/Rest/EntriesAdminController.php:257
+#: admin-src/entries/errors.js:15
+msgid "The list changed. Review it and try again."
+msgstr ""
+
+#: includes/Rest/EntriesAdminController.php:305
+msgid "Send either a list of entries or a filter with its highest entry id and entry count — exactly one of the two."
+msgstr ""
+
+#: includes/Rest/EntriesAdminController.php:312
+#: admin-src/entries/EntryDetailScreen.js:425
+msgid "Entry not found."
+msgstr ""
+
+#: includes/Rest/EntriesController.php:48
+msgid "Your session expired. Please try again."
+msgstr ""
+
+#: includes/Rest/FormsController.php:241
+msgid "This form's saved data could not be read. It has not been touched — contact support before making changes."
+msgstr ""
+
+#: includes/Rest/FormsController.php:269
+#: includes/Rest/FormsController.php:285
+msgid "The form could not be created."
+msgstr ""
+
+#: includes/Rest/FormsController.php:337
+#: includes/Rest/FormsController.php:361
+#: includes/Rest/FormsController.php:369
+#: includes/Rest/FormsController.php:451
+msgid "The form could not be saved."
+msgstr ""
+
+#. translators: %s: parameter name.
+#: includes/Rest/FormsController.php:416
+#, php-format
+msgid "Invalid parameter(s): %s"
+msgstr ""
+
+#: includes/Rest/FormsController.php:421
+msgid "title must be a non-empty string."
+msgstr ""
+
+#: includes/Rest/FormsController.php:488
+msgid "The Trash is disabled on this site, so this form cannot be removed without a permanent, unrecoverable deletion. Enable the Trash (EMPTY_TRASH_DAYS) to delete forms."
+msgstr ""
+
+#: includes/Rest/FormsController.php:556
+msgid "Form not found."
+msgstr ""
+
+#: includes/Rest/SessionController.php:46
+#: includes/Submissions/SubmissionService.php:62
+msgid "This form is not available."
+msgstr ""
+
+#: includes/Submissions/SubmissionService.php:74
+msgid "This submission could not be accepted."
+msgstr ""
+
+#: includes/Submissions/SubmissionService.php:84
+msgid "Some answers need attention."
+msgstr ""
+
+#: includes/Submissions/SubmissionService.php:117
+msgid "Your answers could not be saved. Please try again."
+msgstr ""
+
+#: includes/Submissions/SubmissionService.php:200
+#: frontend-src/runtime/validate.js:94
+msgid "This field is required."
+msgstr ""
+
+#: includes/Submissions/SubmissionService.php:203
+#: frontend-src/runtime/validate.js:98
+msgid "Enter an email address."
+msgstr ""
+
+#. translators: %s: the smallest allowed number.
+#: includes/Submissions/SubmissionService.php:207
+#: frontend-src/runtime/validate.js:104
+#, php-format,js-format
+msgid "Enter %s or more."
+msgstr ""
+
+#. translators: %s: the largest allowed number.
+#: includes/Submissions/SubmissionService.php:211
+#: frontend-src/runtime/validate.js:111
+#, php-format,js-format
+msgid "Enter %s or less."
+msgstr ""
+
+#: quoteform.php:33
+msgid "Quoteform is missing its Composer dependencies (vendor/autoload.php). Run \"composer install\" in the plugin directory, then reload this page."
+msgstr ""
+
+#: admin-src/api/client.js:8
+msgid "The server could not be reached. Check your connection and try again."
+msgstr ""
+
+#: admin-src/api/client.js:19
+msgid "You appear to be offline. Check your connection and try again."
+msgstr ""
+
+#: admin-src/api/client.js:23
+msgid "The server sent a response we could not understand. Please try again."
+msgstr ""
+
+#: admin-src/block/Edit.js:85
+msgid "Your forms could not be loaded. Editing forms needs the “qform_manage_forms” capability."
+msgstr ""
+
+#: admin-src/block/Edit.js:92
+msgid "Looking for your forms…"
+msgstr ""
+
+#: admin-src/block/Edit.js:96
+msgid "There are no forms to show yet. Open Quoteform in the admin menu and create one."
+msgstr ""
+
+#: admin-src/block/Edit.js:106
+msgid "Which form?"
+msgstr ""
+
+#: admin-src/block/Edit.js:108
+msgid "Choose a form…"
+msgstr ""
+
+#. translators: %s: the title of the chosen form.
+#: admin-src/block/Edit.js:121
+#, js-format
+msgid "Visitors will see “%s” here."
+msgstr ""
+
+#. translators: %d: the id of a form that is no longer available.
+#: admin-src/block/Edit.js:131
+#, js-format
+msgid "This block points at form %d, which is no longer available. Nothing will be shown to visitors."
+msgstr ""
+
+#: admin-src/components/CopyField.js:11
+msgid "Press ⌘C to copy."
+msgstr ""
+
+#: admin-src/components/CopyField.js:11
+msgid "Press Ctrl+C to copy."
+msgstr ""
+
+#: admin-src/components/CopyField.js:48
+msgid "Copied."
+msgstr ""
+
+#: admin-src/components/CopyField.js:79
+msgid "Copy"
+msgstr ""
+
+#. translators: %s: the name of the item being moved.
+#: admin-src/components/MoveButtons.js:60
+#, js-format
+msgid "Move %s up"
+msgstr ""
+
+#. translators: %s: the name of the item being moved.
+#: admin-src/components/MoveButtons.js:79
+#, js-format
+msgid "Move %s down"
+msgstr ""
+
+#: admin-src/components/Notice.js:23
+msgid "Dismiss this notice"
+msgstr ""
+
+#. translators: %d: how many items this builder section holds.
+#: admin-src/components/SectionNav.js:14
+#, js-format
+msgid "%d item"
+msgid_plural "%d items"
+msgstr[0] ""
+msgstr[1] ""
+
+#: admin-src/components/SectionNav.js:23
+msgid "has a problem"
+msgstr ""
+
+#: admin-src/components/SectionNav.js:24
+#: admin-src/panels/FieldsPanel.js:98
+msgid "Has a problem"
+msgstr ""
+
+#. translators: %s: the stored value, which is not one of the options.
+#: admin-src/components/SelectControl.js:45
+#, js-format
+msgid "Unrecognised value: %s"
+msgstr ""
+
+#: admin-src/entries.js:12
+msgid "Quoteform needs WordPress 6.2 or newer. This site runs an older version, so the entries screen cannot start. Please update WordPress and reload this page."
+msgstr ""
+
+#: admin-src/entries/BulkBar.js:85
+msgid "Bulk actions"
+msgstr ""
+
+#. translators: %d: number of entries matching the current filter.
+#: admin-src/entries/BulkBar.js:90
+#: admin-src/entries/EntriesListScreen.js:259
+#, js-format
+msgid "All %d entry selected."
+msgid_plural "All %d entries selected."
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: %d: number of selected entries.
+#: admin-src/entries/BulkBar.js:98
+#, js-format
+msgid "%d selected"
+msgid_plural "%d selected"
+msgstr[0] ""
+msgstr[1] ""
+
+#: admin-src/entries/BulkBar.js:104
+#: admin-src/entries/EntryDetailScreen.js:372
+msgid "Mark as read"
+msgstr ""
+
+#: admin-src/entries/BulkBar.js:107
+#: admin-src/entries/EntryDetailScreen.js:372
+msgid "Mark as unread"
+msgstr ""
+
+#: admin-src/entries/BulkBar.js:116
+#: admin-src/entries/EntriesTable.js:235
+#: admin-src/entries/EntryDetailScreen.js:381
+msgid "Delete"
+msgstr ""
+
+#. translators: %d: number of entries on the current page, all of them selected.
+#: admin-src/entries/BulkBar.js:123
+#, js-format
+msgid "All %d entry on this page is selected."
+msgid_plural "All %d entries on this page are selected."
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: %d: number of entries matching the current filter (more than one page).
+#: admin-src/entries/BulkBar.js:135
+#, js-format
+msgid "Select all %d entry matching this filter"
+msgid_plural "Select all %d entries matching this filter"
+msgstr[0] ""
+msgstr[1] ""
+
+#: admin-src/entries/BulkBar.js:149
+msgid "Clear selection"
+msgstr ""
+
+#. translators: %d: number of entries matching the current filter.
+#: admin-src/entries/BulkBar.js:158
+#, js-format
+msgid "Delete %d entry matching this filter? This cannot be undone."
+msgid_plural "Delete all %d entries matching this filter? This cannot be undone."
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: %d: number of selected entries.
+#: admin-src/entries/BulkBar.js:168
+#, js-format
+msgid "Delete %d entry? This cannot be undone."
+msgid_plural "Delete %d entries? This cannot be undone."
+msgstr[0] ""
+msgstr[1] ""
+
+#: admin-src/entries/BulkBar.js:172
+#: admin-src/entries/EntriesTable.js:245
+#: admin-src/entries/EntryDetailScreen.js:395
+msgid "Delete permanently"
+msgstr ""
+
+#: admin-src/entries/BulkBar.js:173
+#: admin-src/entries/EntriesTable.js:246
+#: admin-src/entries/EntryDetailScreen.js:396
+#: admin-src/panels/FieldsPanel.js:128
+#: admin-src/panels/StepsPanel.js:250
+#: admin-src/screens/FormListScreen.js:236
+msgid "Cancel"
+msgstr ""
+
+#. translators: %d: number of entries.
+#: admin-src/entries/EntriesListScreen.js:21
+#, js-format
+msgid "%d entry deleted."
+msgid_plural "%d entries deleted."
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: %d: number of entries.
+#: admin-src/entries/EntriesListScreen.js:26
+#, js-format
+msgid "%d entry marked as unread."
+msgid_plural "%d entries marked as unread."
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: %d: number of entries.
+#: admin-src/entries/EntriesListScreen.js:30
+#, js-format
+msgid "%d entry marked as read."
+msgid_plural "%d entries marked as read."
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: %d: number of entries.
+#: admin-src/entries/EntriesListScreen.js:142
+#, js-format
+msgid "%d entry found."
+msgid_plural "%d entries found."
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: %d: entry number.
+#: admin-src/entries/EntriesListScreen.js:348
+#: admin-src/entries/EntryDetailScreen.js:305
+#, js-format
+msgid "Entry #%d deleted."
+msgstr ""
+
+#. translators: %s: number of entries.
+#: admin-src/entries/EntriesListScreen.js:385
+#, js-format
+msgid "%s entry"
+msgid_plural "%s entries"
+msgstr[0] ""
+msgstr[1] ""
+
+#: admin-src/entries/EntriesListScreen.js:396
+msgid "Export CSV"
+msgstr ""
+
+#: admin-src/entries/EntriesListScreen.js:416
+#: admin-src/entries/EntryDetailScreen.js:414
+#: admin-src/screens/FormListScreen.js:134
+msgid "Try again"
+msgstr ""
+
+#: admin-src/entries/EntriesListScreen.js:435
+msgid "Loading entries…"
+msgstr ""
+
+#: admin-src/entries/EntriesListScreen.js:440
+msgid "No entries match these filters."
+msgstr ""
+
+#: admin-src/entries/EntriesListScreen.js:441
+#: admin-src/entries/FilterBar.js:210
+msgid "Clear filters"
+msgstr ""
+
+#: admin-src/entries/EntriesListScreen.js:448
+msgid "No entries yet. They appear here when visitors send one of your forms."
+msgstr ""
+
+#. translators: %s: a shortcode such as [quoteform id="12"].
+#: admin-src/entries/EntriesListScreen.js:453
+#, js-format
+msgid "Put a form on a page with its shortcode, for example %s."
+msgstr ""
+
+#: admin-src/entries/EntriesTable.js:11
+msgid "Entries, lowest total first"
+msgstr ""
+
+#: admin-src/entries/EntriesTable.js:12
+msgid "Entries, highest total first"
+msgstr ""
+
+#: admin-src/entries/EntriesTable.js:16
+msgid "Entries, oldest first"
+msgstr ""
+
+#: admin-src/entries/EntriesTable.js:17
+msgid "Entries, newest first"
+msgstr ""
+
+#: admin-src/entries/EntriesTable.js:78
+msgid "Calculation failed"
+msgstr ""
+
+#: admin-src/entries/EntriesTable.js:142
+msgid "Entries table"
+msgstr ""
+
+#: admin-src/entries/EntriesTable.js:160
+msgid "Select all entries on this page"
+msgstr ""
+
+#: admin-src/entries/EntriesTable.js:163
+msgid "Entry"
+msgstr ""
+
+#: admin-src/entries/EntriesTable.js:164
+msgid "Name / Email"
+msgstr ""
+
+#: admin-src/entries/EntriesTable.js:169
+#: admin-src/screens/FormListScreen.js:154
+msgid "Actions"
+msgstr ""
+
+#. translators: %d: entry number.
+#: admin-src/entries/EntriesTable.js:183
+#, js-format
+msgid "Select entry #%d"
+msgstr ""
+
+#. translators: %d: entry number.
+#: admin-src/entries/EntriesTable.js:217
+#, js-format
+msgid "View entry #%d"
+msgstr ""
+
+#: admin-src/entries/EntriesTable.js:221
+msgid "View"
+msgstr ""
+
+#. translators: %d: entry number.
+#: admin-src/entries/EntriesTable.js:231
+#, js-format
+msgid "Delete entry #%d"
+msgstr ""
+
+#. translators: %d: entry number.
+#: admin-src/entries/EntriesTable.js:242
+#: admin-src/entries/EntryDetailScreen.js:392
+#, js-format
+msgid "Delete entry #%d? This cannot be undone."
+msgstr ""
+
+#: admin-src/entries/EntryDetailScreen.js:16
+msgid "Previous entry"
+msgstr ""
+
+#: admin-src/entries/EntryDetailScreen.js:16
+msgid "Next entry"
+msgstr ""
+
+#: admin-src/entries/EntryDetailScreen.js:20
+#: admin-src/entries/EntryDetailScreen.js:21
+msgid "Older entry"
+msgstr ""
+
+#: admin-src/entries/EntryDetailScreen.js:20
+#: admin-src/entries/EntryDetailScreen.js:21
+msgid "Newer entry"
+msgstr ""
+
+#: admin-src/entries/EntryDetailScreen.js:40
+msgid "No answers were saved with this entry."
+msgstr ""
+
+#: admin-src/entries/EntryDetailScreen.js:59
+#: admin-src/entries/EntryDetailScreen.js:70
+msgid "Price breakdown"
+msgstr ""
+
+#. translators: %s: the calculation error code, e.g. division_by_zero.
+#: admin-src/entries/EntryDetailScreen.js:64
+#, js-format
+msgid "The price could not be worked out when this entry was sent (%s)."
+msgstr ""
+
+#: admin-src/entries/EntryDetailScreen.js:93
+msgid "Details"
+msgstr ""
+
+#: admin-src/entries/EntryDetailScreen.js:95
+msgid "IP address"
+msgstr ""
+
+#: admin-src/entries/EntryDetailScreen.js:96
+msgid "Browser"
+msgstr ""
+
+#: admin-src/entries/EntryDetailScreen.js:98
+msgid "User"
+msgstr ""
+
+#: admin-src/entries/EntryDetailScreen.js:102
+msgid "Submitted"
+msgstr ""
+
+#: admin-src/entries/EntryDetailScreen.js:231
+msgid "Entry marked as read."
+msgstr ""
+
+#: admin-src/entries/EntryDetailScreen.js:231
+msgid "Entry marked as unread."
+msgstr ""
+
+#. translators: %d: entry number.
+#: admin-src/entries/EntryDetailScreen.js:280
+#, js-format
+msgid "Entry #%d was already deleted."
+msgstr ""
+
+#: admin-src/entries/EntryDetailScreen.js:338
+msgid "← Back to entries"
+msgstr ""
+
+#. translators: %d: entry number.
+#: admin-src/entries/EntryDetailScreen.js:346
+#, js-format
+msgid "Entry #%d"
+msgstr ""
+
+#: admin-src/entries/EntryDetailScreen.js:420
+msgid "Loading entry…"
+msgstr ""
+
+#: admin-src/entries/EntryDetailScreen.js:426
+msgid "It may have been deleted."
+msgstr ""
+
+#: admin-src/entries/EntryDetailScreen.js:432
+msgid "Entry navigation"
+msgstr ""
+
+#: admin-src/entries/errors.js:11
+msgid "You are no longer allowed to see entries. Reload the page and sign in again."
+msgstr ""
+
+#: admin-src/entries/errors.js:19
+msgid "That entry no longer exists."
+msgstr ""
+
+#: admin-src/entries/FilterBar.js:83
+msgid "Use a plain number, like 150 or 99.50."
+msgstr ""
+
+#: admin-src/entries/FilterBar.js:105
+msgid "All forms"
+msgstr ""
+
+#: admin-src/entries/FilterBar.js:117
+#: admin-src/entries/FilterBar.js:126
+msgid "Deleted forms"
+msgstr ""
+
+#. translators: %d: form id.
+#: admin-src/entries/FilterBar.js:131
+#, js-format
+msgid "Form #%d (not available)"
+msgstr ""
+
+#: admin-src/entries/FilterBar.js:155
+msgid "Filter entries"
+msgstr ""
+
+#: admin-src/entries/FilterBar.js:168
+msgid "All"
+msgstr ""
+
+#: admin-src/entries/FilterBar.js:175
+msgid "From"
+msgstr ""
+
+#: admin-src/entries/FilterBar.js:184
+msgid "To"
+msgstr ""
+
+#: admin-src/entries/FilterBar.js:194
+msgid "Minimum total"
+msgstr ""
+
+#: admin-src/entries/FilterBar.js:201
+msgid "Maximum total"
+msgstr ""
+
+#: admin-src/entries/Pagination.js:43
+msgid "Entry list pages"
+msgstr ""
+
+#: admin-src/entries/Pagination.js:48
+msgid "Previous page"
+msgstr ""
+
+#. translators: 1: page number. 2: how many pages there are.
+#: admin-src/entries/Pagination.js:65
+#: admin-src/screens/FormListScreen.js:262
+#, js-format
+msgid "Page %1$d of %2$d"
+msgstr ""
+
+#: admin-src/entries/Pagination.js:78
+msgid "Next page"
+msgstr ""
+
+#: admin-src/entries/Pagination.js:85
+msgid "Per page"
+msgstr ""
+
+#: admin-src/index.js:12
+msgid "Quoteform needs WordPress 6.2 or newer. This site runs an older version, so the form builder cannot start. Please update WordPress and reload this page."
+msgstr ""
+
+#: admin-src/lib/apiErrors.js:10
+msgid "Something went wrong. Please try again."
+msgstr ""
+
+#: admin-src/lib/apiErrors.js:17
+msgid "You are no longer allowed to manage forms. Reload the page and sign in again."
+msgstr ""
+
+#: admin-src/lib/apiErrors.js:24
+msgid "This site has the trash switched off, so deleting a form would be permanent. Quoteform will not do that."
+msgstr ""
+
+#: admin-src/lib/apiErrors.js:31
+msgid "The form was not saved. Your changes are still here — try again."
+msgstr ""
+
+#: admin-src/lib/apiErrors.js:35
+msgid "That form no longer exists. It may have been moved to the trash."
+msgstr ""
+
+#. translators: 1: the label a user typed. 2: the stable key it is stored under.
+#: admin-src/lib/names.js:12
+#, js-format
+msgid "%1$s (%2$s)"
+msgstr ""
+
+#. translators: %s: step title or key.
+#: admin-src/lib/references.js:37
+#, js-format
+msgid "the step “%s”"
+msgstr ""
+
+#. translators: %s: calculation key.
+#: admin-src/lib/references.js:53
+#, js-format
+msgid "the calculation “%s”"
+msgstr ""
+
+#. translators: %d: rule number, starting at one.
+#: admin-src/lib/references.js:78
+#, js-format
+msgid "rule %d"
+msgstr ""
+
+#: admin-src/panels/CalculationsPanel.js:31
+msgid "These calculations reference each other in a loop."
+msgstr ""
+
+#: admin-src/panels/CalculationsPanel.js:76
+msgid "Calculations"
+msgstr ""
+
+#: admin-src/panels/CalculationsPanel.js:78
+msgid "They run top to bottom, so a later one can use an earlier one’s key."
+msgstr ""
+
+#: admin-src/panels/CalculationsPanel.js:85
+msgid "Add calculation"
+msgstr ""
+
+#: admin-src/panels/CalculationsPanel.js:91
+msgid "Every form needs a calculation named “total”."
+msgstr ""
+
+#. translators: %s: calculation key, or its row number while the key is still empty.
+#: admin-src/panels/CalculationsPanel.js:109
+#, js-format
+msgid "Remove calculation %s"
+msgstr ""
+
+#. translators: %d: calculation number.
+#: admin-src/panels/CalculationsPanel.js:130
+#, js-format
+msgid "Calculation %d key"
+msgstr ""
+
+#. translators: short visible label of a numbered calculation field; the full name is "Calculation N key".
+#: admin-src/panels/CalculationsPanel.js:135
+msgctxt "short label for a numbered field"
+msgid "Key"
+msgstr ""
+
+#: admin-src/panels/CalculationsPanel.js:144
+msgid "That key is already used by a field."
+msgstr ""
+
+#: admin-src/panels/CalculationsPanel.js:150
+msgid "Two calculations cannot share a key."
+msgstr ""
+
+#. translators: %d: calculation number.
+#: admin-src/panels/CalculationsPanel.js:158
+#, js-format
+msgid "Calculation %d label"
+msgstr ""
+
+#. translators: short visible label of a numbered calculation field; the full name is "Calculation N label".
+#: admin-src/panels/CalculationsPanel.js:163
+msgctxt "short label for a numbered field"
+msgid "Label"
+msgstr ""
+
+#. translators: %d: calculation number.
+#: admin-src/panels/CalculationsPanel.js:175
+#, js-format
+msgid "Calculation %d formula"
+msgstr ""
+
+#. translators: short visible label of a numbered calculation field; the full name is "Calculation N formula".
+#: admin-src/panels/CalculationsPanel.js:180
+msgctxt "short label for a numbered field"
+msgid "Formula"
+msgstr ""
+
+#. translators: %d: calculation number.
+#: admin-src/panels/CalculationsPanel.js:195
+#, js-format
+msgid "Show calculation %d to the visitor"
+msgstr ""
+
+#: admin-src/panels/CalculationsPanel.js:221
+#: admin-src/panels/FieldsPanel.js:113
+#: admin-src/panels/OptionsEditor.js:91
+msgid "Remove"
+msgstr ""
+
+#. translators: %s: calculation key, or its row number while the key is still empty.
+#: admin-src/panels/CalculationsPanel.js:230
+#, js-format
+msgid "Remove “%s”? Anything using it will stop working."
+msgstr ""
+
+#. translators: %s: calculation key, or its row number while the key is still empty.
+#: admin-src/panels/CalculationsPanel.js:245
+#, js-format
+msgid "Yes, remove %s"
+msgstr ""
+
+#. translators: %s: calculation key, or its row number while the key is still empty.
+#: admin-src/panels/CalculationsPanel.js:257
+#, js-format
+msgid "Keep %s"
+msgstr ""
+
+#: admin-src/panels/FieldEditor.js:100
+msgid "This key is in use, so it cannot be renamed here."
+msgstr ""
+
+#: admin-src/panels/FieldEditor.js:101
+msgid "Used in formulas, like {room_count}."
+msgstr ""
+
+#: admin-src/panels/FieldEditor.js:119
+msgid "Key"
+msgstr ""
+
+#: admin-src/panels/FieldEditor.js:133
+msgid "Used in:"
+msgstr ""
+
+#: admin-src/panels/FieldEditor.js:144
+msgid "A key must start with a lowercase letter and use only lowercase letters, numbers and underscores."
+msgstr ""
+
+#: admin-src/panels/FieldEditor.js:158
+msgid "That key is reserved. Choose another one."
+msgstr ""
+
+#: admin-src/panels/FieldEditor.js:169
+msgid "That key is already used by another field."
+msgstr ""
+
+#: admin-src/panels/FieldEditor.js:176
+msgid "Label"
+msgstr ""
+
+#: admin-src/panels/FieldEditor.js:185
+msgid "Help text"
+msgstr ""
+
+#: admin-src/panels/FieldEditor.js:193
+msgid "Placeholder"
+msgstr ""
+
+#: admin-src/panels/FieldEditor.js:201
+msgid "Required"
+msgstr ""
+
+#: admin-src/panels/FieldEditor.js:211
+msgid "Minimum"
+msgstr ""
+
+#: admin-src/panels/FieldEditor.js:218
+msgid "Maximum"
+msgstr ""
+
+#: admin-src/panels/FieldEditor.js:225
+#: admin-src/panels/RulesPanel.js:24
+msgid "Step"
+msgstr ""
+
+#: admin-src/panels/FieldsPanel.js:52
+#: admin-src/screens/EditorScreen.js:33
+msgid "Fields"
+msgstr ""
+
+#: admin-src/panels/FieldsPanel.js:56
+msgid "Field type"
+msgstr ""
+
+#: admin-src/panels/FieldsPanel.js:69
+msgid "Add field"
+msgstr ""
+
+#: admin-src/panels/FieldsPanel.js:74
+msgid "No fields yet. Add one to get started."
+msgstr ""
+
+#. translators: %s: field label or key.
+#: admin-src/panels/FieldsPanel.js:109
+#, js-format
+msgid "Remove %s"
+msgstr ""
+
+#: admin-src/panels/FieldsPanel.js:119
+msgid "Removing a field does not remove references to it. Any step, calculation or rule that uses it will report an error until you fix it."
+msgstr ""
+
+#: admin-src/panels/FieldsPanel.js:125
+msgid "Remove field"
+msgstr ""
+
+#: admin-src/panels/FormulaEditor.js:31
+msgid "A calculation needs a formula."
+msgstr ""
+
+#. translators: 1: current length, 2: maximum length.
+#: admin-src/panels/FormulaEditor.js:39
+#, js-format
+msgid "This formula is too long: %1$d characters, and the limit is %2$d."
+msgstr ""
+
+#. translators: 1: engine error code, 2: character position.
+#: admin-src/panels/FormulaEditor.js:53
+#, js-format
+msgid "This formula is not valid (%1$s) at character %2$d."
+msgstr ""
+
+#. translators: 1: the name written in the formula, 2: the existing name it is probably a typo of.
+#: admin-src/panels/FormulaEditor.js:90
+#, js-format
+msgid "There is no “%1$s” in this form — did you mean “%2$s”?"
+msgstr ""
+
+#. translators: %s: comma-separated variable names.
+#: admin-src/panels/FormulaEditor.js:101
+#, js-format
+msgid "This formula uses something the form does not have: %s."
+msgstr ""
+
+#. translators: %s: comma-separated variable names.
+#: admin-src/panels/FormulaEditor.js:112
+#, js-format
+msgid "Only “.price” works here, and only on a dropdown, radio or checkbox field: %s."
+msgstr ""
+
+#: admin-src/panels/FormulaEditor.js:121
+msgid "This formula is valid."
+msgstr ""
+
+#: admin-src/panels/FormulaEditor.js:187
+msgid "What can I use here?"
+msgstr ""
+
+#: admin-src/panels/FormulaEditor.js:189
+msgid "Numbers, + - * / and ( ), comparisons, and functions like round(), min(), max(), if(), contains() and is_empty()."
+msgstr ""
+
+#: admin-src/panels/OptionsEditor.js:28
+msgid "Options"
+msgstr ""
+
+#. translators: %d: option number.
+#: admin-src/panels/OptionsEditor.js:40
+#, js-format
+msgid "Option %d label"
+msgstr ""
+
+#. translators: %d: option number.
+#: admin-src/panels/OptionsEditor.js:51
+#, js-format
+msgid "Option %d value"
+msgstr ""
+
+#. translators: %d: option number.
+#: admin-src/panels/OptionsEditor.js:62
+#, js-format
+msgid "Option %d price"
+msgstr ""
+
+#. translators: %d: option number.
+#: admin-src/panels/OptionsEditor.js:72
+#, js-format
+msgid "option %d"
+msgstr ""
+
+#. translators: %d: option number.
+#: admin-src/panels/OptionsEditor.js:87
+#, js-format
+msgid "Remove option %d"
+msgstr ""
+
+#: admin-src/panels/OptionsEditor.js:113
+msgid "Add option"
+msgstr ""
+
+#. translators: %1$d: rule number, %2$d: condition number.
+#: admin-src/panels/RuleConditionRow.js:41
+#, js-format
+msgid "Remove condition %2$d from rule %1$d"
+msgstr ""
+
+#. translators: connector word before a rule's first condition, e.g. "if Pets is Yes".
+#: admin-src/panels/RuleConditionRow.js:56
+msgctxt "rule condition connector"
+msgid "if"
+msgstr ""
+
+#. translators: connector word between rule conditions when any may match.
+#: admin-src/panels/RuleConditionRow.js:59
+msgctxt "rule condition connector"
+msgid "or"
+msgstr ""
+
+#. translators: connector word between rule conditions when all must match.
+#: admin-src/panels/RuleConditionRow.js:61
+msgctxt "rule condition connector"
+msgid "and"
+msgstr ""
+
+#. translators: %1$d: rule number, %2$d: condition number.
+#: admin-src/panels/RuleConditionRow.js:68
+#, js-format
+msgid "Rule %1$d condition %2$d field"
+msgstr ""
+
+#: admin-src/panels/RuleConditionRow.js:76
+msgid "Choose a field to test…"
+msgstr ""
+
+#. translators: %1$d: rule number, %2$d: condition number.
+#: admin-src/panels/RuleConditionRow.js:84
+#, js-format
+msgid "Rule %1$d condition %2$d operator"
+msgstr ""
+
+#. translators: %1$d: rule number, %2$d: condition number.
+#: admin-src/panels/RuleConditionRow.js:100
+#, js-format
+msgid "Rule %1$d condition %2$d value"
+msgstr ""
+
+#: admin-src/panels/RuleConditionRow.js:118
+msgid "Remove condition"
+msgstr ""
+
+#. translators: %1$d: rule number, %2$d: condition number.
+#: admin-src/panels/RuleConditionRow.js:125
+#, js-format
+msgid "Remove condition %2$d from rule %1$d?"
+msgstr ""
+
+#. translators: %1$d: rule number, %2$d: condition number.
+#: admin-src/panels/RuleConditionRow.js:131
+#, js-format
+msgid "Yes, remove rule %1$d condition %2$d"
+msgstr ""
+
+#. translators: %1$d: rule number, %2$d: condition number.
+#: admin-src/panels/RuleConditionRow.js:137
+#, js-format
+msgid "Keep rule %1$d condition %2$d"
+msgstr ""
+
+#: admin-src/panels/RulesPanel.js:23
+msgid "Field"
+msgstr ""
+
+#: admin-src/panels/RulesPanel.js:28
+msgid "All conditions must match"
+msgstr ""
+
+#: admin-src/panels/RulesPanel.js:29
+msgid "Any condition may match"
+msgstr ""
+
+#: admin-src/panels/RulesPanel.js:96
+#: admin-src/screens/EditorScreen.js:36
+msgid "Rules"
+msgstr ""
+
+#: admin-src/panels/RulesPanel.js:98
+msgid "Show or hide a field or a whole step."
+msgstr ""
+
+#: admin-src/panels/RulesPanel.js:102
+msgid "Add rule"
+msgstr ""
+
+#: admin-src/panels/RulesPanel.js:108
+msgid "No rules yet. Add one to show or hide things conditionally."
+msgstr ""
+
+#: admin-src/panels/RulesPanel.js:121
+#: admin-src/panels/StepsPanel.js:311
+msgid "Choose a step…"
+msgstr ""
+
+#: admin-src/panels/RulesPanel.js:122
+msgid "Choose a field…"
+msgstr ""
+
+#. translators: %d: rule number.
+#: admin-src/panels/RulesPanel.js:144
+#, js-format
+msgid "Rule %d target kind"
+msgstr ""
+
+#. translators: %d: rule number.
+#: admin-src/panels/RulesPanel.js:162
+#, js-format
+msgid "Rule %d target"
+msgstr ""
+
+#. translators: %d: rule number.
+#: admin-src/panels/RulesPanel.js:185
+#, js-format
+msgid "Rule %d action"
+msgstr ""
+
+#. translators: connector word in a rule sentence, before "All/Any condition(s) must match".
+#: admin-src/panels/RulesPanel.js:198
+msgctxt "rule sentence connector"
+msgid "when"
+msgstr ""
+
+#. translators: %d: rule number.
+#: admin-src/panels/RulesPanel.js:206
+#, js-format
+msgid "Rule %d match"
+msgstr ""
+
+#: admin-src/panels/RulesPanel.js:219
+msgid "A rule cannot test the same field it changes."
+msgstr ""
+
+#. translators: %d: rule number.
+#: admin-src/panels/RulesPanel.js:281
+#, js-format
+msgid "Add condition to rule %d"
+msgstr ""
+
+#: admin-src/panels/RulesPanel.js:285
+msgid "Add condition"
+msgstr ""
+
+#. translators: %d: rule number.
+#: admin-src/panels/RulesPanel.js:296
+#, js-format
+msgid "Remove rule %d"
+msgstr ""
+
+#: admin-src/panels/RulesPanel.js:300
+msgid "Remove rule"
+msgstr ""
+
+#. translators: %d: rule number.
+#: admin-src/panels/RulesPanel.js:308
+#, js-format
+msgid "Remove rule %d? This cannot be undone."
+msgstr ""
+
+#. translators: %d: rule number.
+#: admin-src/panels/RulesPanel.js:313
+#, js-format
+msgid "Yes, remove rule %d"
+msgstr ""
+
+#. translators: %d: rule number.
+#: admin-src/panels/RulesPanel.js:318
+#, js-format
+msgid "Keep rule %d"
+msgstr ""
+
+#: admin-src/panels/SettingsPanel.js:27
+#: admin-src/screens/EditorScreen.js:37
+msgid "Settings"
+msgstr ""
+
+#: admin-src/panels/SettingsPanel.js:31
+msgid "Money"
+msgstr ""
+
+#: admin-src/panels/SettingsPanel.js:39
+msgid "A three-letter code such as USD or EUR."
+msgstr ""
+
+#: admin-src/panels/SettingsPanel.js:44
+msgid "Currency position"
+msgstr ""
+
+#: admin-src/panels/SettingsPanel.js:49
+msgid "Before the number"
+msgstr ""
+
+#: admin-src/panels/SettingsPanel.js:50
+msgid "After the number"
+msgstr ""
+
+#: admin-src/panels/SettingsPanel.js:56
+msgid "Decimal places"
+msgstr ""
+
+#: admin-src/panels/SettingsPanel.js:68
+msgid "After submitting"
+msgstr ""
+
+#: admin-src/panels/SettingsPanel.js:72
+msgid "Submit button label"
+msgstr ""
+
+#: admin-src/panels/SettingsPanel.js:80
+msgid "After a successful submission"
+msgstr ""
+
+#: admin-src/panels/SettingsPanel.js:85
+msgid "Show a message"
+msgstr ""
+
+#: admin-src/panels/SettingsPanel.js:86
+msgid "Redirect to a URL"
+msgstr ""
+
+#: admin-src/panels/SettingsPanel.js:93
+msgid "Redirect URL"
+msgstr ""
+
+#: admin-src/panels/SettingsPanel.js:97
+msgid "Must start with http:// or https://."
+msgstr ""
+
+#: admin-src/panels/SettingsPanel.js:102
+msgid "Success message"
+msgstr ""
+
+#: admin-src/panels/SettingsPanel.js:112
+msgid "Visitors"
+msgstr ""
+
+#: admin-src/panels/SettingsPanel.js:116
+msgid "Let visitors save and resume"
+msgstr ""
+
+#: admin-src/panels/SettingsPanel.js:124
+msgid "Store the visitor’s IP address with each entry"
+msgstr ""
+
+#. translators: %s: step title or key.
+#: admin-src/panels/StepsPanel.js:26
+#, js-format
+msgid "Remove “%s”?"
+msgstr ""
+
+#. translators: 1: step title or key. 2: number of fields the step still holds, which will be unassigned.
+#: admin-src/panels/StepsPanel.js:33
+#, js-format
+msgid "Remove “%1$s” and unassign its %2$d field?"
+msgid_plural "Remove “%1$s” and unassign its %2$d fields?"
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: %s: field name, which already carries its key.
+#: admin-src/panels/StepsPanel.js:54
+#, js-format
+msgid "Take off this step: %s"
+msgstr ""
+
+#. translators: %s: field name, which already carries its key.
+#: admin-src/panels/StepsPanel.js:62
+#, js-format
+msgid "Put on step: %s"
+msgstr ""
+
+#: admin-src/panels/StepsPanel.js:148
+#: admin-src/screens/EditorScreen.js:34
+msgid "Steps"
+msgstr ""
+
+#: admin-src/panels/StepsPanel.js:151
+msgid "Visitors move through these one at a time."
+msgstr ""
+
+#: admin-src/panels/StepsPanel.js:155
+msgid "Add step"
+msgstr ""
+
+#: admin-src/panels/StepsPanel.js:161
+msgid "No steps yet. Add one to hold your fields."
+msgstr ""
+
+#. translators: 1: step number. 2: step title.
+#: admin-src/panels/StepsPanel.js:170
+#, js-format
+msgid "step %1$d: %2$s"
+msgstr ""
+
+#. translators: %d: step number.
+#: admin-src/panels/StepsPanel.js:187
+#, js-format
+msgid "Step %d title"
+msgstr ""
+
+#. translators: short visible label of a numbered step field; the full name is "Step N title".
+#: admin-src/panels/StepsPanel.js:192
+msgctxt "short label for a numbered field"
+msgid "Title"
+msgstr ""
+
+#. translators: %d: step number.
+#: admin-src/panels/StepsPanel.js:203
+#, js-format
+msgid "Step %d description"
+msgstr ""
+
+#. translators: short visible label of a numbered step field; the full name is "Step N description".
+#: admin-src/panels/StepsPanel.js:208
+msgctxt "short label for a numbered field"
+msgid "Description"
+msgstr ""
+
+#. translators: 1: step number. 2: step title.
+#: admin-src/panels/StepsPanel.js:234
+#, js-format
+msgid "Remove step %1$d: %2$s"
+msgstr ""
+
+#: admin-src/panels/StepsPanel.js:239
+#: admin-src/panels/StepsPanel.js:247
+msgid "Remove step"
+msgstr ""
+
+#: admin-src/panels/StepsPanel.js:276
+msgid "This step has no fields, so it cannot be saved."
+msgstr ""
+
+#: admin-src/panels/StepsPanel.js:285
+msgid "Not on any step — nobody can fill these in"
+msgstr ""
+
+#. translators: %s: field label.
+#: admin-src/panels/StepsPanel.js:293
+#, js-format
+msgid "Put %s on"
+msgstr ""
+
+#: admin-src/panels/StepsPanel.js:325
+msgid "Put on step"
+msgstr ""
+
+#: admin-src/screens/EditorScreen.js:35
+msgid "Pricing"
+msgstr ""
+
+#: admin-src/screens/EditorScreen.js:200
+#: admin-src/screens/EditorScreen.js:227
+#: admin-src/screens/EditorScreen.js:248
+msgid "Edit form"
+msgstr ""
+
+#: admin-src/screens/EditorScreen.js:205
+msgid "This form’s saved data could not be read. Editing it here would overwrite what is still stored, so Quoteform will not open it."
+msgstr ""
+
+#: admin-src/screens/EditorScreen.js:213
+#: admin-src/screens/EditorScreen.js:324
+msgid "Reload page"
+msgstr ""
+
+#: admin-src/screens/EditorScreen.js:217
+#: admin-src/screens/EditorScreen.js:232
+#: admin-src/screens/EditorScreen.js:256
+msgid "Back to all forms"
+msgstr ""
+
+#: admin-src/screens/EditorScreen.js:230
+msgid "Loading…"
+msgstr ""
+
+#: admin-src/screens/EditorScreen.js:269
+msgid "Form title"
+msgstr ""
+
+#: admin-src/screens/EditorScreen.js:279
+msgid "Unsaved changes"
+msgstr ""
+
+#: admin-src/screens/EditorScreen.js:290
+msgid "Save"
+msgstr ""
+
+#: admin-src/screens/EditorScreen.js:297
+msgid "You have unsaved changes. Leave anyway?"
+msgstr ""
+
+#: admin-src/screens/EditorScreen.js:305
+msgid "Leave without saving"
+msgstr ""
+
+#: admin-src/screens/EditorScreen.js:308
+msgid "Stay here"
+msgstr ""
+
+#: admin-src/screens/EditorScreen.js:315
+msgid "Saved."
+msgstr ""
+
+#: admin-src/screens/EditorScreen.js:331
+msgid "the form"
+msgstr ""
+
+#: admin-src/screens/EditorScreen.js:342
+msgid "Builder sections"
+msgstr ""
+
+#: admin-src/screens/EditorScreen.js:365
+msgid "Select a field to edit it."
+msgstr ""
+
+#: admin-src/screens/FormListScreen.js:82
+msgid "Untitled form"
+msgstr ""
+
+#: admin-src/screens/FormListScreen.js:123
+msgid "Create a form"
+msgstr ""
+
+#: admin-src/screens/FormListScreen.js:137
+msgid "Loading forms…"
+msgstr ""
+
+#: admin-src/screens/FormListScreen.js:142
+msgid "No forms yet. Create your first one."
+msgstr ""
+
+#: admin-src/screens/FormListScreen.js:152
+msgid "Shortcode"
+msgstr ""
+
+#: admin-src/screens/FormListScreen.js:153
+msgid "Last modified"
+msgstr ""
+
+#. translators: %d: form id.
+#: admin-src/screens/FormListScreen.js:165
+#, js-format
+msgid "ID %d"
+msgstr ""
+
+#. translators: %s: form title.
+#: admin-src/screens/FormListScreen.js:176
+#, js-format
+msgid "Shortcode for “%s”"
+msgstr ""
+
+#. translators: %s: form title.
+#: admin-src/screens/FormListScreen.js:181
+#, js-format
+msgid "Copy shortcode for “%s”"
+msgstr ""
+
+#. translators: 1: form title, 2: form id.
+#: admin-src/screens/FormListScreen.js:196
+#, js-format
+msgid "Edit “%1$s” (form %2$d)"
+msgstr ""
+
+#: admin-src/screens/FormListScreen.js:201
+msgid "Edit"
+msgstr ""
+
+#. translators: 1: form title, 2: form id.
+#: admin-src/screens/FormListScreen.js:212
+#, js-format
+msgid "Move “%1$s” to trash (form %2$d)"
+msgstr ""
+
+#: admin-src/screens/FormListScreen.js:217
+msgid "Trash"
+msgstr ""
+
+#. translators: %s: form title.
+#: admin-src/screens/FormListScreen.js:224
+#, js-format
+msgid "Move “%s” to the trash?"
+msgstr ""
+
+#: admin-src/screens/FormListScreen.js:233
+msgid "Move to trash"
+msgstr ""
+
+#: admin-src/screens/FormListScreen.js:251
+msgid "Form list pages"
+msgstr ""
+
+#: admin-src/state/calculations.js:13
+msgid "New calculation"
+msgstr ""
+
+#: admin-src/state/fields.js:45
+msgid "Number"
+msgstr ""
+
+#: admin-src/state/fields.js:46
+msgid "Text"
+msgstr ""
+
+#: admin-src/state/fields.js:47
+msgid "Email"
+msgstr ""
+
+#: admin-src/state/fields.js:48
+msgid "Phone"
+msgstr ""
+
+#: admin-src/state/fields.js:49
+msgid "Multi-line text"
+msgstr ""
+
+#: admin-src/state/fields.js:50
+msgid "Dropdown"
+msgstr ""
+
+#: admin-src/state/fields.js:51
+msgid "Radio buttons"
+msgstr ""
+
+#: admin-src/state/fields.js:52
+msgid "Checkboxes"
+msgstr ""
+
+#: admin-src/state/fields.js:53
+msgid "Toggle"
+msgstr ""
+
+#: admin-src/state/fields.js:55
+msgid "Slider"
+msgstr ""
+
+#: admin-src/state/fields.js:56
+msgid "Hidden"
+msgstr ""
+
+#: admin-src/state/fields.js:57
+msgid "HTML block"
+msgstr ""
+
+#: admin-src/state/fields.js:100
+msgid "First option"
+msgstr ""
+
+#: admin-src/state/fields.js:103
+msgid "Write something here."
+msgstr ""
+
+#: admin-src/state/fields.js:113
+msgid "New field"
+msgstr ""
+
+#: admin-src/state/rules.js:29
+msgid "Show"
+msgstr ""
+
+#: admin-src/state/rules.js:30
+msgid "Hide"
+msgstr ""
+
+#: admin-src/state/rules.js:31
+msgid "Make required"
+msgstr ""
+
+#: admin-src/state/rules.js:32
+msgid "Make optional"
+msgstr ""
+
+#: admin-src/state/rules.js:36
+msgid "is equal to"
+msgstr ""
+
+#: admin-src/state/rules.js:37
+msgid "is not equal to"
+msgstr ""
+
+#: admin-src/state/rules.js:38
+msgid "is greater than"
+msgstr ""
+
+#: admin-src/state/rules.js:39
+msgid "is greater than or equal to"
+msgstr ""
+
+#: admin-src/state/rules.js:40
+msgid "is less than"
+msgstr ""
+
+#: admin-src/state/rules.js:41
+msgid "is less than or equal to"
+msgstr ""
+
+#: admin-src/state/rules.js:42
+msgid "contains"
+msgstr ""
+
+#: admin-src/state/rules.js:43
+msgid "does not contain"
+msgstr ""
+
+#: admin-src/state/rules.js:44
+msgid "is empty"
+msgstr ""
+
+#: admin-src/state/rules.js:45
+msgid "is not empty"
+msgstr ""
+
+#: admin-src/state/steps.js:39
+msgid "New step"
+msgstr ""
+
+#: admin-src/state/StoreContext.js:24
+msgid "useStore must be used inside a StoreProvider."
+msgstr ""
+
+#: admin-src/state/StoreContext.js:36
+msgid "useDispatch must be used inside a StoreProvider."
+msgstr ""
+
+#: frontend-src/dom/form.js:52
+msgid "Estimated total"
+msgstr ""
+
+#. translators: 1: current step number. 2: total number of steps.
+#: frontend-src/dom/form.js:116
+#, js-format
+msgid "Step %1$d of %2$d"
+msgstr ""
+
+#. translators: 1: current step number. 2: total number of steps.
+#: frontend-src/dom/form.js:125
+#, js-format
+msgid "Step %1$d of %2$d."
+msgstr ""
+
+#. translators: 1: current step number. 2: total number of steps. 3: formatted total.
+#: frontend-src/dom/form.js:131
+#, js-format
+msgid "Step %1$d of %2$d. Total %3$s."
+msgstr ""
+
+#: frontend-src/dom/form.js:185
+msgid "There is nothing to fill in right now."
+msgstr ""
+
+#: frontend-src/dom/form.js:196
+msgid "Back"
+msgstr ""
+
+#: frontend-src/dom/form.js:197
+msgid "Next"
+msgstr ""
+
+#: frontend-src/dom/form.js:206
+msgid "We couldn’t send your quote. Please try again."
+msgstr ""
+
+#. translators: %d: how many answers the server rejected.
+#: frontend-src/dom/form.js:452
+#, js-format
+msgid "%d field needs attention."
+msgid_plural "%d fields need attention."
+msgstr[0] ""
+msgstr[1] ""
+
+#: frontend-src/dom/form.js:511
+msgid "Sending…"
+msgstr ""
+
+#: frontend-src/dom/submit.js:9
+msgid "Send"
+msgstr ""
+
+#: frontend-src/dom/submit.js:50
+msgid "Website"
+msgstr ""
+
+#: frontend-src/dom/submit.js:78
+msgid "Thank you. Your request has been sent."
+msgstr ""
+
+#: includes/Rendering/block.json
+msgctxt "block title"
+msgid "Quote form"
+msgstr ""
+
+#: includes/Rendering/block.json
+msgctxt "block description"
+msgid "Show one of your saved Quoteform forms on this page."
+msgstr ""
+
+#: includes/Rendering/block.json
+msgctxt "block keyword"
+msgid "quote"
+msgstr ""
+
+#: includes/Rendering/block.json
+msgctxt "block keyword"
+msgid "calculator"
+msgstr ""
+
+#: includes/Rendering/block.json
+msgctxt "block keyword"
+msgid "price"
+msgstr ""
+
+#: includes/Rendering/block.json
+msgctxt "block keyword"
+msgid "estimate"
+msgstr ""

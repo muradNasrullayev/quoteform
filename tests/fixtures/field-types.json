@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "_comment": "Sahə tiplərinin YEGANƏ mənbəyi. Eyni cədvəl PHP-də (FieldValidator, CalculationValidator), builder-də (admin-src/state/fields.js) və renderer-də (frontend-src/dom/controls.js, frontend-src/runtime/values.js) təkrarlanır. Bu faylı hər iki dəst oxuyur — tests/php/Forms/FieldTypeContractTest.php, tests/js/admin/fields.test.js və tests/js/frontend/field-types-contract.test.js — yəni nüsxələrdən biri geri qalanda dəst düşür. Eyni yanaşma ifadə mühərriki üçün tests/fixtures/expressions.json ilə tətbiq olunub (spec §7.5). SIRA da əhəmiyyətlidir: FieldValidator::types() və builder-in tip siyahısı eyni ardıcıllıqla gəlir.",
+  "types": [
+    { "type": "number",   "extra_keys": [ "min", "max", "step" ], "label_optional": false, "price_bearing": false, "numeric": true,  "multi": false },
+    { "type": "text",     "extra_keys": [],                       "label_optional": false, "price_bearing": false, "numeric": false, "multi": false },
+    { "type": "email",    "extra_keys": [],                       "label_optional": false, "price_bearing": false, "numeric": false, "multi": false },
+    { "type": "tel",      "extra_keys": [],                       "label_optional": false, "price_bearing": false, "numeric": false, "multi": false },
+    { "type": "textarea", "extra_keys": [],                       "label_optional": false, "price_bearing": false, "numeric": false, "multi": false },
+    { "type": "select",   "extra_keys": [ "options" ],            "label_optional": false, "price_bearing": true,  "numeric": false, "multi": false },
+    { "type": "radio",    "extra_keys": [ "options" ],            "label_optional": false, "price_bearing": true,  "numeric": false, "multi": false },
+    { "type": "checkbox", "extra_keys": [ "options" ],            "label_optional": false, "price_bearing": true,  "numeric": false, "multi": true  },
+    { "type": "toggle",   "extra_keys": [],                       "label_optional": false, "price_bearing": false, "numeric": false, "multi": false },
+    { "type": "date",     "extra_keys": [],                       "label_optional": false, "price_bearing": false, "numeric": false, "multi": false },
+    { "type": "slider",   "extra_keys": [ "min", "max", "step" ], "label_optional": false, "price_bearing": false, "numeric": true,  "multi": false },
+    { "type": "hidden",   "extra_keys": [],                       "label_optional": true,  "price_bearing": false, "numeric": false, "multi": false },
+    { "type": "html",     "extra_keys": [ "content" ],            "label_optional": true,  "price_bearing": false, "numeric": false, "multi": false }
+  ]
+}

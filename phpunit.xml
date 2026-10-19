@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit bootstrap="tests/php/bootstrap.php"
+         colors="true"
+         convertDeprecationsToExceptions="true"
+         failOnWarning="true">
+    <testsuites>
+        <testsuite name="quoteform">
+            <directory>tests/php</directory>
+        </testsuite>
+    </testsuites>
+</phpunit>

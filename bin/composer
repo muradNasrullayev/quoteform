@@ -1,0 +1,7 @@
+#!/bin/sh
+# Quoteform: dockerized Composer — this machine has no host PHP binary.
+set -e
+ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+exec docker run --rm -u "$(id -u):$(id -g)" \
+	-e COMPOSER_HOME=/tmp/composer \
+	-v "$ROOT":/app -w /app composer:2 "$@"

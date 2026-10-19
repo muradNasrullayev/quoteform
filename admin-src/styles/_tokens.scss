@@ -1,0 +1,25 @@
+// Builder-in bütün rəng və ölçüləri. Aksent WP admin rəng sxemindən gəlir —
+// istifadəçi profilində "Ocean" seçəndə builder də onunla dəyişir.
+.quoteform_builder,
+.quoteform_block {
+	--qf-accent: var( --wp-admin-theme-color, #2271b1 );
+	--qf-accent-dark: var( --wp-admin-theme-color-darker-10, #135e96 );
+	--qf-accent-soft: #f0f6fc;
+	--qf-bg: #f0f0f1;
+	--qf-surface: #fff;
+	--qf-subtle: #f6f7f7;
+	--qf-border: #dcdcde;
+	--qf-field: #8c8f94;
+	--qf-text: #1d2327;
+	--qf-muted: #646970;
+	--qf-danger: #b32d2e;
+	--qf-danger-soft: #fcf0f1;
+	--qf-warning: #996800;
+	--qf-warning-bg: #fcf9e8;
+	--qf-warning-border: #dba617;
+	--qf-success: #00a32a;
+	--qf-radius: 8px;
+	--qf-control-radius: 6px;
+	--qf-gap: 16px;
+	--qf-shadow: 0 1px 2px rgba( 0, 0, 0, 0.05 );
+}

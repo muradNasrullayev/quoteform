@@ -1,0 +1,296 @@
+{
+  "version": 1,
+  "_comment": "Runtime paritet qapısı: eyni fayl tests/js/frontend/submissions-parity.test.js və tests/php/Runtime/SubmissionParityTest.php tərəfindən oxunur. Gözlənilən dəyərlər əl ilə hesablanıb; testi keçirmək üçün DƏYİŞDİRİLMİR.",
+  "schemas": {
+    "basic": {
+      "version": 1,
+      "settings": { "currency": "USD", "currency_position": "before", "decimals": 2 },
+      "fields": {
+        "rooms": { "key": "rooms", "type": "number", "label": "Rooms", "required": true, "default": 1, "min": 1, "max": 10 },
+        "service": { "key": "service", "type": "radio", "label": "Service", "required": true, "default": "standard", "options": [ { "label": "Standard", "value": "standard", "price": 0 }, { "label": "Deep", "value": "deep", "price": 60 } ] },
+        "extras": { "key": "extras", "type": "checkbox", "label": "Extras", "required": false, "default": [], "options": [ { "label": "Oven", "value": "oven", "price": 25 }, { "label": "Fridge", "value": "fridge", "price": 20 } ] },
+        "pets": { "key": "pets", "type": "toggle", "label": "Pets", "required": false, "default": false },
+        "email": { "key": "email", "type": "email", "label": "Email", "required": true, "default": "" },
+        "notes": { "key": "notes", "type": "textarea", "label": "Notes", "required": false, "default": "" }
+      },
+      "steps": [
+        { "key": "one", "title": "One", "description": "", "fields": [ "rooms", "service" ] },
+        { "key": "two", "title": "Two", "description": "", "fields": [ "extras", "pets" ] },
+        { "key": "three", "title": "Three", "description": "", "fields": [ "email", "notes" ] }
+      ],
+      "calculations": [
+        { "key": "base", "label": "Rooms", "expression": "{rooms} * 40", "visible": true },
+        { "key": "addons", "label": "Extras", "expression": "{service.price} + {extras.price}", "visible": true },
+        { "key": "total", "label": "Total", "expression": "{base} + {addons} + {pets} * 15", "visible": false }
+      ],
+      "rules": []
+    },
+    "rules": {
+      "version": 1,
+      "settings": { "currency": "USD", "currency_position": "before", "decimals": 2 },
+      "fields": {
+        "kind": { "key": "kind", "type": "select", "label": "Kind", "required": false, "default": "home", "options": [ { "label": "Home", "value": "home", "price": 0 }, { "label": "Office", "value": "office", "price": 100 } ] },
+        "size": { "key": "size", "type": "number", "label": "Size", "required": false, "default": 1 },
+        "express": { "key": "express", "type": "toggle", "label": "Express", "required": false, "default": false },
+        "express_note": { "key": "express_note", "type": "text", "label": "Express note", "required": false, "default": "" },
+        "office_floor": { "key": "office_floor", "type": "number", "label": "Floor", "required": false, "default": "" },
+        "company": { "key": "company", "type": "text", "label": "Company", "required": true, "default": "" },
+        "pets": { "key": "pets", "type": "toggle", "label": "Pets", "required": false, "default": false }
+      },
+      "steps": [
+        { "key": "s1", "title": "S1", "description": "", "fields": [ "kind", "size", "express" ] },
+        { "key": "s2", "title": "S2", "description": "", "fields": [ "express_note", "office_floor", "company" ] },
+        { "key": "s3", "title": "S3", "description": "", "fields": [ "pets" ] }
+      ],
+      "calculations": [
+        { "key": "line", "label": "Size", "expression": "{size} * 10", "visible": true },
+        { "key": "total", "label": "Total", "expression": "{kind.price} + {line} + {office_floor} * 5", "visible": false }
+      ],
+      "rules": [
+        { "target": { "kind": "field", "key": "express_note" }, "action": "hide", "match": "all", "conditions": [ { "field": "express", "operator": "equals", "value": false } ] },
+        { "target": { "kind": "step", "key": "s2" }, "action": "hide", "match": "all", "conditions": [ { "field": "kind", "operator": "equals", "value": "home" } ] },
+        { "target": { "kind": "field", "key": "office_floor" }, "action": "require", "match": "all", "conditions": [ { "field": "kind", "operator": "equals", "value": "office" } ] },
+        { "target": { "kind": "field", "key": "pets" }, "action": "hide", "match": "all", "conditions": [ { "field": "office_floor", "operator": "greater", "value": 10 } ] },
+        { "target": { "kind": "field", "key": "company" }, "action": "optional", "match": "all", "conditions": [ { "field": "size", "operator": "greater_or_equal", "value": 5 } ] }
+      ]
+    },
+    "unplaced": {
+      "version": 1,
+      "settings": { "currency": "USD", "currency_position": "before", "decimals": 2 },
+      "fields": {
+        "shown": { "key": "shown", "type": "number", "label": "Shown", "required": false, "default": 2 },
+        "secret": { "key": "secret", "type": "number", "label": "Secret", "required": false, "default": 7 }
+      },
+      "steps": [ { "key": "one", "title": "One", "description": "", "fields": [ "shown" ] } ],
+      "calculations": [ { "key": "total", "label": "Total", "expression": "{shown} + {secret}", "visible": true } ],
+      "rules": []
+    },
+    "calc": {
+      "version": 1,
+      "settings": { "currency": "USD", "currency_position": "before", "decimals": 2 },
+      "fields": { "n": { "key": "n", "type": "number", "label": "N", "required": false, "default": 0 } },
+      "steps": [ { "key": "one", "title": "One", "description": "", "fields": [ "n" ] } ],
+      "calculations": [
+        { "key": "line", "label": "Line", "expression": "10 / {n}", "visible": true },
+        { "key": "total", "label": "Total", "expression": "{line} + 1", "visible": false }
+      ],
+      "rules": []
+    },
+    "malformed": {
+      "version": 1,
+      "settings": { "currency": "USD", "currency_position": "before", "decimals": 2 },
+      "fields": {
+        "a": { "key": "a", "type": "number", "label": "A", "required": false, "default": 1 },
+        "b": { "key": "b", "type": "text", "label": "B", "required": false, "default": "" }
+      },
+      "steps": [ { "key": "one", "title": "One", "description": "", "fields": [ "a", "b" ] } ],
+      "calculations": [ { "key": "total", "label": "A", "expression": "{a}", "visible": true } ],
+      "rules": [
+        { "target": { "kind": "field", "key": "b" }, "action": "hide", "match": "all", "conditions": [ null, { "field": "a", "operator": "equals", "value": 1 } ] },
+        { "target": { "kind": "field", "key": "b" }, "action": "hide", "match": "all", "conditions": [ { "field": [ "a" ], "operator": "equals", "value": 1 } ] },
+        { "target": { "kind": "field", "key": 5 }, "action": "hide", "match": "any", "conditions": [ { "field": "a", "operator": "equals", "value": 1 } ] }
+      ]
+    },
+    "malformed_calc": {
+      "version": 1,
+      "settings": { "currency": "USD", "currency_position": "before", "decimals": 2 },
+      "fields": { "n": { "key": "n", "type": "number", "label": "N", "required": false, "default": 2 } },
+      "steps": [ { "key": "one", "title": "One", "description": "", "fields": [ "n" ] } ],
+      "calculations": [ { "key": "total", "label": "Total", "expression": "{n} * 3", "visible": true }, null ],
+      "rules": []
+    },
+    "coupon": {
+      "version": 1,
+      "settings": { "currency": "USD", "currency_position": "before", "decimals": 2 },
+      "fields": {
+        "coupon": { "key": "coupon", "type": "text", "label": "Coupon", "required": false, "default": "" },
+        "code": { "key": "code", "type": "text", "label": "Member code", "required": true, "default": "" },
+        "vip": { "key": "vip", "type": "text", "label": "VIP", "required": false, "default": "" }
+      },
+      "steps": [ { "key": "one", "title": "One", "description": "", "fields": [ "coupon", "code", "vip" ] } ],
+      "calculations": [ { "key": "total", "label": "Total", "expression": "if({coupon} == \"MEMBER\", 10, 20)", "visible": true } ],
+      "rules": [
+        { "target": { "kind": "field", "key": "code" }, "action": "hide", "match": "all", "conditions": [ { "field": "coupon", "operator": "not_equals", "value": "MEMBER" } ] },
+        { "target": { "kind": "field", "key": "vip" }, "action": "require", "match": "all", "conditions": [ { "field": "coupon", "operator": "equals", "value": "MEMBER" } ] }
+      ]
+    }
+  },
+  "cases": [
+    {
+      "id": "basic-defaults",
+      "note": "email boş və məcburidir; base=1*40; addons=0+0; total=40+0+0*15",
+      "schema": "basic",
+      "values": { "rooms": 1, "service": "standard", "extras": [], "pets": false, "email": "", "notes": "" },
+      "expect": { "visible_fields": [ "email", "extras", "notes", "pets", "rooms", "service" ], "visible_steps": [ "one", "two", "three" ], "required": [ "email", "rooms", "service" ], "errors": { "email": "required" }, "total": 40, "breakdown": [ { "key": "base", "amount": 40 }, { "key": "addons", "amount": 0 } ], "calc_error": null }
+    },
+    {
+      "id": "basic-everything-chosen",
+      "note": "base=3*40=120; addons=60+(25+20)=105; total=120+105+1*15=240",
+      "schema": "basic",
+      "values": { "rooms": 3, "service": "deep", "extras": [ "oven", "fridge" ], "pets": true, "email": "jane@example.com", "notes": "Ring twice" },
+      "expect": { "visible_fields": [ "email", "extras", "notes", "pets", "rooms", "service" ], "visible_steps": [ "one", "two", "three" ], "required": [ "email", "rooms", "service" ], "errors": {}, "total": 240, "breakdown": [ { "key": "base", "amount": 120 }, { "key": "addons", "amount": 105 } ], "calc_error": null }
+    },
+    {
+      "id": "number-on-upper-bound",
+      "schema": "basic",
+      "values": { "rooms": 10, "service": "standard", "extras": [], "pets": false, "email": "a@b", "notes": "" },
+      "expect": { "visible_fields": [ "email", "extras", "notes", "pets", "rooms", "service" ], "visible_steps": [ "one", "two", "three" ], "required": [ "email", "rooms", "service" ], "errors": {}, "total": 400, "breakdown": [ { "key": "base", "amount": 400 }, { "key": "addons", "amount": 0 } ], "calc_error": null }
+    },
+    {
+      "id": "number-above-upper-bound",
+      "note": "validasiya xətası hesablamanı dayandırmır",
+      "schema": "basic",
+      "values": { "rooms": 11, "service": "standard", "extras": [], "pets": false, "email": "a@b", "notes": "" },
+      "expect": { "visible_fields": [ "email", "extras", "notes", "pets", "rooms", "service" ], "visible_steps": [ "one", "two", "three" ], "required": [ "email", "rooms", "service" ], "errors": { "rooms": "max" }, "total": 440, "breakdown": [ { "key": "base", "amount": 440 }, { "key": "addons", "amount": 0 } ], "calc_error": null }
+    },
+    {
+      "id": "number-below-lower-bound",
+      "note": "0 boş deyil — cavabdır, amma min=1-dən kiçikdir",
+      "schema": "basic",
+      "values": { "rooms": 0, "service": "standard", "extras": [], "pets": false, "email": "a@b", "notes": "" },
+      "expect": { "visible_fields": [ "email", "extras", "notes", "pets", "rooms", "service" ], "visible_steps": [ "one", "two", "three" ], "required": [ "email", "rooms", "service" ], "errors": { "rooms": "min" }, "total": 0, "breakdown": [ { "key": "base", "amount": 0 }, { "key": "addons", "amount": 0 } ], "calc_error": null }
+    },
+    {
+      "id": "numeric-string-counts",
+      "schema": "basic",
+      "values": { "rooms": "3", "service": "standard", "extras": [], "pets": false, "email": "a@b", "notes": "" },
+      "expect": { "visible_fields": [ "email", "extras", "notes", "pets", "rooms", "service" ], "visible_steps": [ "one", "two", "three" ], "required": [ "email", "rooms", "service" ], "errors": {}, "total": 120, "breakdown": [ { "key": "base", "amount": 120 }, { "key": "addons", "amount": 0 } ], "calc_error": null }
+    },
+    {
+      "id": "padded-numeric-string-is-blank",
+      "note": "\" 5\" NUMERIC_STRING-ə uyğun deyil → '' → məcburi xəta; dəyişən '' → 0",
+      "schema": "basic",
+      "values": { "rooms": " 5", "service": "standard", "extras": [], "pets": false, "email": "a@b", "notes": "" },
+      "expect": { "visible_fields": [ "email", "extras", "notes", "pets", "rooms", "service" ], "visible_steps": [ "one", "two", "three" ], "required": [ "email", "rooms", "service" ], "errors": { "rooms": "required" }, "total": 0, "breakdown": [ { "key": "base", "amount": 0 }, { "key": "addons", "amount": 0 } ], "calc_error": null }
+    },
+    {
+      "id": "trailing-newline-is-blank",
+      "note": "PCRE /D olmadan PHP \"5\\n\"-i rəqəm sayardı (məlum divergensiya #3)",
+      "schema": "basic",
+      "values": { "rooms": "5\n", "service": "standard", "extras": [], "pets": false, "email": "a@b", "notes": "" },
+      "expect": { "visible_fields": [ "email", "extras", "notes", "pets", "rooms", "service" ], "visible_steps": [ "one", "two", "three" ], "required": [ "email", "rooms", "service" ], "errors": { "rooms": "required" }, "total": 0, "breakdown": [ { "key": "base", "amount": 0 }, { "key": "addons", "amount": 0 } ], "calc_error": null }
+    },
+    {
+      "id": "overflowing-number",
+      "note": "\"1e400\" → Infinity: max xətası; mühərrik not_finite verir → total null, açılış boş",
+      "schema": "basic",
+      "values": { "rooms": "1e400", "service": "standard", "extras": [], "pets": false, "email": "a@b", "notes": "" },
+      "expect": { "visible_fields": [ "email", "extras", "notes", "pets", "rooms", "service" ], "visible_steps": [ "one", "two", "three" ], "required": [ "email", "rooms", "service" ], "errors": { "rooms": "max" }, "total": null, "breakdown": [], "calc_error": "not_finite" }
+    },
+    {
+      "id": "string-toggle-counts",
+      "note": "toggle \"1\" → 1; total=40+0+15",
+      "schema": "basic",
+      "values": { "rooms": 1, "service": "standard", "extras": [], "pets": "1", "email": "a@b", "notes": "" },
+      "expect": { "visible_fields": [ "email", "extras", "notes", "pets", "rooms", "service" ], "visible_steps": [ "one", "two", "three" ], "required": [ "email", "rooms", "service" ], "errors": {}, "total": 55, "breakdown": [ { "key": "base", "amount": 40 }, { "key": "addons", "amount": 0 } ], "calc_error": null }
+    },
+    {
+      "id": "email-needs-one-at-sign",
+      "schema": "basic",
+      "values": { "rooms": 1, "service": "standard", "extras": [], "pets": false, "email": "a@@b", "notes": "" },
+      "expect": { "visible_fields": [ "email", "extras", "notes", "pets", "rooms", "service" ], "visible_steps": [ "one", "two", "three" ], "required": [ "email", "rooms", "service" ], "errors": { "email": "email" }, "total": 40, "breakdown": [ { "key": "base", "amount": 40 }, { "key": "addons", "amount": 0 } ], "calc_error": null }
+    },
+    {
+      "id": "email-rejects-a-space",
+      "schema": "basic",
+      "values": { "rooms": 1, "service": "standard", "extras": [], "pets": false, "email": "a b@c", "notes": "" },
+      "expect": { "visible_fields": [ "email", "extras", "notes", "pets", "rooms", "service" ], "visible_steps": [ "one", "two", "three" ], "required": [ "email", "rooms", "service" ], "errors": { "email": "email" }, "total": 40, "breakdown": [ { "key": "base", "amount": 40 }, { "key": "addons", "amount": 0 } ], "calc_error": null }
+    },
+    {
+      "id": "email-rejects-a-no-break-space",
+      "note": "U+00A0 JS \\s-dədir; PHP açıq sinifdən istifadə etməsə keçərdi",
+      "schema": "basic",
+      "values": { "rooms": 1, "service": "standard", "extras": [], "pets": false, "email": "a b@c", "notes": "" },
+      "expect": { "visible_fields": [ "email", "extras", "notes", "pets", "rooms", "service" ], "visible_steps": [ "one", "two", "three" ], "required": [ "email", "rooms", "service" ], "errors": { "email": "email" }, "total": 40, "breakdown": [ { "key": "base", "amount": 40 }, { "key": "addons", "amount": 0 } ], "calc_error": null }
+    },
+    {
+      "id": "unknown-checkbox-option-costs-nothing",
+      "note": "runtime səviyyəsində naməlum variant 0-dır (server InputSanitizer onu 400 ilə rədd edir — Task 9)",
+      "schema": "basic",
+      "values": { "rooms": 1, "service": "standard", "extras": [ "oven", "sauna" ], "pets": false, "email": "a@b", "notes": "" },
+      "expect": { "visible_fields": [ "email", "extras", "notes", "pets", "rooms", "service" ], "visible_steps": [ "one", "two", "three" ], "required": [ "email", "rooms", "service" ], "errors": {}, "total": 65, "breakdown": [ { "key": "base", "amount": 40 }, { "key": "addons", "amount": 25 } ], "calc_error": null }
+    },
+    {
+      "id": "rules-home-defaults",
+      "note": "r1 express_note-u, r2 s2-ni gizlədir; s2-nin sahələri düşür; company-nin məcburiliyi düşür; total=0+10+''*5",
+      "schema": "rules",
+      "values": { "kind": "home", "size": 1, "express": false, "express_note": "", "office_floor": "", "company": "", "pets": false },
+      "expect": { "visible_fields": [ "express", "kind", "pets", "size" ], "visible_steps": [ "s1", "s3" ], "required": [], "errors": {}, "total": 10, "breakdown": [ { "key": "line", "amount": 10 } ], "calc_error": null }
+    },
+    {
+      "id": "rules-office-high-floor",
+      "note": "r3 office_floor-u məcburi edir; r4 (12>10) pets-i gizlədir; company boşdur; total=100+20+60",
+      "schema": "rules",
+      "values": { "kind": "office", "size": 2, "express": true, "express_note": "", "office_floor": 12, "company": "", "pets": false },
+      "expect": { "visible_fields": [ "company", "express", "express_note", "kind", "office_floor", "size" ], "visible_steps": [ "s1", "s2", "s3" ], "required": [ "company", "office_floor" ], "errors": { "company": "required" }, "total": 180, "breakdown": [ { "key": "line", "amount": 20 } ], "calc_error": null }
+    },
+    {
+      "id": "rules-required-by-rule-is-blank",
+      "note": "office_floor qayda ilə məcburi, boşdur; ''>10 yalan → pets görünür; total=100+10+0",
+      "schema": "rules",
+      "values": { "kind": "office", "size": 1, "express": false, "express_note": "", "office_floor": "", "company": "Acme", "pets": false },
+      "expect": { "visible_fields": [ "company", "express", "kind", "office_floor", "pets", "size" ], "visible_steps": [ "s1", "s2", "s3" ], "required": [ "company", "office_floor" ], "errors": { "office_floor": "required" }, "total": 110, "breakdown": [ { "key": "line", "amount": 10 } ], "calc_error": null }
+    },
+    {
+      "id": "rules-stale-value-on-hidden-step-settles",
+      "note": "1-ci keçid: office_floor=50 görünür sayılır → pets gizlənir; 2-ci keçid: s2 gizli, office_floor '' → pets görünür; 3-cü keçid eynidir. total=0+10+0",
+      "schema": "rules",
+      "values": { "kind": "home", "size": 1, "express": false, "express_note": "", "office_floor": 50, "company": "", "pets": false },
+      "expect": { "visible_fields": [ "express", "kind", "pets", "size" ], "visible_steps": [ "s1", "s3" ], "required": [], "errors": {}, "total": 10, "breakdown": [ { "key": "line", "amount": 10 } ], "calc_error": null }
+    },
+    {
+      "id": "rules-optional-overrides-required",
+      "note": "r5 (5>=5) company-ni ixtiyari edir; r3 office_floor-u məcburi; total=100+50+15",
+      "schema": "rules",
+      "values": { "kind": "office", "size": 5, "express": false, "express_note": "", "office_floor": 3, "company": "", "pets": false },
+      "expect": { "visible_fields": [ "company", "express", "kind", "office_floor", "pets", "size" ], "visible_steps": [ "s1", "s2", "s3" ], "required": [ "office_floor" ], "errors": {}, "total": 165, "breakdown": [ { "key": "line", "amount": 50 } ], "calc_error": null }
+    },
+    {
+      "id": "unplaced-field-keeps-its-value",
+      "note": "addımsız sahə görünən sayılır və hesablamaya düşür; validasiya etmir",
+      "schema": "unplaced",
+      "values": { "shown": 2, "secret": 7 },
+      "expect": { "visible_fields": [ "secret", "shown" ], "visible_steps": [ "one" ], "required": [], "errors": {}, "total": 9, "breakdown": [ { "key": "total", "amount": 9 } ], "calc_error": null }
+    },
+    {
+      "id": "calculation-error-is-reported-not-thrown",
+      "schema": "calc",
+      "values": { "n": 0 },
+      "expect": { "visible_fields": [ "n" ], "visible_steps": [ "one" ], "required": [], "errors": {}, "total": null, "breakdown": [], "calc_error": "division_by_zero" }
+    },
+    {
+      "id": "calculation-succeeds",
+      "schema": "calc",
+      "values": { "n": 2 },
+      "expect": { "visible_fields": [ "n" ], "visible_steps": [ "one" ], "required": [], "errors": {}, "total": 6, "breakdown": [ { "key": "line", "amount": 5 } ], "calc_error": null }
+    },
+    {
+      "id": "malformed-rules-are-ignored",
+      "note": "pozulmuş şərt/qayda hər iki mühərrikdə nəzərə alınmır (Ruling R3)",
+      "schema": "malformed",
+      "values": { "a": 1, "b": "" },
+      "expect": { "visible_fields": [ "a", "b" ], "visible_steps": [ "one" ], "required": [], "errors": {}, "total": 1, "breakdown": [ { "key": "total", "amount": 1 } ], "calc_error": null }
+    },
+    {
+      "id": "malformed-calculation-entry-is-ignored",
+      "note": "pozulmuş hesablama elementi hər iki mühərrikdə atlanır (Ruling R4)",
+      "schema": "malformed_calc",
+      "values": { "n": 2 },
+      "expect": { "visible_fields": [ "n" ], "visible_steps": [ "one" ], "required": [], "errors": {}, "total": 6, "breakdown": [ { "key": "total", "amount": 6 } ], "calc_error": null }
+    },
+    {
+      "id": "text-trailing-space-is-not-trimmed",
+      "note": "Ruling R15: \"MEMBER \" != \"MEMBER\" — code gizli, vip məcburi deyil, total=20. Server brauzerin qiymətləndirdiyi xam sətri qiymətləndirir",
+      "schema": "coupon",
+      "values": { "coupon": "MEMBER ", "code": "", "vip": "" },
+      "expect": { "visible_fields": [ "coupon", "vip" ], "visible_steps": [ "one" ], "required": [], "errors": {}, "total": 20, "breakdown": [ { "key": "total", "amount": 20 } ], "calc_error": null }
+    },
+    {
+      "id": "text-exact-match-shows-and-requires",
+      "note": "Ruling R15 qarşı halı: \"MEMBER\" — code görünür və məcburidir (boş), vip məcburidir (boş), total=10",
+      "schema": "coupon",
+      "values": { "coupon": "MEMBER", "code": "", "vip": "" },
+      "expect": { "visible_fields": [ "code", "coupon", "vip" ], "visible_steps": [ "one" ], "required": [ "code", "vip" ], "errors": { "code": "required", "vip": "required" }, "total": 10, "breakdown": [ { "key": "total", "amount": 10 } ], "calc_error": null }
+    }
+  ]
+}

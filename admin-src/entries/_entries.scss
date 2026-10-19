@@ -1,0 +1,301 @@
+// Müraciətlər ekranı (Plan 07). Ümumi stillər (tokens, base, shell, list)
+// style.scss-də import olunur; burada yalnız bu ekrana aid olanlar.
+
+// Tək canlı sahə `createAnnouncer`-in `<p class="quoteform_sr_only">`-idir; frontend
+// stil faylı admində yüklənmir, ona görə gizlətmə qaydası burada da lazımdır.
+.quoteform_builder .quoteform_sr_only {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	margin: -1px;
+	padding: 0;
+	overflow: hidden;
+	clip: rect( 0 0 0 0 );
+	white-space: nowrap;
+	border: 0;
+}
+
+// --- Siyahı ---------------------------------------------------------------
+
+.quoteform_builder .quoteform_entries__title {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: baseline;
+	gap: 4px 10px;
+}
+
+.quoteform_builder .quoteform_entries__count {
+	color: var( --qf-muted );
+}
+
+.quoteform_builder .quoteform_entries__filters {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: flex-end;
+	gap: 8px 12px;
+	margin: 0 0 var( --qf-gap );
+	padding: 12px 16px;
+	background: var( --qf-surface );
+	border: 1px solid var( --qf-border );
+	border-radius: var( --qf-radius );
+
+	.quoteform_control {
+		flex: 0 1 180px;
+		min-width: 140px;
+		margin: 0;
+	}
+
+	.quoteform_help {
+		margin: 4px 0 0;
+		color: var( --qf-danger );
+	}
+}
+
+.quoteform_builder .quoteform_entries__bulk {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 8px;
+	margin: 0 0 12px;
+	padding: 8px 16px;
+	background: var( --qf-accent-soft );
+	border: 1px solid var( --qf-border );
+	border-radius: var( --qf-radius );
+
+	.quoteform_confirm {
+		flex-basis: 100%;
+	}
+}
+
+.quoteform_builder .quoteform_entries__selected {
+	font-weight: 600;
+}
+
+// "Filtrə uyğun hamısı" təklifi/ləğvi: mətn içində link görünüşlü düymə (Gmail üslubu).
+.quoteform_builder .quoteform_entries__scope {
+	flex-basis: 100%;
+}
+
+.quoteform_builder .quoteform_entries__link {
+	padding: 0;
+	font: inherit;
+	color: var( --qf-accent );
+	text-decoration: underline;
+	background: none;
+	border: 0;
+	cursor: pointer;
+
+	&[aria-disabled="true"] {
+		cursor: default;
+		opacity: 0.6;
+	}
+
+	&:focus-visible {
+		outline: 2px solid var( --qf-accent );
+		outline-offset: 2px;
+	}
+}
+
+.quoteform_builder .quoteform_entries .quoteform_card:has( > .quoteform_entries__scroll ) {
+	padding: 0;
+}
+
+// Dar ekranda kart görünüşü YOX: cədvəl öz bölgəsində üfüqi sürüşür (spec §3.3).
+.quoteform_builder .quoteform_entries__scroll {
+	overflow-x: auto;
+
+	&:focus-visible {
+		outline: 2px solid var( --qf-accent );
+		outline-offset: 2px;
+	}
+}
+
+.quoteform_builder .quoteform_entries__table {
+	min-width: 760px;
+
+	.quoteform_entries__check {
+		width: 40px;
+	}
+
+	th[scope="row"] {
+		font-weight: 400;
+		white-space: nowrap;
+	}
+
+	.quoteform_entries__row--unread {
+		th[scope="row"],
+		td {
+			font-weight: 600;
+		}
+	}
+}
+
+.quoteform_builder .quoteform_entries__sort {
+	padding: 0;
+	font: inherit;
+	font-weight: 600;
+	color: inherit;
+	background: none;
+	border: 0;
+	cursor: pointer;
+
+	&:focus-visible {
+		outline: 2px solid var( --qf-accent );
+		outline-offset: 2px;
+	}
+}
+
+.quoteform_builder .quoteform_entries__arrow {
+	margin-inline-start: 4px;
+}
+
+.quoteform_builder .quoteform_entries__new {
+	display: inline-block;
+	margin-inline-start: 6px;
+	padding: 0 6px;
+	font-size: 11px;
+	font-weight: 600;
+	line-height: 18px;
+	color: #fff;
+	background: var( --qf-accent );
+	border-radius: 9px;
+}
+
+// Uzun ad/email serverdə kəsilmir (bayt/simvol səhvi sinfi); ekranda ellipsis.
+.quoteform_builder .quoteform_entries__who {
+	max-width: 280px;
+
+	.quoteform_entries__name,
+	.quoteform_entries__email {
+		display: block;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+}
+
+.quoteform_builder .quoteform_entries__muted {
+	font-size: 12px;
+	color: var( --qf-muted );
+}
+
+.quoteform_builder .quoteform_entries__total {
+	white-space: nowrap;
+}
+
+.quoteform_builder .quoteform_entries__pagination {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: flex-end;
+	gap: 12px;
+	margin-block-start: 12px;
+
+	.quoteform_list__pages {
+		margin-block-start: 0;
+	}
+}
+
+.quoteform_builder .quoteform_entries__gap {
+	align-self: center;
+	padding: 0 4px;
+	color: var( --qf-muted );
+}
+
+.quoteform_builder .quoteform_entries__per-page {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+}
+
+// --- Detal ----------------------------------------------------------------
+
+.quoteform_builder .quoteform_entry .quoteform_topbar h1 {
+	margin: 0;
+	padding: 0;
+	font-size: 20px;
+	font-weight: 600;
+}
+
+.quoteform_builder .quoteform_entry__meta {
+	color: var( --qf-muted );
+}
+
+.quoteform_builder .quoteform_entry__neighbours {
+	display: flex;
+	justify-content: space-between;
+	gap: 8px;
+	margin: 0 0 var( --qf-gap );
+}
+
+.quoteform_builder .quoteform_entry > .quoteform_card + .quoteform_card {
+	margin-block-start: var( --qf-gap );
+}
+
+.quoteform_builder .quoteform_entry__list {
+	display: grid;
+	grid-template-columns: minmax( 120px, 240px ) minmax( 0, 1fr );
+	gap: 8px 16px;
+	margin: 12px 0 0;
+
+	> div {
+		display: contents;
+	}
+
+	dt {
+		font-weight: 600;
+	}
+
+	dd {
+		margin: 0;
+	}
+}
+
+// Çoxsətirli cavab sətirlərini saxlayır; uzun sözsüz mətn (user agent, URL) sarınır.
+.quoteform_builder .quoteform_entry__value {
+	white-space: pre-wrap;
+	overflow-wrap: anywhere;
+}
+
+@media ( max-width: 600px ) {
+	.quoteform_builder .quoteform_entry__list {
+		grid-template-columns: minmax( 0, 1fr );
+
+		dd {
+			margin-block-end: 8px;
+		}
+	}
+}
+
+.quoteform_builder .quoteform_entry__breakdown {
+	width: 100%;
+	margin-block-start: 12px;
+	border-collapse: collapse;
+
+	th,
+	td {
+		padding: 6px 0;
+		border-block-end: 1px solid var( --qf-bg );
+	}
+
+	th {
+		font-weight: 400;
+		text-align: start;
+	}
+
+	td {
+		text-align: end;
+		white-space: nowrap;
+	}
+
+	tfoot th,
+	tfoot td {
+		font-weight: 600;
+		border-block-start: 1px solid var( --qf-border );
+		border-block-end: 0;
+	}
+}
+
+.quoteform_builder .quoteform_entry__error {
+	color: var( --qf-danger );
+}

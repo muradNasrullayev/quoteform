@@ -1,0 +1,8 @@
+#!/bin/sh
+# Quoteform: dockerized PHPUnit. QF_PHP picks the image (default php:8.2-cli).
+# Floor check: QF_PHP=php:7.4-cli bin/phpunit
+set -e
+ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+IMAGE="${QF_PHP:-php:8.2-cli}"
+exec docker run --rm -u "$(id -u):$(id -g)" \
+	-v "$ROOT":/app -w /app "$IMAGE" vendor/bin/phpunit "$@"

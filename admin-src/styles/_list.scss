@@ -1,0 +1,130 @@
+.quoteform_builder .quoteform_list__header {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-between;
+	gap: 12px;
+	margin: 8px 0 16px;
+
+	h1 {
+		margin: 0;
+		padding: 0;
+		font-size: 23px;
+		font-weight: 400;
+	}
+}
+
+.quoteform_builder .quoteform_list .quoteform_card:has( > .quoteform_list__table ) {
+	padding: 0;
+	overflow-x: auto;
+}
+
+.quoteform_builder .quoteform_list__table {
+	width: 100%;
+	border-collapse: collapse;
+
+	th,
+	td {
+		padding: 12px 16px;
+		text-align: start;
+		vertical-align: middle;
+		border-bottom: 1px solid var( --qf-bg );
+	}
+
+	th {
+		font-size: 12px;
+		font-weight: 600;
+		color: var( --qf-muted );
+		background: var( --qf-subtle );
+	}
+
+	tr:last-child td {
+		border-bottom: 0;
+	}
+
+	time {
+		font-size: 13px;
+		color: var( --qf-muted );
+		white-space: nowrap;
+	}
+}
+
+.quoteform_builder .quoteform_list__title {
+	display: block;
+	font-weight: 600;
+}
+
+.quoteform_builder .quoteform_list__id {
+	font-size: 12px;
+	color: var( --qf-muted );
+}
+
+.quoteform_builder .quoteform_list__actions {
+	white-space: nowrap;
+
+	.quoteform_confirm {
+		margin-top: 8px;
+		white-space: normal;
+	}
+}
+
+.quoteform_builder .quoteform_copy {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 4px;
+}
+
+.quoteform_builder .quoteform_copy__value {
+	width: 17em;
+	min-height: 28px;
+	padding: 2px 8px;
+	font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+	font-size: 12px;
+	background: var( --qf-subtle );
+	border: 1px solid var( --qf-border );
+	border-radius: var( --qf-control-radius );
+}
+
+.quoteform_builder .quoteform_copy__status {
+	flex-basis: 100%;
+	min-height: 1em;
+	font-size: 11px;
+	color: var( --qf-success );
+}
+
+.quoteform_builder .quoteform_list .quoteform_empty .dashicons {
+	width: 40px;
+	height: 40px;
+	font-size: 40px;
+	color: var( --qf-field );
+}
+
+.quoteform_builder .quoteform_list__pages {
+	display: flex;
+	justify-content: flex-end;
+	gap: 4px;
+	margin-top: 12px;
+
+	button {
+		min-width: 32px;
+		min-height: 32px;
+		font: inherit;
+		background: var( --qf-surface );
+		border: 1px solid var( --qf-border );
+		border-radius: var( --qf-control-radius );
+		cursor: pointer;
+
+		&[aria-current="page"] {
+			font-weight: 600;
+			color: #fff;
+			background: var( --qf-accent );
+			border-color: var( --qf-accent );
+		}
+
+		&:focus-visible {
+			outline: 2px solid var( --qf-accent );
+			outline-offset: 1px;
+		}
+	}
+}

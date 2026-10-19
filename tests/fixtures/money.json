@@ -1,0 +1,22 @@
+{
+  "_comment": "Pul formatı paritet halları. JS en-US (jsdom-da document.lang boşdur → FALLBACK_LOCALE), PHP ',' və '.' ayırıcıları ilə yoxlanılır. Gözlənilən dəyərlər əl ilə yazılıb.",
+  "cases": [
+    { "id": "grouping-and-decimals", "amount": 1234.5, "settings": { "currency": "USD", "currency_position": "before", "decimals": 2 }, "expect": "$1,234.50" },
+    { "id": "negative-sign-before-symbol", "amount": -1234.5, "settings": { "currency": "USD", "currency_position": "before", "decimals": 2 }, "expect": "-$1,234.50" },
+    { "id": "half-rounds-away-from-zero", "amount": 0.005, "settings": { "currency": "USD", "currency_position": "before", "decimals": 2 }, "expect": "$0.01" },
+    { "id": "symbol-after", "amount": 1234.5, "settings": { "currency": "AZN", "currency_position": "after", "decimals": 2 }, "expect": "1,234.50 ₼" },
+    { "id": "unknown-currency-uses-its-code", "amount": 1, "settings": { "currency": "XYZ", "currency_position": "before", "decimals": 2 }, "expect": "XYZ1.00" },
+    { "id": "zero-decimals-rounds", "amount": 1234.5, "settings": { "currency": "USD", "currency_position": "before", "decimals": 0 }, "expect": "$1,235" },
+    { "id": "null-is-a-dash", "amount": null, "settings": { "currency": "EUR", "currency_position": "before", "decimals": 2 }, "expect": "—" },
+    { "id": "string-is-a-dash", "amount": "5", "settings": { "currency": "USD", "currency_position": "before", "decimals": 2 }, "expect": "—" },
+    { "id": "missing-decimals-means-two", "amount": 2.5, "settings": { "currency": "USD", "currency_position": "before" }, "expect": "$2.50" },
+    { "id": "negative-zero-has-no-sign", "amount": -0.001, "settings": { "currency": "USD", "currency_position": "before", "decimals": 2 }, "expect": "$0.00" },
+    { "id": "millions", "amount": 1234567.891, "settings": { "currency": "USD", "currency_position": "before", "decimals": 2 }, "expect": "$1,234,567.89" },
+    { "id": "quadrillion-1e15", "amount": 1e15, "settings": { "currency": "USD", "currency_position": "before", "decimals": 2 }, "expect": "$1,000,000,000,000,001.00" },
+    { "id": "quadrillion-1e16", "amount": 1e16, "settings": { "currency": "USD", "currency_position": "before", "decimals": 2 }, "expect": "$10,000,000,000,000,010.00" },
+    { "id": "quadrillion-1e17", "amount": 1e17, "settings": { "currency": "USD", "currency_position": "before", "decimals": 2 }, "expect": "$100,000,000,000,000,100.00" },
+    { "id": "quintillion-1e18", "amount": 1e18, "settings": { "currency": "USD", "currency_position": "before", "decimals": 2 }, "expect": "$1,000,000,000,000,001,000.00" },
+    { "id": "sextillion-1e21", "amount": 1e21, "settings": { "currency": "USD", "currency_position": "before", "decimals": 2 }, "expect": "$1,000,000,000,000,000,900,000.00" },
+    { "id": "fraction-precision", "amount": 123456789.125, "settings": { "currency": "USD", "currency_position": "before", "decimals": 2 }, "expect": "$123,456,789.13" }
+  ]
+}

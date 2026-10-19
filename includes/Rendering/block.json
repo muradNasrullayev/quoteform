@@ -1,0 +1,21 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "quoteform/form",
+	"title": "Quote form",
+	"category": "widgets",
+	"icon": "calculator",
+	"description": "Show one of your saved Quoteform forms on this page.",
+	"keywords": [ "quote", "calculator", "price", "estimate" ],
+	"textdomain": "quoteform",
+	"supports": {
+		"html": false,
+		"multiple": true
+	},
+	"attributes": {
+		"formId": {
+			"type": "number",
+			"default": 0
+		}
+	}
+}

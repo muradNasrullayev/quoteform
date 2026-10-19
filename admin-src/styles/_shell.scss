@@ -1,0 +1,208 @@
+// --- Üst zolaq --------------------------------------------------------------
+
+.quoteform_builder .quoteform_topbar {
+	position: sticky;
+	top: var( --wp-admin--admin-bar--height, 32px );
+	z-index: 20;
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 8px 12px;
+	margin: 0 0 var( --qf-gap );
+	padding: 10px 16px;
+	background: var( --qf-surface );
+	border: 1px solid var( --qf-border );
+	border-radius: var( --qf-radius );
+	box-shadow: var( --qf-shadow );
+}
+
+// WP nüvəsində `#wpadminbar` 600px-ə qədər `position: fixed` qalır
+// (≤782px-də hündürlüyü 46px — dəyişən bunu özü verir); yalnız ≤600px-də
+// statik olur. Ona görə `top: 0` yalnız orada.
+@media ( max-width: 600px ) {
+	.quoteform_builder .quoteform_topbar {
+		top: 0;
+	}
+}
+
+.quoteform_builder .quoteform_topbar__sep {
+	color: var( --qf-border );
+}
+
+.quoteform_builder .quoteform_topbar__title {
+	flex: 1 1 220px;
+	min-width: 0;
+
+	// `.quoteform_control` daxil edilib ki, specifiklik _base.scss-in
+	// `.quoteform_control input:not([type="checkbox"])` qaydasını (0,3,1)
+	// üstələsin — `!important` işlətmədən.
+	.quoteform_control input {
+		min-height: 36px;
+		padding: 2px 8px;
+		font-size: 16px;
+		font-weight: 600;
+		border-color: transparent;
+		background: transparent;
+
+		&:hover {
+			border-color: var( --qf-border );
+		}
+
+		&:focus {
+			background: var( --qf-surface );
+		}
+	}
+}
+
+.quoteform_builder .quoteform_topbar__actions {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	margin-inline-start: auto;
+}
+
+// --- Gövdə ---------------------------------------------------------------
+
+.quoteform_builder .quoteform_editor__body {
+	display: grid;
+	grid-template-columns: 180px minmax( 0, 1fr );
+	gap: 20px;
+	align-items: start;
+}
+
+@media ( max-width: 960px ) {
+	.quoteform_builder .quoteform_editor__body {
+		grid-template-columns: minmax( 0, 1fr );
+	}
+}
+
+// Fokusla sürüşdürmə elementi yapışqan üst zolağın altına salmasın
+// (WCAG 2.4.11): zolaq ~70px + admin bar. `scroll-margin` sürüşdürülən
+// elementin ÖZÜNƏ aiddir — fokus "Stay here" düyməsinə düşür, ona görə
+// təsdiq qutusunun düymələri də siyahıdadır, qutunun özü kifayət deyil.
+.quoteform_builder .quoteform_editor > .quoteform_confirm,
+.quoteform_builder .quoteform_editor > .quoteform_confirm button,
+.quoteform_builder .quoteform_editor__body :is( a, button, input, select, textarea, [tabindex] ) {
+	scroll-margin-top: calc( var( --wp-admin--admin-bar--height, 32px ) + 80px );
+}
+
+@media ( max-width: 600px ) {
+	.quoteform_builder .quoteform_editor > .quoteform_confirm,
+	.quoteform_builder .quoteform_editor > .quoteform_confirm button,
+	.quoteform_builder .quoteform_editor__body :is( a, button, input, select, textarea, [tabindex] ) {
+		scroll-margin-top: 80px;
+	}
+}
+
+// --- Sol menyu ---------------------------------------------------------------
+
+.quoteform_builder .quoteform_sections {
+	position: sticky;
+	top: calc( var( --wp-admin--admin-bar--height, 32px ) + 76px );
+
+	ul {
+		display: flex;
+		flex-direction: column;
+		gap: 2px;
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	li {
+		margin: 0;
+	}
+}
+
+@media ( max-width: 600px ) {
+	.quoteform_builder .quoteform_sections {
+		top: 76px;
+	}
+}
+
+.quoteform_builder .quoteform_sections__tab {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	width: 100%;
+	min-height: 36px;
+	padding: 0 12px;
+	font: inherit;
+	font-size: 13px;
+	color: #50575e;
+	text-align: start;
+	background: transparent;
+	border: 0;
+	border-radius: var( --qf-control-radius );
+	cursor: pointer;
+
+	&:hover {
+		color: var( --qf-text );
+		background: rgba( 0, 0, 0, 0.04 );
+	}
+
+	&[aria-current="page"] {
+		font-weight: 600;
+		color: var( --qf-text );
+		background: var( --qf-surface );
+		box-shadow: var( --qf-shadow ), inset 3px 0 0 var( --qf-accent );
+	}
+
+	&:focus-visible {
+		outline: 2px solid var( --qf-accent );
+		outline-offset: -2px;
+	}
+}
+
+.quoteform_builder .quoteform_sections__label {
+	flex: 1;
+}
+
+.quoteform_builder .quoteform_sections__count {
+	font-size: 11px;
+	color: var( --qf-muted );
+}
+
+.quoteform_builder .quoteform_sections__dot {
+	width: 8px;
+	height: 8px;
+	background: var( --qf-danger );
+	border-radius: 50%;
+}
+
+@media ( max-width: 960px ) {
+	.quoteform_builder .quoteform_sections {
+		position: static;
+
+		ul {
+			flex-direction: row;
+			overflow-x: auto;
+		}
+	}
+
+	.quoteform_builder .quoteform_sections__tab {
+		width: auto;
+		white-space: nowrap;
+	}
+}
+
+// --- Panel başlığı (bütün panellərdə) ---------------------------------------
+
+.quoteform_builder .quoteform_panel__head {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-between;
+	gap: 8px 16px;
+	margin-bottom: 12px;
+}
+
+.quoteform_builder .quoteform_panel__intro {
+	margin: 2px 0 0;
+	font-size: 12px;
+	color: var( --qf-muted );
+}
+
+.quoteform_builder .quoteform_panel > * + * {
+	margin-top: 12px;
+}
