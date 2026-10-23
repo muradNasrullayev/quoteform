@@ -4,7 +4,7 @@ Tags: calculator, price calculator, quote form, conditional logic, multi-step fo
 Requires at least: 6.2
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 0.1.0
+Stable tag: 0.1.1
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -197,6 +197,15 @@ To rebuild the assets from source:
 PHP dependencies are installed with `composer install --no-dev`.
 
 == Changelog ==
+
+= 0.1.1 =
+* Fix: the entries table install no longer records its version when the table
+  could not be created, so it is retried on the next load.
+* Fix: the entries table definition is compatible with MySQL versions before
+  8.0.13.
+* Security: the CSV export reads only the parameters it needs and sanitizes
+  each one.
+* The uninstall routine runs only when WordPress itself uninstalls the plugin.
 
 = 0.1.0 =
 * First release.

@@ -3,7 +3,7 @@
  * Plugin Name:       Quoteform
  * Plugin URI:        https://wordpress.org/plugins/quoteform/
  * Description:       Multi-step quote calculator and conditional logic forms. Free, with no paid upgrade.
- * Version:           0.1.0
+ * Version:           0.1.1
  * Requires at least: 6.2
  * Requires PHP:      7.4
  * Author:            Murad Nasrullayev
@@ -21,7 +21,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'QFORM_VERSION', '0.1.0' );
+define( 'QFORM_VERSION', '0.1.1' );
 define( 'QFORM_FILE', __FILE__ );
 define( 'QFORM_PATH', plugin_dir_path( __FILE__ ) );
 define( 'QFORM_URL', plugin_dir_url( __FILE__ ) );

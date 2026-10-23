@@ -17,7 +17,7 @@ final class SmokeTest extends WP_UnitTestCase
     public function testPluginBootstrapRan(): void
     {
         $this->assertTrue( defined( 'QFORM_VERSION' ) );
-        $this->assertSame( '0.1.0', QFORM_VERSION );
+        $this->assertSame( '0.1.1', QFORM_VERSION );
     }
 
     public function testEngineAutoloadsInsideWordPress(): void
