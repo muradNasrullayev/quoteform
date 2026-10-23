@@ -7,31 +7,22 @@
 
 declare(strict_types=1);
 
+// Yalnız WordPress-in öz uninstall axını (Plugins → Delete) bu faylı icra edə bilər.
 if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
-	return;
+	exit;
 }
 
 /*
  * Bu fayl plugin YÜKLƏNMƏDƏN qaçır, `vendor/` isə `.gitignore`-dadır — yəni
- * Composer autoloader-inin mövcudluğuna bel bağlamaq olmaz. Ona görə
- * composer.json-dakı yeganə PSR-4 qaydası (`Quoteform\` => `includes/`)
- * burada təkrarlanır. CPT adı, meta açarı və capability adları literal kimi
- * kopyalanmır: öz siniflərindən oxunur, beləcə uyğunsuzluq yarana bilmir.
+ * Composer autoloader-inə bel bağlamaq olmaz. Ona görə Uninstaller-in
+ * istifadə etdiyi siniflər birbaşa qoşulur. CPT adı, meta açarı və capability
+ * adları literal kimi kopyalanmır: öz siniflərindən oxunur, beləcə uyğunsuzluq
+ * yarana bilmir.
  */
-spl_autoload_register(
-	static function ( string $class ): void {
-		$prefix = 'Quoteform\\';
-
-		if ( 0 !== strpos( $class, $prefix ) ) {
-			return;
-		}
-
-		$path = __DIR__ . '/includes/' . str_replace( '\\', '/', substr( $class, strlen( $prefix ) ) ) . '.php';
-
-		if ( is_readable( $path ) ) {
-			require_once $path;
-		}
-	}
-);
+require_once __DIR__ . '/includes/Support/Capabilities.php';
+require_once __DIR__ . '/includes/Forms/FormPostType.php';
+require_once __DIR__ . '/includes/Entries/EntriesTable.php';
+require_once __DIR__ . '/includes/Entries/EntryPreferences.php';
+require_once __DIR__ . '/includes/Support/Uninstaller.php';
 
 Quoteform\Support\Uninstaller::run();

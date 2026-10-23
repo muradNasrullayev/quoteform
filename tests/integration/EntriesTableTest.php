@@ -49,6 +49,22 @@ final class EntriesTableTest extends WP_UnitTestCase
         $this->assertSame( EntriesTable::VERSION, get_option( EntriesTable::OPTION ) );
     }
 
+    public function testAFailedCreateDoesNotRecordTheVersion(): void
+    {
+        EntriesTable::drop();
+
+        $blockCreate = static function ( string $query ): string {
+            return false !== stripos( $query, 'CREATE' ) ? '' : $query;
+        };
+
+        add_filter( 'query', $blockCreate );
+        EntriesTable::install();
+        remove_filter( 'query', $blockCreate );
+
+        $this->assertFalse( EntriesTable::exists() );
+        $this->assertFalse( get_option( EntriesTable::OPTION ), 'A missing table must leave the version unset so maybeUpgrade() retries.' );
+    }
+
     public function testTheTableIsPrefixed(): void
     {
         global $wpdb;

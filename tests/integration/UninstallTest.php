@@ -11,11 +11,10 @@ declare(strict_types=1);
  * 1. The work itself lives in `Quoteform\Support\Uninstaller::run()`, which is
  *    an ordinary class and is called directly by the cleanup tests below —
  *    against real WordPress, real roles and the real database.
- * 2. The `WP_UNINSTALL_PLUGIN` guard is proved in-process by requiring the real
- *    file while the constant is undefined. That works precisely because no
- *    test in this process ever defines it: the cleanup tests call
- *    `Uninstaller::run()` instead, so the assertion cannot be invalidated by
- *    test ordering.
+ * 2. The `WP_UNINSTALL_PLUGIN` guard `exit`s, so it cannot be required in this
+ *    process (it would end the suite). It is proved in a bare child process
+ *    instead: with the constant undefined the file must stop before loading
+ *    any plugin class.
  * 3. The two things (1) and (2) leave uncovered — that `uninstall.php` actually
  *    reaches `Uninstaller::run()`, and that it can load its own classes with no
  *    Composer autoloader anywhere — are proved by running the file in a bare
@@ -56,23 +55,26 @@ final class UninstallTest extends WP_UnitTestCase
 
     public function testTheFileIsInertWhenWordPressDidNotInvokeIt(): void
     {
-        $this->assertFalse(
-            defined( 'WP_UNINSTALL_PLUGIN' ),
-            'No test in this suite may define WP_UNINSTALL_PLUGIN — this test depends on it being absent.'
-        );
+        $harness = <<<PHP
+<?php
+register_shutdown_function( static function () {
+    echo class_exists( 'Quoteform\\\\Support\\\\Uninstaller', false ) ? "UNINSTALLER_LOADED\\n" : "UNINSTALLER_NOT_LOADED\\n";
+} );
 
-        Activation::activate();
+require {$this->export( $this->uninstallFile )};
 
-        $formId = $this->createForm( 'Survives' );
+echo "CONTINUED_PAST_GUARD\\n";
+PHP;
 
-        require $this->uninstallFile;
+        $harnessFile = tempnam( sys_get_temp_dir(), 'qform_uninstall_' ) . '.php';
+        file_put_contents( $harnessFile, $harness );
 
-        $this->assertInstanceOf( \WP_Post::class, get_post( $formId ), 'The form must survive.' );
-        $this->assertSame( '{"steps":[]}', get_post_meta( $formId, FormPostType::META_SCHEMA, true ) );
-        $this->assertTrue(
-            get_role( 'administrator' )->has_cap( Capabilities::MANAGE_FORMS ),
-            'Capabilities must survive.'
-        );
+        $result = $this->runPhpFile( $harnessFile );
+
+        unlink( $harnessFile );
+
+        $this->assertSame( 0, $result['status'], $result['output'] );
+        $this->assertSame( 'UNINSTALLER_NOT_LOADED', $result['output'], 'Without WP_UNINSTALL_PLUGIN the file must exit before loading or running anything.' );
     }
 
     public function testRunningTheFileDirectlyProducesNothingAndDoesNotFatal(): void

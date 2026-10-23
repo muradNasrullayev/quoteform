@@ -16,6 +16,9 @@ final class EntriesExport
 {
     public const ACTION = 'qform_export_entries';
 
+    /** Siyahının oxuduğu filtr açarları (EntryFilters::normalise) — başqa heç nə oxunmur. */
+    private const FILTER_KEYS = [ 'form', 'status', 'from', 'to', 'min', 'max', 'orderby', 'order' ];
+
     public static function register(): void
     {
         add_action( 'admin_post_' . self::ACTION, [ self::class, 'handle' ] );
@@ -53,6 +56,26 @@ final class EntriesExport
         }
     }
 
+    /**
+     * Yalnız tanınan filtr açarları, hər biri oxunan anda sanitizasiya olunur. Massiv kimi
+     * gələn dəyər atılır: EntryFilters onsuz da yalnız sətir qəbul edir.
+     *
+     * @return array<string, string>
+     */
+    private static function filterParams(): array
+    {
+        $params = [];
+
+        foreach ( self::FILTER_KEYS as $key ) {
+            // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- nonce verified in authorize() before this runs.
+            if ( isset( $_GET[ $key ] ) && is_string( $_GET[ $key ] ) ) {
+                $params[ $key ] = sanitize_text_field( wp_unslash( $_GET[ $key ] ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- nonce verified in authorize() before this runs.
+            }
+        }
+
+        return $params;
+    }
+
     public static function filename(): string
     {
         return 'quoteform-entries-' . wp_date( 'Y-m-d' ) . '.csv';
@@ -60,10 +83,12 @@ final class EntriesExport
 
     public static function handle(): void
     {
-        $params = wp_unslash( $_GET ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- verified in authorize().
-        $params = is_array( $params ) ? $params : [];
+        // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- this IS the nonce, verified in authorize().
+        $nonce = isset( $_GET['_wpnonce'] ) && is_string( $_GET['_wpnonce'] ) ? sanitize_text_field( wp_unslash( $_GET['_wpnonce'] ) ) : '';
 
-        self::authorize( $params );
+        self::authorize( [ '_wpnonce' => $nonce ] );
+
+        $params = self::filterParams();
 
         // Axın: bufer qalsa böyük eksport yaddaşda yığılar və başlıqlar gec gedər.
         // `ob_end_clean()` bəzi buferləri (məs. `output_buffering` qoruyucu bufer) silə

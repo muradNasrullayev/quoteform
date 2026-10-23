@@ -32,6 +32,8 @@ final class EntriesTable
         $charset = $wpdb->get_charset_collate();
 
         // dbDelta formatı: hər sütun ayrı sətirdə, PRIMARY KEY-dən sonra İKİ boşluq.
+        // TEXT sütunlarında DEFAULT yazılmır — MySQL 8.0.13-dən əvvəl qəbul olunmur;
+        // nullable `longtext` onsuz da NULL ilə başlayır.
         $sql = "CREATE TABLE {$table} (
   id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   form_id bigint(20) unsigned NOT NULL,
@@ -39,7 +41,7 @@ final class EntriesTable
   total decimal(18,4) DEFAULT NULL,
   currency char(3) NOT NULL DEFAULT 'USD',
   data longtext NOT NULL,
-  breakdown longtext DEFAULT NULL,
+  breakdown longtext,
   resume_token char(32) DEFAULT NULL,
   current_step smallint(5) unsigned NOT NULL DEFAULT 0,
   user_id bigint(20) unsigned DEFAULT NULL,
@@ -57,7 +59,24 @@ final class EntriesTable
 
         dbDelta( $sql );
 
-        update_option( self::OPTION, self::VERSION );
+        // dbDelta uğursuzluğu bildirmir. Versiya cədvəl həqiqətən yarananda yazılır —
+        // əks halda `maybeUpgrade` heç vaxt yenidən cəhd etməz və plugin cədvəlsiz qalar.
+        if ( self::exists() ) {
+            update_option( self::OPTION, self::VERSION );
+        }
+    }
+
+    public static function exists(): bool
+    {
+        global $wpdb;
+
+        // `SHOW TABLES` deyil: o TEMPORARY cədvəlləri göstərmir (WP test suite-i elə yaradır).
+        // Cədvəl yoxdursa sorğu xəta verir — WP_DEBUG-da çap olunmasın deyə susdurulur.
+        $suppressed = $wpdb->suppress_errors( true );
+        $columns    = $wpdb->get_col( $wpdb->prepare( 'SHOW COLUMNS FROM %i', self::name() ) ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery -- checking the plugin's own table has no WordPress API.
+        $wpdb->suppress_errors( $suppressed );
+
+        return [] !== $columns;
     }
 
     public static function maybeUpgrade(): void
