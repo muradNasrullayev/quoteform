@@ -31,6 +31,10 @@
 /phpunit-integration-trash-disabled.xml
 /.phpunit.result.cache
 
+# wordpress.org banner/ikon mənbəyi. Bu fayllar SVN-in `assets/` qovluğuna gedir,
+# plugin arxivinə yox.
+/.wordpress-org
+
 # Daxili sənədləşmə və planlar. Bunlar tarixi qeydlərdir, məhsul deyil —
 # arxivə düşsəydi, istifadəçi pluginin özü kimi oxuyardı.
 /docs

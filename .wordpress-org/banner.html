@@ -1,0 +1,34 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=IBM+Plex+Mono:wght@500&display=block" rel="stylesheet">
+<style>
+:root{--cobalt:#2F5BEA;--deep:#152470;--tag:#FFD02E;--paper:#EEF2FF}
+*{margin:0;box-sizing:border-box}
+html,body{width:772px;height:250px;overflow:hidden}
+body{background:var(--cobalt);font-family:'Bricolage Grotesque',sans-serif;color:#fff;position:relative}
+/* faint ruled grid: the builder's canvas */
+body::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.07) 1px,transparent 1px);background-size:25px 25px;background-position:-1px -1px}
+.text{position:absolute;left:48px;top:44px;width:470px}
+h1{font-size:62px;font-weight:800;letter-spacing:-.035em;line-height:1;font-variation-settings:"opsz" 96}
+.formula{margin-top:22px;font-family:'IBM Plex Mono',monospace;font-size:17px;font-weight:500;display:flex;align-items:center;gap:7px;flex-wrap:nowrap;color:var(--paper)}
+.tok{background:var(--deep);color:#fff;padding:4px 9px;border-radius:5px}
+.op{opacity:.85}
+.sub{margin-top:22px;font-size:17px;font-weight:500;color:var(--paper);opacity:.92;letter-spacing:-.005em}
+.tag{position:absolute;right:58px;top:50px;width:196px;height:132px;background:var(--tag);color:var(--deep);
+  clip-path:polygon(22% 0,100% 0,100% 100%,22% 100%,0 50%);transform:rotate(-8deg);
+  filter:drop-shadow(0 10px 0 var(--deep));display:flex;align-items:center;justify-content:flex-end;padding-right:22px}
+.wrap{position:absolute;right:56px;top:52px;width:218px;height:128px;transform:rotate(-8deg)}
+.wrap .shadow{position:absolute;inset:0;background:var(--deep);clip-path:polygon(22% 0,100% 0,100% 100%,22% 100%,0 50%);transform:translate(8px,8px)}
+.wrap .face{position:absolute;inset:0;background:var(--tag);clip-path:polygon(22% 0,100% 0,100% 100%,22% 100%,0 50%);display:flex;align-items:center;justify-content:center;padding-left:48px}
+.wrap .hole{position:absolute;left:28px;top:54px;width:20px;height:20px;border-radius:50%;background:var(--cobalt);box-shadow:inset 2px 2px 0 var(--deep)}
+.price{font-size:58px;font-weight:800;letter-spacing:-.04em;color:var(--deep);font-variation-settings:"opsz" 96}
+.price small{font-size:30px;vertical-align:20px;margin-right:2px}
+.string{position:absolute;right:236px;top:118px;width:90px;height:2px;background:var(--paper);opacity:.0}
+</style></head><body>
+<div class="text">
+  <h1>Quoteform</h1>
+  <div class="formula"><span class="tok">{room_count}</span><span class="op">× 50 +</span><span class="tok">{bathrooms}</span><span class="op">× 120</span></div>
+  <div class="sub">Multi-step quote forms with conditional logic.</div>
+</div>
+<div class="wrap"><div class="shadow"></div><div class="face"><div class="price"><small>$</small>390</div></div><div class="hole"></div></div>
+</body></html>

@@ -1,0 +1,17 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,800&display=block" rel="stylesheet">
+<style>
+:root{--cobalt:#2F5BEA;--deep:#152470;--tag:#FFD02E}
+*{margin:0;box-sizing:border-box}
+html,body{width:256px;height:256px;overflow:hidden}
+body{background:var(--cobalt);position:relative;font-family:'Bricolage Grotesque',sans-serif}
+.wrap{position:absolute;left:22px;top:58px;width:206px;height:136px;transform:rotate(-12deg)}
+.shadow,.face{position:absolute;inset:0;clip-path:polygon(24% 0,100% 0,100% 100%,24% 100%,0 50%)}
+.shadow{background:var(--deep);transform:translate(9px,9px)}
+.face{background:var(--tag);display:flex;align-items:center;justify-content:center;padding-left:52px}
+.hole{position:absolute;left:30px;top:56px;width:24px;height:24px;border-radius:50%;background:var(--cobalt);box-shadow:inset 3px 3px 0 var(--deep)}
+.b{font-size:104px;font-weight:800;color:var(--deep);letter-spacing:-.02em;line-height:1;font-variation-settings:"opsz" 96;transform:translateY(-4px)}
+</style></head><body>
+<div class="wrap"><div class="shadow"></div><div class="face"><span class="b">{&thinsp;}</span></div><div class="hole"></div></div>
+</body></html>
