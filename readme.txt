@@ -4,11 +4,11 @@ Tags: calculator, price calculator, quote form, conditional logic, multi-step fo
 Requires at least: 6.2
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 0.1.1
+Stable tag: 0.1.2
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Build multi-step quote and price calculator forms with conditional logic. Free, with no paid upgrade.
+Build multi-step quote and price calculator forms with conditional logic, and collect the quotes your visitors submit. Free, with no paid upgrade.
 
 == Description ==
 
@@ -55,12 +55,27 @@ they should, and a required field they can see has to be filled in before Next
 will move them on. On the last step the total is broken down into the
 calculations that make it up.
 
+= Submissions and entries =
+
+On the last step the visitor submits the form. The server then works out the
+price again from the answers alone. The browser never sends a total, so a
+visitor cannot change the price that gets stored.
+
+* **After a submission** — show a message with the total and its breakdown, or
+  redirect the visitor to a URL. You choose this per form.
+* **Spam protection** — a hidden honeypot field and a time check signed by the
+  server. No CAPTCHA and no external service.
+* **Entries screen** — every submission is stored in your WordPress database
+  and listed under **Quoteform → Entries**. Filter by form, new or read, date
+  and total. Open an entry to see each answer and the price breakdown.
+* **Bulk actions** — mark entries as read or unread, or delete them.
+* **CSV export** — export the entries that match the current filters.
+
 = What this version does not do =
 
-Quoteform works out and shows a price. **It does not yet send or store
-anything:** there is no submit step, no entry storage, no email notification and
-no payment. That is the next release. If a form that only quotes is not enough
-for you, this version will not be either.
+Quoteform does not send email notifications, does not take payments and does
+not let a visitor save a form and come back to it later. Entries are only on
+the Entries screen and in the CSV export.
 
 = Formulas, without writing code =
 
@@ -103,6 +118,17 @@ No pro version, no add-ons, no license key, no account and no hosted service.
 Quoteform sends no data anywhere: it makes no request to any external server,
 loads no fonts or scripts from a CDN, and collects no usage statistics.
 
+= Privacy =
+
+Submitted entries stay in your own WordPress database. Each entry stores the
+answers, the calculated total and its breakdown, the date, the visitor's
+browser user agent and, if the visitor was logged in, their user ID. The
+visitor's IP address is stored only if you turn on **Store the visitor's IP
+address with each entry** in the form settings. It is off by default.
+
+The answers can contain personal data, such as a name or an email address,
+when your form asks for it. Mention this in your site's privacy policy.
+
 == Installation ==
 
 1. Install the plugin from the Plugins screen in WordPress, or upload the
@@ -112,10 +138,14 @@ loads no fonts or scripts from a CDN, and collects no usage statistics.
 4. Put the form on a page with the **Quote form** block, the `[quoteform id="…"]`
    shortcode or the Elementor widget.
 
-Activating the plugin gives administrators the `qform_manage_forms` capability,
-which is what the builder and its REST endpoints require. It is deliberately
-separate from `manage_options`, so you can grant it to another role without
-handing over the rest of the site settings.
+Activating the plugin gives administrators three capabilities:
+
+* `qform_manage_forms` — create and edit forms, and delete entries.
+* `qform_view_entries` — see the Entries screen.
+* `qform_export_entries` — export entries to CSV.
+
+They are deliberately separate from `manage_options`, so you can grant them to
+another role without handing over the rest of the site settings.
 
 == Frequently Asked Questions ==
 
@@ -126,8 +156,13 @@ to enter and no account to create. Nothing in the plugin is locked.
 
 = Can visitors submit the form? =
 
-Not in this version. A form calculates and shows a price; nothing is sent or
-stored. Submissions, entry storage and notifications are the next release.
+Yes. The submission is stored as an entry in your WordPress database, and you
+see it under **Quoteform → Entries**. The price is calculated again on the
+server, so the stored total is always the one your formulas give.
+
+= Will I get an email when someone submits a form? =
+
+Not in this version. Check the Entries screen, or export the entries to CSV.
 
 = Do I need Elementor, Divi or a page builder? =
 
@@ -163,12 +198,13 @@ back exactly as it was.
 = And if I delete the plugin? =
 
 Deleting is not the same as deactivating. **Deleting Quoteform permanently
-deletes every form you have made**, including forms in the trash, and removes
+deletes every form you have made and every entry submitted to them**, including
+forms in the trash, and removes
 `qform_manage_forms`, `qform_view_entries` and `qform_export_entries` from every
 role on the site. On a multisite network it does this on every site of the
 network, because the forms and the roles live on each site separately. Nothing
-is recoverable afterwards, so export or copy anything you want to keep before
-you click Delete.
+is recoverable afterwards, so export your entries to CSV and copy anything else
+you want to keep before you click Delete.
 
 = Who can create and edit forms? =
 
@@ -197,6 +233,12 @@ To rebuild the assets from source:
 PHP dependencies are installed with `composer install --no-dev`.
 
 == Changelog ==
+
+= 0.1.2 =
+* The readme now describes submissions, the Entries screen, CSV export and the
+  data each entry stores.
+* Removed the "save and resume" option from the form settings. The feature is
+  not implemented yet.
 
 = 0.1.1 =
 * Fix: the entries table install no longer records its version when the table

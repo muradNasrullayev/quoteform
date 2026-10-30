@@ -94,7 +94,9 @@ describe( 'settings groups', () => {
 
 		expect( money ).toContainElement( screen.getByLabelText( 'Currency' ) );
 		expect( money ).toContainElement( screen.getByLabelText( 'Decimal places' ) );
-		expect( visitors ).toContainElement( screen.getByLabelText( 'Let visitors save and resume' ) );
+		expect( visitors ).toContainElement(
+			screen.getByLabelText( 'Store the visitor’s IP address with each entry' )
+		);
 	} );
 
 	it( 'keeps the success action a select', async () => {

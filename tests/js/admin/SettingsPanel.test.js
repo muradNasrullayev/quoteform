@@ -91,7 +91,8 @@ describe( 'SettingsPanel', () => {
 		expect( screen.getByLabelText( 'Submit button label' ) ).toHaveValue( 'Get my quote' );
 		expect( screen.getByLabelText( 'After a successful submission' ) ).toHaveValue( 'message' );
 		expect( screen.getByLabelText( 'Success message' ) ).toHaveValue( 'Thanks.' );
-		expect( screen.getByLabelText( 'Let visitors save and resume' ) ).not.toBeChecked();
+		// Save & resume is not implemented, so the builder must not offer it.
+		expect( screen.queryByLabelText( 'Let visitors save and resume' ) ).not.toBeInTheDocument();
 		expect( screen.getByLabelText( 'Store the visitor’s IP address with each entry' ) ).toBeChecked();
 
 		// The section is a labelled landmark, not just a div with a heading.
@@ -203,12 +204,6 @@ describe( 'SettingsPanel', () => {
 					message: 'Redirect url error.',
 					context: {},
 				},
-				{
-					path: 'settings.save_resume',
-					code: 'invalid_type',
-					message: 'Save resume error.',
-					context: {},
-				},
 				{ path: 'settings.store_ip', code: 'invalid_type', message: 'Store ip error.', context: {} },
 			] ),
 		} );
@@ -230,9 +225,6 @@ describe( 'SettingsPanel', () => {
 		);
 		expect( screen.getByLabelText( 'Success message' ) ).toHaveAccessibleDescription(
 			'Success message error.'
-		);
-		expect( screen.getByLabelText( 'Let visitors save and resume' ) ).toHaveAccessibleDescription(
-			'Save resume error.'
 		);
 		expect(
 			screen.getByLabelText( 'Store the visitor’s IP address with each entry' )
@@ -299,12 +291,6 @@ describe( 'SettingsPanel', () => {
 				user.selectOptions( screen.getByLabelText( 'After a successful submission' ), 'redirect' ),
 			act: ( user ) => user.type( screen.getByLabelText( 'Redirect URL' ), 'https://example.org' ),
 			expected: 'https://example.org',
-		},
-		{
-			key: 'save_resume',
-			prep: null,
-			act: ( user ) => user.click( screen.getByLabelText( 'Let visitors save and resume' ) ),
-			expected: true,
 		},
 		{
 			key: 'store_ip',

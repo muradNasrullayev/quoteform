@@ -111,14 +111,8 @@ export default function SettingsPanel( { errorIndex } ) {
 			<Card className="quoteform_settings-group">
 				<h3>{ __( 'Visitors', 'quoteform' ) }</h3>
 
-				<ToggleControl
-					id="quoteform_save-resume"
-					label={ __( 'Let visitors save and resume', 'quoteform' ) }
-					checked={ settings.save_resume }
-					onChange={ change( 'save_resume' ) }
-					errors={ errors( 'save_resume' ) }
-				/>
-
+				{ /* `save_resume` stays in the schema for stored forms, but the
+				     feature is not implemented, so the builder does not offer it. */ }
 				<ToggleControl
 					id="quoteform_store-ip"
 					label={ __( 'Store the visitor’s IP address with each entry', 'quoteform' ) }
