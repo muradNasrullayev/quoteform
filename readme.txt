@@ -1,21 +1,25 @@
-=== Quoteform ===
+=== Quoteform – Quote & Cost Calculator Form ===
 Contributors: miratnasrullayev
-Tags: calculator, price calculator, quote form, conditional logic, multi-step form
+Tags: cost calculator, quote calculator, price calculator, quote form, multi-step form
 Requires at least: 6.2
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 0.1.2
+Stable tag: 0.1.3
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Build multi-step quote and price calculator forms with conditional logic, and collect the quotes your visitors submit. Free, with no paid upgrade.
+Build quote and cost calculator forms with a live price, conditional logic and steps. Collect the quotes visitors submit. Free, no paid upgrade.
 
 == Description ==
 
-Quoteform is a form builder for one job: working out a price. A visitor picks a
-configuration — three rooms, two bathrooms, express turnaround — and a quote
-comes out of it. That is a different problem from a contact form, and Quoteform
-is built for it rather than around it.
+Quoteform is a quote and cost calculator form builder for one job: working out
+a price. A visitor picks a configuration — three rooms, two bathrooms, express
+turnaround — and sees an instant estimate. When they submit the form, the quote
+arrives on your Entries screen. That is a different problem from a contact form,
+and Quoteform is built for it rather than around it.
+
+Use it for a cleaning or moving quote, a printing or web design estimate, an
+event or rental price, or any service where the price depends on the answers.
 
 Conditional logic and multi-step forms are the two features that calculator
 plugins usually keep behind a paid upgrade. Here they are simply part of the
@@ -218,6 +222,16 @@ The interface is written in English and is fully translatable — every string i
 both the PHP and the JavaScript goes through WordPress's translation functions,
 and a `.pot` file ships in `languages/`.
 
+== Screenshots ==
+
+1. The visitor sees the price and its breakdown on the last step, before they submit the quote.
+2. After the visitor submits the form, a message shows the final price.
+3. Calculations are named formulas. The editor checks each formula as you type.
+4. Each option of a choice field has its own price.
+5. A rule shows or hides a field or a whole step, based on the answers.
+6. The Entries screen lists every submitted quote. Filter the list and export it to CSV.
+7. An entry shows each answer and the price breakdown.
+
 == Source code ==
 
 The JavaScript and CSS in `build/` are compiled. Their human-readable source
@@ -233,6 +247,11 @@ To rebuild the assets from source:
 PHP dependencies are installed with `composer install --no-dev`.
 
 == Changelog ==
+
+= 0.1.3 =
+* New: a "Rate Quoteform" link in the plugin's row on the Plugins screen.
+* The readme describes more clearly what Quoteform does, and the plugin page
+  now has screenshots.
 
 = 0.1.2 =
 * The readme now describes submissions, the Entries screen, CSV export and the

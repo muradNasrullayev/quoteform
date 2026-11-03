@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Quoteform\Tests\Integration;
 
+use Quoteform\Admin\PluginLinks;
 use Quoteform\Forms\FormPostType;
 use Quoteform\Forms\SchemaRepository;
 use Quoteform\Plugin;
@@ -111,6 +112,16 @@ final class PluginTest extends WP_UnitTestCase
         $this->assertNotFalse(
             has_action( 'plugins_loaded', [ ElementorWidget::class, 'register' ] ),
             'Plugin::boot() must hook ElementorWidget::register() to plugins_loaded.'
+        );
+    }
+
+    public function testBootAddsTheRateLinkToThePluginsScreen(): void
+    {
+        Plugin::boot();
+
+        $this->assertNotFalse(
+            has_filter( 'plugin_row_meta', [ PluginLinks::class, 'rowMeta' ] ),
+            'Plugin::boot() must hook PluginLinks::rowMeta() to plugin_row_meta.'
         );
     }
 

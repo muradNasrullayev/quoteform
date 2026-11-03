@@ -7,6 +7,7 @@ namespace Quoteform;
 use Quoteform\Admin\BuilderPage;
 use Quoteform\Admin\EntriesExport;
 use Quoteform\Admin\EntriesPage;
+use Quoteform\Admin\PluginLinks;
 use Quoteform\Entries\EntriesTable;
 use Quoteform\Forms\FormPostType;
 use Quoteform\Rendering\Block;
@@ -54,6 +55,7 @@ final class Plugin
         BuilderPage::register();
         EntriesPage::register();
         EntriesExport::register();
+        PluginLinks::register();
 
         add_action(
             'rest_api_init',
