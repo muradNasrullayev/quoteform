@@ -18,6 +18,11 @@ export default function NotificationsCard( { errorIndex } ) {
 
 	const notification = schema.notifications?.[ 0 ];
 	const enabled = notification?.enabled === true;
+	const toErrors = errorsFor( errorIndex, 'notifications.0.to' );
+	const subjectErrors = errorsFor( errorIndex, 'notifications.0.subject' );
+	// The server validates both fields even when the toggle is off, so an error
+	// on them must stay visible or the user cannot fix it.
+	const showFields = enabled || toErrors.length > 0 || subjectErrors.length > 0;
 	const change = ( key ) => ( value ) => dispatch( setNotification( key, value ) );
 
 	return (
@@ -33,14 +38,14 @@ export default function NotificationsCard( { errorIndex } ) {
 				errors={ errorsFor( errorIndex, 'notifications.0.enabled' ) }
 			/>
 
-			{ enabled && (
+			{ showFields && (
 				<>
 					<TextControl
 						id="quoteform_notify-to"
 						label={ __( 'Send to', 'quoteform' ) }
-						value={ notification.to ?? '' }
+						value={ notification?.to ?? '' }
 						onChange={ change( 'to' ) }
-						errors={ errorsFor( errorIndex, 'notifications.0.to' ) }
+						errors={ toErrors }
 						help={ __(
 							'Separate addresses with commas. Leave empty to use the site’s admin email address.',
 							'quoteform'
@@ -50,9 +55,9 @@ export default function NotificationsCard( { errorIndex } ) {
 					<TextControl
 						id="quoteform_notify-subject"
 						label={ __( 'Subject', 'quoteform' ) }
-						value={ notification.subject ?? '' }
+						value={ notification?.subject ?? '' }
 						onChange={ change( 'subject' ) }
-						errors={ errorsFor( errorIndex, 'notifications.0.subject' ) }
+						errors={ subjectErrors }
 						help={ __( 'You can use {form_name}, {total} and {entry_id}.', 'quoteform' ) }
 					/>
 				</>

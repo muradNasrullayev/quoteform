@@ -107,4 +107,16 @@ describe( 'NotificationsCard', () => {
 		expect( screen.getByLabelText( 'Subject' ) ).toHaveAccessibleDescription( /Too long\./ );
 		expect( screen.getByText( 'List error.' ) ).toBeInTheDocument();
 	} );
+
+	it( 'keeps a field with a server error visible when the toggle is off', async () => {
+		await renderLoaded( {
+			notifications: [ { type: 'admin', enabled: false, to: '', subject: '' } ],
+			errorIndex: indexErrors( [
+				{ path: 'notifications.0.subject', code: 'empty', message: 'Subject is required.', context: {} },
+			] ),
+		} );
+
+		expect( screen.getByLabelText( toggleLabel ) ).not.toBeChecked();
+		expect( screen.getByLabelText( 'Subject' ) ).toHaveAccessibleDescription( /Subject is required\./ );
+	} );
 } );
