@@ -86,6 +86,26 @@ PHP;
         $this->assertSame( '', $result['output'] );
     }
 
+    public function testTheFileRequiresEveryClassTheUninstallerImports(): void
+    {
+        $source = (string) file_get_contents( dirname( __DIR__, 2 ) . '/includes/Support/Uninstaller.php' );
+        $file   = (string) file_get_contents( $this->uninstallFile );
+
+        preg_match_all( '/^use Quoteform\\\\([A-Za-z\\\\]+);/m', $source, $matches );
+
+        $this->assertNotEmpty( $matches[1] );
+
+        foreach ( $matches[1] as $class ) {
+            $path = 'includes/' . str_replace( '\\', '/', $class ) . '.php';
+
+            $this->assertStringContainsString(
+                "require_once __DIR__ . '/{$path}';",
+                $file,
+                "uninstall.php runs without an autoloader but does not require {$class}."
+            );
+        }
+    }
+
     public function testTheFileReachesTheUninstallerWithoutAComposerAutoloader(): void
     {
         $harness = <<<PHP
