@@ -10,6 +10,7 @@ use Quoteform\Admin\BuilderPage;
 use Quoteform\Admin\EntriesPage;
 use Quoteform\Entries\EntriesTable;
 use Quoteform\Forms\FormPostType;
+use Quoteform\Notifications\AdminNotifier;
 use Quoteform\Support\Capabilities;
 use Quoteform\Tests\Integration\Support\SeedsEntries;
 use WP_UnitTestCase;
@@ -249,6 +250,23 @@ final class EntriesPageTest extends WP_UnitTestCase
         $this->assertTrue( $config['hasDeletedForms'] );
         $this->assertFalse( $config['canDelete'] );
         $this->assertFalse( $config['canExport'] );
+    }
+
+    public function testTheConfigReportsAFailedNotificationEmail(): void
+    {
+        delete_option( AdminNotifier::FAILURE_OPTION );
+        $this->assertNull( EntriesPage::config()['mailFailure'] );
+
+        update_option( AdminNotifier::FAILURE_OPTION, [ 'entry_id' => 41, 'time' => 1 ] );
+        $this->assertSame( [ 'entryId' => 41 ], EntriesPage::config()['mailFailure'] );
+
+        update_option( AdminNotifier::FAILURE_OPTION, 'x' );
+        $this->assertNull( EntriesPage::config()['mailFailure'] );
+
+        update_option( AdminNotifier::FAILURE_OPTION, [ 'entry_id' => 0, 'time' => 1 ] );
+        $this->assertNull( EntriesPage::config()['mailFailure'] );
+
+        delete_option( AdminNotifier::FAILURE_OPTION );
     }
 
     public function testTheBadgeTextIsTranslatableAndEscaped(): void

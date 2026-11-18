@@ -44,6 +44,7 @@ export default function EntriesListScreen( {
 } ) {
 	const [ data, setData ] = useState( null );
 	const [ loading, setLoading ] = useState( true );
+	const [ mailWarningDismissed, setMailWarningDismissed ] = useState( false );
 	const [ error, setError ] = useState( null );
 	const [ perPage, setPerPage ] = useState( initialPerPage || 20 );
 	const [ selected, setSelected ] = useState( () => new Set() );
@@ -404,6 +405,16 @@ export default function EntriesListScreen( {
 				filters={ filters }
 				onChange={ handleFilters }
 			/>
+
+			{ config.mailFailure && ! mailWarningDismissed && (
+				<Notice status="warning" live={ false } onDismiss={ () => setMailWarningDismissed( true ) }>
+					{ sprintf(
+						/* translators: %d: entry number. */
+						__( "The last notification email could not be sent (entry #%d). Check your site's email setup.", 'quoteform' ),
+						config.mailFailure.entryId
+					) }
+				</Notice>
+			) }
 
 			{ error && (
 				<Notice status="error" live={ false } onDismiss={ () => setError( null ) }>

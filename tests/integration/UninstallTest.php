@@ -24,6 +24,7 @@ declare(strict_types=1);
 namespace Quoteform\Tests\Integration;
 
 use Quoteform\Forms\FormPostType;
+use Quoteform\Notifications\AdminNotifier;
 use Quoteform\Support\Activation;
 use Quoteform\Support\Capabilities;
 use Quoteform\Support\Uninstaller;
@@ -208,6 +209,15 @@ PHP;
         Uninstaller::run();
 
         $this->assertSame( 0, $this->countSchemaMetaRows(), 'No _qform_schema row may outlive the forms.' );
+    }
+
+    public function testRemovesTheMailFailureOption(): void
+    {
+        update_option( AdminNotifier::FAILURE_OPTION, [ 'entry_id' => 41, 'time' => 1 ] );
+
+        Uninstaller::run();
+
+        $this->assertFalse( get_option( AdminNotifier::FAILURE_OPTION ) );
     }
 
     public function testRemovesFormRevisionsToo(): void

@@ -7,6 +7,7 @@ namespace Quoteform\Admin;
 use Quoteform\Entries\EntryPreferences;
 use Quoteform\Entries\EntryRepository;
 use Quoteform\Entries\FormDirectory;
+use Quoteform\Notifications\AdminNotifier;
 use Quoteform\Support\Capabilities;
 
 /**
@@ -146,6 +147,24 @@ final class EntriesPage
             'builderUrl'      => admin_url( 'admin.php?page=' . BuilderPage::MENU_SLUG ),
             'forms'           => $list,
             'hasDeletedForms' => [] !== array_diff( ( new EntryRepository() )->formIdsWithEntries(), array_keys( $forms ) ),
+            'mailFailure'     => self::mailFailure(),
         ];
+    }
+
+    /**
+     * Son uğursuz bildiriş emaili (AdminNotifier yazır). Seçim pozulubsa və ya
+     * `entry_id` müsbət tam ədəd deyilsə, xəbərdarlıq göstərilmir.
+     *
+     * @return array{entryId: int}|null
+     */
+    private static function mailFailure(): ?array
+    {
+        $failure = get_option( AdminNotifier::FAILURE_OPTION );
+
+        if ( ! is_array( $failure ) || ! isset( $failure['entry_id'] ) || ! is_int( $failure['entry_id'] ) || $failure['entry_id'] < 1 ) {
+            return null;
+        }
+
+        return [ 'entryId' => $failure['entry_id'] ];
     }
 }
