@@ -8,6 +8,7 @@ use Quoteform\Entries\EntriesTable;
 use Quoteform\Entries\EntryRepository;
 use Quoteform\Forms\FormPostType;
 use Quoteform\Forms\SchemaRepository;
+use Quoteform\Notifications\AdminNotifier;
 use Quoteform\Submissions\SpamGuard;
 use Quoteform\Submissions\SubmissionService;
 use WP_UnitTestCase;
@@ -22,9 +23,47 @@ final class SubmissionServiceTest extends WP_UnitTestCase
         FormPostType::register();
         EntriesTable::drop();
         EntriesTable::install();
+        $this->mails = [];
+        delete_option( AdminNotifier::FAILURE_OPTION );
+        add_filter( 'pre_wp_mail', [ $this, 'captureMail' ], 10, 2 );
     }
 
-    private function schema( array $settings = [] ): array
+    protected function tearDown(): void
+    {
+        remove_filter( 'pre_wp_mail', [ $this, 'captureMail' ], 10 );
+        remove_all_filters( 'pre_wp_mail' );
+        delete_option( AdminNotifier::FAILURE_OPTION );
+        parent::tearDown();
+    }
+
+    /** @var array<int, array<string, mixed>> */
+    private $mails = [];
+
+    /** @var string 'ok' | 'fail' | 'throw' */
+    private $mailMode = 'ok';
+
+    /**
+     * @param mixed                $short
+     * @param array<string, mixed> $atts
+     * @return mixed
+     */
+    public function captureMail( $short, array $atts )
+    {
+        if ( 'throw' === $this->mailMode ) {
+            throw new \RuntimeException( 'mail filter broke' );
+        }
+
+        $this->mails[] = $atts;
+
+        return 'fail' === $this->mailMode ? false : true;
+    }
+
+    private function adminNotification(): array
+    {
+        return [ [ 'type' => 'admin', 'enabled' => true, 'to' => 'owner@example.com', 'subject' => 'New: {total}' ] ];
+    }
+
+    private function schema( array $settings = [], ?array $notifications = null ): array
     {
         return [
             'version'       => 1,
@@ -47,7 +86,7 @@ final class SubmissionServiceTest extends WP_UnitTestCase
                 [ 'key' => 'total', 'label' => 'Total', 'expression' => '{base}', 'visible' => false ],
             ],
             'rules'         => [],
-            'notifications' => [],
+            'notifications' => $notifications ?? [],
         ];
     }
 
@@ -256,5 +295,61 @@ final class SubmissionServiceTest extends WP_UnitTestCase
         $postId = self::factory()->post->create( [ 'post_status' => 'publish' ] );
 
         $this->assertFalse( SubmissionService::isPublishedForm( $postId ) );
+    }
+
+    public function testAGoodSubmissionEmailsTheSiteOwner(): void
+    {
+        $formId = $this->form( $this->schema( [], $this->adminNotification() ) );
+        $this->submit( $formId, [ 'rooms' => 2, 'service' => 'standard', 'email' => 'a@b' ] );
+
+        $this->assertCount( 1, $this->mails );
+        $this->assertStringContainsString( '$80.00', $this->mails[0]['subject'] );
+    }
+
+    public function testAFormWithNoNotificationsSendsNothing(): void
+    {
+        $formId = $this->form( $this->schema( [], [] ) );
+        $this->submit( $formId, [ 'rooms' => 2, 'service' => 'standard', 'email' => 'a@b' ] );
+
+        $this->assertSame( [], $this->mails );
+    }
+
+    public function testSpamSendsNothing(): void
+    {
+        $formId = $this->form( $this->schema( [], $this->adminNotification() ) );
+        $this->submit( $formId, [ 'rooms' => 2, 'service' => 'standard', 'email' => 'a@b' ], [ 'hp' => 'bot' ] );
+
+        $this->assertSame( [], $this->mails );
+    }
+
+    public function testInvalidAnswersSendNothing(): void
+    {
+        $formId = $this->form( $this->schema( [], $this->adminNotification() ) );
+        $result = $this->submit( $formId, [ 'rooms' => 11, 'service' => 'standard', 'email' => '' ] );
+
+        $this->assertSame( 422, $result['status'] );
+        $this->assertSame( [], $this->mails );
+    }
+
+    public function testAMailFailureKeepsTheEntryAndRecordsIt(): void
+    {
+        $this->mailMode = 'fail';
+        $formId = $this->form( $this->schema( [], $this->adminNotification() ) );
+        $result = $this->submit( $formId, [ 'rooms' => 2, 'service' => 'standard', 'email' => 'a@b' ] );
+
+        $this->assertSame( 201, $result['status'] );
+        $this->assertCount( 1, $this->rows() );
+        $this->assertIsArray( get_option( AdminNotifier::FAILURE_OPTION ) );
+    }
+
+    public function testAThrowingMailFilterDoesNotBreakTheSubmission(): void
+    {
+        $this->mailMode = 'throw';
+        $formId = $this->form( $this->schema( [], $this->adminNotification() ) );
+        $result = $this->submit( $formId, [ 'rooms' => 2, 'service' => 'standard', 'email' => 'a@b' ] );
+
+        $this->assertSame( 201, $result['status'] );
+        $this->assertCount( 1, $this->rows() );
+        $this->assertIsArray( get_option( AdminNotifier::FAILURE_OPTION ) );
     }
 }
