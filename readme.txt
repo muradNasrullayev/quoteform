@@ -120,8 +120,9 @@ contain a form.
 = Free, and that is the whole plan =
 
 No pro version, no add-ons, no license key, no account and no hosted service.
-Quoteform sends no data anywhere: it makes no request to any external server,
-loads no fonts or scripts from a CDN, and collects no usage statistics.
+Quoteform itself makes no request to any external server, loads no fonts or
+scripts from a CDN, and collects no usage statistics. Notification emails leave
+your site only through its own mail setup (`wp_mail()`).
 
 = Privacy =
 
