@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-11-03T06:10:21+00:00\n"
+"POT-Creation-Date: 2026-11-18T11:53:33+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: quoteform\n"
@@ -36,8 +36,8 @@ msgstr ""
 
 #: includes/Admin/BuilderPage.php:40
 #: includes/Admin/BuilderPage.php:41
-#: includes/Admin/EntriesPage.php:46
 #: includes/Admin/EntriesPage.php:47
+#: includes/Admin/EntriesPage.php:48
 #: admin-src/screens/FormListScreen.js:120
 msgid "Quoteform"
 msgstr ""
@@ -56,14 +56,14 @@ msgstr ""
 msgid "This export link has expired. Reload the Entries page and try again."
 msgstr ""
 
-#: includes/Admin/EntriesPage.php:60
 #: includes/Admin/EntriesPage.php:61
-#: admin-src/entries/EntriesListScreen.js:379
+#: includes/Admin/EntriesPage.php:62
+#: admin-src/entries/EntriesListScreen.js:380
 msgid "Entries"
 msgstr ""
 
 #. translators: %s: number of unread entries.
-#: includes/Admin/EntriesPage.php:85
+#: includes/Admin/EntriesPage.php:86
 #: admin-src/entries/menuBadge.js:32
 #, php-format,js-format
 msgid "%s unread entry"
@@ -92,6 +92,7 @@ msgstr ""
 
 #: includes/Entries/CsvExporter.php:76
 #: includes/Forms/SchemaRepository.php:72
+#: includes/Notifications/AdminNotifier.php:146
 #: admin-src/entries/EntriesTable.js:21
 #: admin-src/entries/EntryDetailScreen.js:81
 #: frontend-src/dom/submit.js:109
@@ -99,7 +100,7 @@ msgid "Total"
 msgstr ""
 
 #: includes/Entries/CsvExporter.php:77
-#: admin-src/panels/SettingsPanel.js:35
+#: admin-src/panels/SettingsPanel.js:36
 msgid "Currency"
 msgstr ""
 
@@ -135,10 +136,12 @@ msgid "(deleted form)"
 msgstr ""
 
 #: includes/Entries/EntryPresenter.php:121
+#: includes/Notifications/AdminNotifier.php:177
 msgid "Yes"
 msgstr ""
 
 #: includes/Entries/EntryPresenter.php:121
+#: includes/Notifications/AdminNotifier.php:177
 msgid "No"
 msgstr ""
 
@@ -317,6 +320,55 @@ msgstr ""
 msgid "This key is reserved and cannot be used."
 msgstr ""
 
+#: includes/Forms/NotificationValidator.php:28
+#: includes/Forms/NotificationValidator.php:64
+msgid "Notifications must be a list."
+msgstr ""
+
+#: includes/Forms/NotificationValidator.php:34
+msgid "Only one notification is supported."
+msgstr ""
+
+#: includes/Forms/NotificationValidator.php:71
+#: includes/Forms/SettingsValidator.php:55
+msgid "Unknown setting."
+msgstr ""
+
+#: includes/Forms/NotificationValidator.php:79
+#: includes/Forms/SettingsValidator.php:63
+msgid "This setting is required."
+msgstr ""
+
+#: includes/Forms/NotificationValidator.php:89
+msgid "Unknown notification type."
+msgstr ""
+
+#: includes/Forms/NotificationValidator.php:93
+#: includes/Forms/SettingsValidator.php:111
+msgid "This setting must be true or false."
+msgstr ""
+
+#: includes/Forms/NotificationValidator.php:106
+#: includes/Forms/NotificationValidator.php:126
+msgid "Enter valid email addresses, separated by commas."
+msgstr ""
+
+#: includes/Forms/NotificationValidator.php:117
+msgid "Enter at most 10 email addresses."
+msgstr ""
+
+#: includes/Forms/NotificationValidator.php:139
+msgid "Enter a subject."
+msgstr ""
+
+#: includes/Forms/NotificationValidator.php:144
+msgid "The subject can have at most 200 characters."
+msgstr ""
+
+#: includes/Forms/NotificationValidator.php:148
+msgid "The subject must be on one line."
+msgstr ""
+
 #: includes/Forms/RuleValidator.php:58
 msgid "Rules must be a list."
 msgstr ""
@@ -398,6 +450,12 @@ msgstr ""
 msgid "How many?"
 msgstr ""
 
+#. translators: keep {form_name} and {total} exactly as written.
+#: includes/Forms/SchemaRepository.php:83
+#: admin-src/state/reducer.js:125
+msgid "New quote: {form_name} — {total}"
+msgstr ""
+
 #: includes/Forms/SchemaValidator.php:28
 #: includes/Rest/FormsController.php:447
 msgid "A schema must be an object."
@@ -415,44 +473,32 @@ msgstr ""
 msgid "Unsupported schema version."
 msgstr ""
 
-#: includes/Forms/SchemaValidator.php:89
-msgid "Notifications must be a list."
-msgstr ""
-
-#: includes/Forms/SchemaValidator.php:113
+#: includes/Forms/SchemaValidator.php:111
 msgid "Fields must be an object."
 msgstr ""
 
-#: includes/Forms/SchemaValidator.php:119
+#: includes/Forms/SchemaValidator.php:117
 msgid "A form needs at least one field."
 msgstr ""
 
-#: includes/Forms/SchemaValidator.php:125
+#: includes/Forms/SchemaValidator.php:123
 msgid "Fields must be keyed by field key, not a list."
 msgstr ""
 
-#: includes/Forms/SchemaValidator.php:175
+#: includes/Forms/SchemaValidator.php:173
 msgid "This field is not placed on any step, so nobody can fill it in."
 msgstr ""
 
-#: includes/Forms/SchemaValidator.php:201
+#: includes/Forms/SchemaValidator.php:199
 msgid "A calculation cannot have the same key as a field."
 msgstr ""
 
-#: includes/Forms/SchemaValidator.php:312
+#: includes/Forms/SchemaValidator.php:310
 msgid "A rule cannot test a field that lives on the very step it targets — that would loop forever."
 msgstr ""
 
 #: includes/Forms/SettingsValidator.php:48
 msgid "Settings must be an object."
-msgstr ""
-
-#: includes/Forms/SettingsValidator.php:55
-msgid "Unknown setting."
-msgstr ""
-
-#: includes/Forms/SettingsValidator.php:63
-msgid "This setting is required."
 msgstr ""
 
 #: includes/Forms/SettingsValidator.php:73
@@ -489,10 +535,6 @@ msgstr ""
 
 #: includes/Forms/SettingsValidator.php:105
 msgid "The redirect URL must start with http:// or https://."
-msgstr ""
-
-#: includes/Forms/SettingsValidator.php:111
-msgid "This setting must be true or false."
 msgstr ""
 
 #: includes/Forms/StepValidator.php:28
@@ -545,6 +587,14 @@ msgstr ""
 
 #: includes/Forms/StepValidator.php:138
 msgid "A field can appear on only one step."
+msgstr ""
+
+#: includes/Notifications/AdminNotifier.php:104
+msgid "New quote: {form_name}"
+msgstr ""
+
+#: includes/Notifications/AdminNotifier.php:152
+msgid "View this entry"
 msgstr ""
 
 #: includes/Rendering/elementor-widget-class.php:26
@@ -622,41 +672,41 @@ msgid "Form not found."
 msgstr ""
 
 #: includes/Rest/SessionController.php:46
-#: includes/Submissions/SubmissionService.php:62
+#: includes/Submissions/SubmissionService.php:67
 msgid "This form is not available."
 msgstr ""
 
-#: includes/Submissions/SubmissionService.php:74
+#: includes/Submissions/SubmissionService.php:79
 msgid "This submission could not be accepted."
 msgstr ""
 
-#: includes/Submissions/SubmissionService.php:84
+#: includes/Submissions/SubmissionService.php:89
 msgid "Some answers need attention."
 msgstr ""
 
-#: includes/Submissions/SubmissionService.php:117
+#: includes/Submissions/SubmissionService.php:124
 msgid "Your answers could not be saved. Please try again."
 msgstr ""
 
-#: includes/Submissions/SubmissionService.php:200
+#: includes/Submissions/SubmissionService.php:215
 #: frontend-src/runtime/validate.js:94
 msgid "This field is required."
 msgstr ""
 
-#: includes/Submissions/SubmissionService.php:203
+#: includes/Submissions/SubmissionService.php:218
 #: frontend-src/runtime/validate.js:98
 msgid "Enter an email address."
 msgstr ""
 
 #. translators: %s: the smallest allowed number.
-#: includes/Submissions/SubmissionService.php:207
+#: includes/Submissions/SubmissionService.php:222
 #: frontend-src/runtime/validate.js:104
 #, php-format,js-format
 msgid "Enter %s or more."
 msgstr ""
 
 #. translators: %s: the largest allowed number.
-#: includes/Submissions/SubmissionService.php:211
+#: includes/Submissions/SubmissionService.php:226
 #: frontend-src/runtime/validate.js:111
 #, php-format,js-format
 msgid "Enter %s or less."
@@ -775,7 +825,7 @@ msgstr ""
 
 #. translators: %d: number of entries matching the current filter.
 #: admin-src/entries/BulkBar.js:90
-#: admin-src/entries/EntriesListScreen.js:259
+#: admin-src/entries/EntriesListScreen.js:260
 #, js-format
 msgid "All %d entry selected."
 msgid_plural "All %d entries selected."
@@ -882,7 +932,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. translators: %d: number of entries.
-#: admin-src/entries/EntriesListScreen.js:142
+#: admin-src/entries/EntriesListScreen.js:143
 #, js-format
 msgid "%d entry found."
 msgid_plural "%d entries found."
@@ -890,49 +940,55 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. translators: %d: entry number.
-#: admin-src/entries/EntriesListScreen.js:348
+#: admin-src/entries/EntriesListScreen.js:349
 #: admin-src/entries/EntryDetailScreen.js:305
 #, js-format
 msgid "Entry #%d deleted."
 msgstr ""
 
 #. translators: %s: number of entries.
-#: admin-src/entries/EntriesListScreen.js:385
+#: admin-src/entries/EntriesListScreen.js:386
 #, js-format
 msgid "%s entry"
 msgid_plural "%s entries"
 msgstr[0] ""
 msgstr[1] ""
 
-#: admin-src/entries/EntriesListScreen.js:396
+#: admin-src/entries/EntriesListScreen.js:397
 msgid "Export CSV"
 msgstr ""
 
-#: admin-src/entries/EntriesListScreen.js:416
+#. translators: %d: entry number.
+#: admin-src/entries/EntriesListScreen.js:413
+#, js-format
+msgid "The last notification email could not be sent (entry #%d). Check your site's email setup."
+msgstr ""
+
+#: admin-src/entries/EntriesListScreen.js:427
 #: admin-src/entries/EntryDetailScreen.js:414
 #: admin-src/screens/FormListScreen.js:134
 msgid "Try again"
 msgstr ""
 
-#: admin-src/entries/EntriesListScreen.js:435
+#: admin-src/entries/EntriesListScreen.js:446
 msgid "Loading entries…"
 msgstr ""
 
-#: admin-src/entries/EntriesListScreen.js:440
+#: admin-src/entries/EntriesListScreen.js:451
 msgid "No entries match these filters."
 msgstr ""
 
-#: admin-src/entries/EntriesListScreen.js:441
+#: admin-src/entries/EntriesListScreen.js:452
 #: admin-src/entries/FilterBar.js:210
 msgid "Clear filters"
 msgstr ""
 
-#: admin-src/entries/EntriesListScreen.js:448
+#: admin-src/entries/EntriesListScreen.js:459
 msgid "No entries yet. They appear here when visitors send one of your forms."
 msgstr ""
 
 #. translators: %s: a shortcode such as [quoteform id="12"].
-#: admin-src/entries/EntriesListScreen.js:453
+#: admin-src/entries/EntriesListScreen.js:464
 #, js-format
 msgid "Put a form on a page with its shortcode, for example %s."
 msgstr ""
@@ -1452,6 +1508,30 @@ msgstr ""
 msgid "Numbers, + - * / and ( ), comparisons, and functions like round(), min(), max(), if(), contains() and is_empty()."
 msgstr ""
 
+#: admin-src/panels/NotificationsCard.js:30
+msgid "Notifications"
+msgstr ""
+
+#: admin-src/panels/NotificationsCard.js:35
+msgid "Email me when someone submits this form"
+msgstr ""
+
+#: admin-src/panels/NotificationsCard.js:45
+msgid "Send to"
+msgstr ""
+
+#: admin-src/panels/NotificationsCard.js:49
+msgid "Separate addresses with commas. Leave empty to use the site’s admin email address."
+msgstr ""
+
+#: admin-src/panels/NotificationsCard.js:57
+msgid "Subject"
+msgstr ""
+
+#: admin-src/panels/NotificationsCard.js:61
+msgid "You can use {form_name}, {total} and {entry_id}."
+msgstr ""
+
 #: admin-src/panels/OptionsEditor.js:28
 msgid "Options"
 msgstr ""
@@ -1668,72 +1748,72 @@ msgstr ""
 msgid "Keep rule %d"
 msgstr ""
 
-#: admin-src/panels/SettingsPanel.js:27
+#: admin-src/panels/SettingsPanel.js:28
 #: admin-src/screens/EditorScreen.js:37
 msgid "Settings"
 msgstr ""
 
-#: admin-src/panels/SettingsPanel.js:31
+#: admin-src/panels/SettingsPanel.js:32
 msgid "Money"
 msgstr ""
 
-#: admin-src/panels/SettingsPanel.js:39
+#: admin-src/panels/SettingsPanel.js:40
 msgid "A three-letter code such as USD or EUR."
 msgstr ""
 
-#: admin-src/panels/SettingsPanel.js:44
+#: admin-src/panels/SettingsPanel.js:45
 msgid "Currency position"
 msgstr ""
 
-#: admin-src/panels/SettingsPanel.js:49
+#: admin-src/panels/SettingsPanel.js:50
 msgid "Before the number"
 msgstr ""
 
-#: admin-src/panels/SettingsPanel.js:50
+#: admin-src/panels/SettingsPanel.js:51
 msgid "After the number"
 msgstr ""
 
-#: admin-src/panels/SettingsPanel.js:56
+#: admin-src/panels/SettingsPanel.js:57
 msgid "Decimal places"
 msgstr ""
 
-#: admin-src/panels/SettingsPanel.js:68
+#: admin-src/panels/SettingsPanel.js:69
 msgid "After submitting"
 msgstr ""
 
-#: admin-src/panels/SettingsPanel.js:72
+#: admin-src/panels/SettingsPanel.js:73
 msgid "Submit button label"
 msgstr ""
 
-#: admin-src/panels/SettingsPanel.js:80
+#: admin-src/panels/SettingsPanel.js:81
 msgid "After a successful submission"
 msgstr ""
 
-#: admin-src/panels/SettingsPanel.js:85
+#: admin-src/panels/SettingsPanel.js:86
 msgid "Show a message"
 msgstr ""
 
-#: admin-src/panels/SettingsPanel.js:86
+#: admin-src/panels/SettingsPanel.js:87
 msgid "Redirect to a URL"
 msgstr ""
 
-#: admin-src/panels/SettingsPanel.js:93
+#: admin-src/panels/SettingsPanel.js:94
 msgid "Redirect URL"
 msgstr ""
 
-#: admin-src/panels/SettingsPanel.js:97
+#: admin-src/panels/SettingsPanel.js:98
 msgid "Must start with http:// or https://."
 msgstr ""
 
-#: admin-src/panels/SettingsPanel.js:102
+#: admin-src/panels/SettingsPanel.js:103
 msgid "Success message"
 msgstr ""
 
-#: admin-src/panels/SettingsPanel.js:112
+#: admin-src/panels/SettingsPanel.js:115
 msgid "Visitors"
 msgstr ""
 
-#: admin-src/panels/SettingsPanel.js:118
+#: admin-src/panels/SettingsPanel.js:121
 msgid "Store the visitor’s IP address with each entry"
 msgstr ""
 

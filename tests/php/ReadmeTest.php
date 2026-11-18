@@ -109,6 +109,13 @@ final class ReadmeTest extends TestCase
         }
     }
 
+    public function testTheReadmeNoLongerDeniesEmailNotifications(): void
+    {
+        $this->assertStringNotContainsString( 'does not send email notifications', $this->readme );
+        $this->assertStringNotContainsString( 'Not in this version. Check the Entries screen', $this->readme );
+        $this->assertStringContainsString( 'Notifications', $this->readme );
+    }
+
     /**
      * Silmək deaktivasiya deyil: hər forma və hər rol icazəsi gedir. Sayt
      * sahibi bunu Delete-ə basmazdan ƏVVƏL bilməlidir.
