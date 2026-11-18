@@ -19,6 +19,7 @@ import {
 	saveFailed,
 	saveStarted,
 	saveSucceeded,
+	setNotification,
 	setSetting,
 	setTitle,
 	updateCalculation,
@@ -368,5 +369,57 @@ describe( 'unknown actions', () => {
 		const loaded = reducer( initialState, loadSucceeded( form ) );
 
 		expect( reducer( loaded, { type: 'nothing/at/all' } ) ).toBe( loaded );
+	} );
+} );
+
+describe( 'notifications', () => {
+	const defaultSubject = 'New quote: {form_name} — {total}';
+
+	it( 'creates the admin notification when the list is empty', () => {
+		const loaded = reducer( initialState, loadSucceeded( form ) );
+		const state = reducer( loaded, setNotification( 'enabled', true ) );
+
+		expect( state.schema.notifications ).toEqual( [
+			{ type: 'admin', enabled: true, to: '', subject: defaultSubject },
+		] );
+		expect( state.dirty ).toBe( true );
+	} );
+
+	it( 'changes only the given key of an existing notification', () => {
+		const loaded = reducer(
+			initialState,
+			loadSucceeded( {
+				...form,
+				schema: {
+					...form.schema,
+					notifications: [ { type: 'admin', enabled: true, to: 'a@b.co', subject: 'S' } ],
+				},
+			} )
+		);
+		const state = reducer( loaded, setNotification( 'to', 'c@d.co' ) );
+
+		expect( state.schema.notifications ).toEqual( [
+			{ type: 'admin', enabled: true, to: 'c@d.co', subject: 'S' },
+		] );
+		expect( state.dirty ).toBe( true );
+	} );
+
+	it( 'does not change the state when the value is the same', () => {
+		const loaded = reducer(
+			initialState,
+			loadSucceeded( {
+				...form,
+				schema: {
+					...form.schema,
+					notifications: [ { type: 'admin', enabled: true, to: '', subject: 'S' } ],
+				},
+			} )
+		);
+
+		expect( reducer( loaded, setNotification( 'enabled', true ) ) ).toBe( loaded );
+	} );
+
+	it( 'ignores edits when nothing is loaded', () => {
+		expect( reducer( initialState, setNotification( 'enabled', true ) ) ).toBe( initialState );
 	} );
 } );

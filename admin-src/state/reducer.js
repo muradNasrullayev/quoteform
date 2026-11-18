@@ -1,3 +1,5 @@
+import { __ } from '@wordpress/i18n';
+
 import {
 	ADD_CALCULATION,
 	ADD_CONDITION,
@@ -20,6 +22,7 @@ import {
 	SAVE_FAILED,
 	SAVE_STARTED,
 	SAVE_SUCCEEDED,
+	SET_NOTIFICATION,
 	SET_SETTING,
 	SET_TITLE,
 	UNASSIGN_FIELD,
@@ -110,6 +113,28 @@ export function reducer( state, action ) {
 				return {
 					...schema,
 					settings: { ...schema.settings, [ action.key ]: action.value },
+				};
+			} );
+
+		case SET_NOTIFICATION:
+			return editSchema( state, ( schema ) => {
+				const current = schema.notifications?.[ 0 ] ?? {
+					type: 'admin',
+					enabled: false,
+					to: '',
+					subject: __( 'New quote: {form_name} — {total}', 'quoteform' ),
+				};
+
+				if ( schema.notifications?.length > 0 && current[ action.key ] === action.value ) {
+					return schema;
+				}
+
+				return {
+					...schema,
+					notifications: [
+						{ ...current, [ action.key ]: action.value },
+						...( schema.notifications ?? [] ).slice( 1 ),
+					],
 				};
 			} );
 
