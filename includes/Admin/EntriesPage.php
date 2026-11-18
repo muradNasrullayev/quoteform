@@ -152,8 +152,10 @@ final class EntriesPage
     }
 
     /**
-     * Son uğursuz bildiriş emaili (AdminNotifier yazır). Seçim pozulubsa və ya
-     * `entry_id` müsbət tam ədəd deyilsə, xəbərdarlıq göstərilmir.
+     * Son uğursuz bildiriş emaili (AdminNotifier yazır). Seçim pozulubsa,
+     * `entry_id` müsbət tam ədəd deyilsə, `time` tam ədəd deyilsə və ya 7 gündən
+     * köhnədirsə, yaxud istifadəçi formaları idarə edə bilmirsə, xəbərdarlıq
+     * göstərilmir. Seçim oxunanda silinmir.
      *
      * @return array{entryId: int}|null
      */
@@ -162,6 +164,14 @@ final class EntriesPage
         $failure = get_option( AdminNotifier::FAILURE_OPTION );
 
         if ( ! is_array( $failure ) || ! isset( $failure['entry_id'] ) || ! is_int( $failure['entry_id'] ) || $failure['entry_id'] < 1 ) {
+            return null;
+        }
+
+        if ( ! isset( $failure['time'] ) || ! is_int( $failure['time'] ) || time() - $failure['time'] > 7 * DAY_IN_SECONDS ) {
+            return null;
+        }
+
+        if ( ! current_user_can( Capabilities::MANAGE_FORMS ) ) {
             return null;
         }
 
