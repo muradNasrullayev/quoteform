@@ -207,4 +207,54 @@ final class AdminNotifierTest extends WP_UnitTestCase
         $this->notify( [] );
         $this->assertFalse( get_option( AdminNotifier::FAILURE_OPTION ) );
     }
+
+    public function testStoredArraysForSubjectAndRecipientAreIgnoredWithoutWarnings(): void
+    {
+        $this->notify( [ 'subject' => [ 'x' ], 'to' => [ 'a@x.co' ] ] );
+        $this->assertSame( [ get_option( 'admin_email' ) ], $this->recipients() );
+        $this->assertSame( 'New quote: Quote', $this->sent[0]['subject'] );
+    }
+
+    public function testAThrowWhileBuildingTheMailIsRecordedAsAFailure(): void
+    {
+        $thrower = static function () {
+            throw new \RuntimeException( 'boom' );
+        };
+        add_filter( 'admin_url', $thrower );
+
+        try {
+            $this->notify( [] );
+        } finally {
+            remove_filter( 'admin_url', $thrower );
+        }
+
+        $this->assertSame( [], $this->sent );
+        $failure = get_option( AdminNotifier::FAILURE_OPTION );
+        $this->assertSame( 41, $failure['entry_id'] );
+    }
+
+    public function testPlaceholdersInTheFormNameAreNotReplacedAgain(): void
+    {
+        $this->notify( [ 'subject' => '{form_name}' ], null, 120.0, 'Price {total}' );
+        $this->assertSame( 'Price {total}', $this->sent[0]['subject'] );
+    }
+
+    public function testTheSubjectDecodesEntitiesButTheBodyDoesNotDoubleEscape(): void
+    {
+        $this->notify( [ 'subject' => '{form_name}' ], null, 120.0, 'Smith &amp; Sons' );
+        $this->assertSame( 'Smith & Sons', $this->sent[0]['subject'] );
+        $this->assertStringContainsString( 'Smith &amp; Sons', $this->sent[0]['message'] );
+        $this->assertStringNotContainsString( '&amp;amp;', $this->sent[0]['message'] );
+    }
+
+    public function testTheHeadingAndFieldLabelsAreEscaped(): void
+    {
+        $snapshot = [ 'a' => [ 'label' => '<i>L</i>', 'type' => 'text', 'value' => 'v' ] ];
+        $this->notify( [], $snapshot, 120.0, '<b>X</b>' );
+        $body = $this->sent[0]['message'];
+        $this->assertStringContainsString( '&lt;b&gt;X&lt;/b&gt;', $body );
+        $this->assertStringContainsString( '&lt;i&gt;L&lt;/i&gt;', $body );
+        $this->assertStringNotContainsString( '<b>X</b>', $body );
+        $this->assertStringNotContainsString( '<i>L</i>', $body );
+    }
 }

@@ -29,22 +29,22 @@ final class AdminNotifier
         }
 
         $settings = isset( $schema['settings'] ) && is_array( $schema['settings'] ) ? $schema['settings'] : [];
-        $totalText = null === $total ? '—' : $this->money( $total, $settings );
-
-        $subject = $this->subject( (string) ( $notification['subject'] ?? '' ), $formName, $totalText, $entryId );
-        $body    = $this->body( $entryId, $formName, $snapshot, $total, $lines, $settings );
-
-        $headers = [ 'Content-Type: text/html; charset=UTF-8' ];
-        $replyTo = $this->replyTo( $snapshot );
-
-        if ( null !== $replyTo ) {
-            $headers[] = 'Reply-To: ' . $replyTo;
-        }
-
-        $sent = false;
+        $sent     = false;
 
         try {
-            $sent = (bool) wp_mail( $this->recipients( (string) ( $notification['to'] ?? '' ) ), $subject, $body, $headers );
+            $totalText = null === $total ? '—' : $this->money( $total, $settings );
+            $subject   = $this->subject( is_string( $notification['subject'] ?? null ) ? $notification['subject'] : '', $formName, $totalText, $entryId );
+            $body      = $this->body( $entryId, $formName, $snapshot, $total, $lines, $settings );
+
+            $headers = [ 'Content-Type: text/html; charset=UTF-8' ];
+            $replyTo = $this->replyTo( $snapshot );
+
+            if ( null !== $replyTo ) {
+                $headers[] = 'Reply-To: ' . $replyTo;
+            }
+
+            $to   = is_string( $notification['to'] ?? null ) ? $notification['to'] : '';
+            $sent = (bool) wp_mail( $this->recipients( $to ), $subject, $body, $headers );
         } catch ( \Throwable $e ) {
             $sent = false;
         }
@@ -89,10 +89,13 @@ final class AdminNotifier
     private function subject( string $template, string $formName, string $totalText, int $entryId ): string
     {
         $replace = static function ( string $text ) use ( $formName, $totalText, $entryId ): string {
-            $text = str_replace(
-                [ '{form_name}', '{total}', '{entry_id}' ],
-                [ $formName, $totalText, (string) $entryId ],
-                $text
+            $text = strtr(
+                $text,
+                [
+                    '{form_name}' => wp_specialchars_decode( $formName, ENT_QUOTES ),
+                    '{total}'     => $totalText,
+                    '{entry_id}'  => (string) $entryId,
+                ]
             );
 
             return str_replace( [ "\r", "\n" ], ' ', $text );
@@ -101,6 +104,7 @@ final class AdminNotifier
         $subject = $replace( $template );
 
         if ( '' === trim( $subject ) ) {
+            /* translators: keep {form_name} exactly as written. */
             $subject = $replace( __( 'New quote: {form_name}', 'quoteform' ) );
         }
 
