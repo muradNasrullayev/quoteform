@@ -340,15 +340,19 @@ final class SchemaValidatorTest extends TestCase
         $this->assertSame( [ 'invalid_type' ], $this->codesFor( $schema ) );
     }
 
-    public function testNotificationsAcceptsAProperlyShapedListEvenWithJunkContent(): void
+    public function testANotificationErrorIsReportedUnderNotifications(): void
     {
-        // Container shape only: a genuine list is accepted even though its
-        // elements are junk. Validating notification content is out of scope
-        // for this task (no NotificationValidator exists yet).
         $schema = $this->schema();
-        $schema['notifications'] = [ 'junk', 123, null ];
+        $schema['notifications'] = [ [ 'type' => 'admin', 'enabled' => true, 'to' => 'nope', 'subject' => 'New quote' ] ];
 
-        $this->assertSame( [], $this->codesFor( $schema ) );
+        $result = ( new SchemaValidator() )->validate( $schema );
+
+        $this->assertSame( [ 'notifications.0.to' ], array_column( $result->getErrors(), 'path' ) );
+    }
+
+    public function testTheDefaultSchemaIsValid(): void
+    {
+        $this->assertSame( [], ( new SchemaValidator() )->validate( \Quoteform\Forms\SchemaRepository::defaults() )->getErrors() );
     }
 
     public function testStepLoopCheckFiresAtANonZeroRuleIndex(): void

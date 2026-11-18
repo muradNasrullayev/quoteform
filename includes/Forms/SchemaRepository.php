@@ -74,7 +74,15 @@ final class SchemaRepository
                 ],
             ],
             'rules'         => [],
-            'notifications' => [],
+            'notifications' => [
+                [
+                    'type'    => 'admin',
+                    'enabled' => true,
+                    'to'      => '',
+                    /* translators: keep {form_name} and {total} exactly as written. */
+                    'subject' => __( 'New quote: {form_name} — {total}', 'quoteform' ),
+                ],
+            ],
         ];
     }
 

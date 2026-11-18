@@ -85,9 +85,7 @@ final class SchemaValidator
 
         $this->validateStepTargetingRuleLoops( $schema['rules'], $schema['steps'], $result );
 
-        if ( ! is_array( $schema['notifications'] ) || ( $schema['notifications'] !== [] && array_keys( $schema['notifications'] ) !== range( 0, count( $schema['notifications'] ) - 1 ) ) ) {
-            $result->addError( 'notifications', 'invalid_type', __( 'Notifications must be a list.', 'quoteform' ) );
-        }
+        $result->merge( ( new NotificationValidator() )->validate( $schema['notifications'] ), 'notifications' );
 
         return $result;
     }
