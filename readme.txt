@@ -172,7 +172,8 @@ server, so the stored total is always the one your formulas give.
 = Will I get an email when someone submits a form? =
 
 Yes. Turn it on under the form's **Settings → Notifications**. New forms have it
-on by default. Choose where the email goes and what its subject says. Leave
+on by default. Forms created before version 0.2.0 have it off until you turn
+it on. Choose where the email goes and what its subject says. Leave
 **Send to** empty to use the site's admin email address, or list up to ten
 addresses separated by commas.
 
