@@ -39,6 +39,8 @@ plugin.
   equals, does not equal, greater than, greater than or equal, less than, less
   than or equal, contains, does not contain, is empty and is not empty.
 * **Settings** — currency, currency position and the number of decimal places.
+* **Notifications** — email yourself every quote: the answers, the price
+  breakdown and the total, to one or more addresses.
 
 = Showing a form to visitors =
 
@@ -77,9 +79,8 @@ visitor cannot change the price that gets stored.
 
 = What this version does not do =
 
-Quoteform does not send email notifications, does not take payments and does
-not let a visitor save a form and come back to it later. Entries are only on
-the Entries screen and in the CSV export.
+Quoteform does not take payments and does not let a visitor save a form and
+come back to it later. It does not email the visitor a copy of their quote yet.
 
 = Formulas, without writing code =
 
@@ -119,8 +120,9 @@ contain a form.
 = Free, and that is the whole plan =
 
 No pro version, no add-ons, no license key, no account and no hosted service.
-Quoteform sends no data anywhere: it makes no request to any external server,
-loads no fonts or scripts from a CDN, and collects no usage statistics.
+Quoteform itself makes no request to any external server, loads no fonts or
+scripts from a CDN, and collects no usage statistics. Notification emails leave
+your site only through its own mail setup (`wp_mail()`).
 
 = Privacy =
 
@@ -132,6 +134,9 @@ address with each entry** in the form settings. It is off by default.
 
 The answers can contain personal data, such as a name or an email address,
 when your form asks for it. Mention this in your site's privacy policy.
+
+The notification email contains the visitor's answers. It goes to the addresses
+you choose, through your site's mail setup.
 
 == Installation ==
 
@@ -166,7 +171,19 @@ server, so the stored total is always the one your formulas give.
 
 = Will I get an email when someone submits a form? =
 
-Not in this version. Check the Entries screen, or export the entries to CSV.
+Yes. Turn it on under the form's **Settings → Notifications**. New forms have it
+on by default. Forms created before version 0.2.0 have it off until you turn
+it on. Choose where the email goes and what its subject says. Leave
+**Send to** empty to use the site's admin email address, or list up to ten
+addresses separated by commas.
+
+The email shows the form name, every answer, the price breakdown, the total and
+a link to the entry. When the form has an email field, replying to the email
+writes to the visitor.
+
+Quoteform sends the email with `wp_mail()`, so an SMTP plugin is recommended
+for reliable delivery. If sending fails, the entry is still saved, the visitor
+still sees the success message, and the Entries screen shows a warning.
 
 = Do I need Elementor, Divi or a page builder? =
 
@@ -247,6 +264,10 @@ To rebuild the assets from source:
 PHP dependencies are installed with `composer install --no-dev`.
 
 == Changelog ==
+
+= 0.2.0 =
+* New: email notifications for the site owner. Forms created before this
+  version have them off — turn them on under Settings → Notifications.
 
 = 0.1.3 =
 * New: a "Rate Quoteform" link in the plugin's row on the Plugins screen.

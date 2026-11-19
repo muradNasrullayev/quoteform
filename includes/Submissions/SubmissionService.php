@@ -8,6 +8,7 @@ use Quoteform\Entries\EntryRepository;
 use Quoteform\Forms\CorruptSchemaException;
 use Quoteform\Forms\FormPostType;
 use Quoteform\Forms\SchemaRepository;
+use Quoteform\Notifications\AdminNotifier;
 use Quoteform\Runtime\Evaluation;
 use Quoteform\Runtime\MoneyFormatter;
 use Quoteform\Runtime\Validator;
@@ -33,12 +34,16 @@ final class SubmissionService
     /** @var InputSanitizer */
     private $sanitizer;
 
-    public function __construct( ?SchemaRepository $forms = null, ?EntryRepository $entries = null, ?SpamGuard $spam = null, ?InputSanitizer $sanitizer = null )
+    /** @var AdminNotifier */
+    private $notifier;
+
+    public function __construct( ?SchemaRepository $forms = null, ?EntryRepository $entries = null, ?SpamGuard $spam = null, ?InputSanitizer $sanitizer = null, ?AdminNotifier $notifier = null )
     {
         $this->forms     = $forms ?? new SchemaRepository();
         $this->entries   = $entries ?? new EntryRepository();
         $this->spam      = $spam ?? SpamGuard::fromWordPress();
         $this->sanitizer = $sanitizer ?? new InputSanitizer();
+        $this->notifier  = $notifier ?? new AdminNotifier();
     }
 
     public static function isPublishedForm( int $formId ): bool
@@ -91,13 +96,15 @@ final class SubmissionService
         $total    = null === $evaluation['calc_error'] ? $evaluation['total'] : null;
         $currency = is_string( $settings['currency'] ?? null ) ? $settings['currency'] : 'USD';
 
+        $snapshot = $this->snapshot( $schema, $state, $evaluation['visibility']['fields'] );
+
         $saved = $this->entries->insert(
             [
                 'form_id'    => $formId,
                 'status'     => 'completed',
                 'total'      => $total,
                 'currency'   => $currency,
-                'data'       => $this->snapshot( $schema, $state, $evaluation['visibility']['fields'] ),
+                'data'       => $snapshot,
                 'breakdown'  => [
                     'currency' => $currency,
                     'position' => $settings['currency_position'] ?? 'before',
@@ -115,6 +122,14 @@ final class SubmissionService
 
         if ( 0 === $saved ) {
             return $this->failure( 500, 'qform_save_failed', __( 'Your answers could not be saved. Please try again.', 'quoteform' ) );
+        }
+
+        // The entry is already saved. A mail problem must never lose it or show the visitor an error.
+        try {
+            $formName = (string) get_post_field( 'post_title', $formId, 'raw' );
+            $this->notifier->notify( $saved, $formName, $schema, $snapshot, $total, $evaluation['breakdown'] );
+        } catch ( \Throwable $e ) {
+            // Intentionally ignored; AdminNotifier records wp_mail failures itself.
         }
 
         return [ 'status' => 201, 'body' => $this->successBody( $settings, $total, $evaluation['breakdown'] ) ];

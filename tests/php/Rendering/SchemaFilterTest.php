@@ -72,6 +72,16 @@ final class SchemaFilterTest extends TestCase
         $this->assertArrayNotHasKey( 'notifications', $filtered );
     }
 
+    public function testNotificationsNeverReachThePage(): void
+    {
+        $input = $this->schema();
+        $input['notifications'] = [ [ 'type' => 'admin', 'enabled' => true, 'to' => 'secret@x.co', 'subject' => 'S' ] ];
+        $output = SchemaFilter::forDisplay( $input );
+
+        $this->assertArrayNotHasKey( 'notifications', $output );
+        $this->assertStringNotContainsString( 'secret@x.co', (string) json_encode( $output ) );
+    }
+
     public function testNoEmailAddressSurvivesAnywhere(): void
     {
         $encoded = json_encode( SchemaFilter::forDisplay( $this->schema() ) );

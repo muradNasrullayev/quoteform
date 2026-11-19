@@ -24,6 +24,7 @@ declare(strict_types=1);
 namespace Quoteform\Tests\Integration;
 
 use Quoteform\Forms\FormPostType;
+use Quoteform\Notifications\AdminNotifier;
 use Quoteform\Support\Activation;
 use Quoteform\Support\Capabilities;
 use Quoteform\Support\Uninstaller;
@@ -83,6 +84,26 @@ PHP;
 
         $this->assertSame( 0, $result['status'], $result['output'] );
         $this->assertSame( '', $result['output'] );
+    }
+
+    public function testTheFileRequiresEveryClassTheUninstallerImports(): void
+    {
+        $source = (string) file_get_contents( dirname( __DIR__, 2 ) . '/includes/Support/Uninstaller.php' );
+        $file   = (string) file_get_contents( $this->uninstallFile );
+
+        preg_match_all( '/^use Quoteform\\\\([A-Za-z\\\\]+);/m', $source, $matches );
+
+        $this->assertNotEmpty( $matches[1] );
+
+        foreach ( $matches[1] as $class ) {
+            $path = 'includes/' . str_replace( '\\', '/', $class ) . '.php';
+
+            $this->assertStringContainsString(
+                "require_once __DIR__ . '/{$path}';",
+                $file,
+                "uninstall.php runs without an autoloader but does not require {$class}."
+            );
+        }
     }
 
     public function testTheFileReachesTheUninstallerWithoutAComposerAutoloader(): void
@@ -208,6 +229,15 @@ PHP;
         Uninstaller::run();
 
         $this->assertSame( 0, $this->countSchemaMetaRows(), 'No _qform_schema row may outlive the forms.' );
+    }
+
+    public function testRemovesTheMailFailureOption(): void
+    {
+        update_option( AdminNotifier::FAILURE_OPTION, [ 'entry_id' => 41, 'time' => 1 ] );
+
+        Uninstaller::run();
+
+        $this->assertFalse( get_option( AdminNotifier::FAILURE_OPTION ) );
     }
 
     public function testRemovesFormRevisionsToo(): void

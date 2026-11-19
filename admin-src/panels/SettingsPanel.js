@@ -5,6 +5,7 @@ import NumberControl from '../components/NumberControl';
 import SelectControl from '../components/SelectControl';
 import TextControl from '../components/TextControl';
 import ToggleControl from '../components/ToggleControl';
+import NotificationsCard from './NotificationsCard';
 import { setSetting } from '../state/actions';
 import { errorsFor } from '../state/errors';
 import { useDispatch, useStore } from '../state/StoreContext';
@@ -107,6 +108,8 @@ export default function SettingsPanel( { errorIndex } ) {
 					/>
 				) }
 			</Card>
+
+			<NotificationsCard errorIndex={ errorIndex } />
 
 			<Card className="quoteform_settings-group">
 				<h3>{ __( 'Visitors', 'quoteform' ) }</h3>

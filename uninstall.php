@@ -23,6 +23,7 @@ require_once __DIR__ . '/includes/Support/Capabilities.php';
 require_once __DIR__ . '/includes/Forms/FormPostType.php';
 require_once __DIR__ . '/includes/Entries/EntriesTable.php';
 require_once __DIR__ . '/includes/Entries/EntryPreferences.php';
+require_once __DIR__ . '/includes/Notifications/AdminNotifier.php';
 require_once __DIR__ . '/includes/Support/Uninstaller.php';
 
 Quoteform\Support\Uninstaller::run();

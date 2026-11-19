@@ -306,6 +306,31 @@ describe( 'acting on entries', () => {
 		expect( announce ).toHaveBeenCalledWith( '1 entry deleted.', { force: true } );
 	} );
 
+	it( 'warns about a failed notification email until dismissed', async () => {
+		listEntries.mockResolvedValue( result( [ item( 41 ) ] ) );
+		const user = userEvent.setup();
+
+		render( <Harness screenConfig={ { ...config, mailFailure: { entryId: 41 } } } /> );
+		await screen.findByText( 'Person 41' );
+
+		const text = "The last notification email could not be sent (entry #41). Check your site's email setup.";
+		const notice = screen.getByText( text ).closest( '.quoteform_notice' );
+		expect( notice ).toHaveClass( 'quoteform_notice--warning' );
+		expect( notice ).not.toHaveAttribute( 'role' );
+
+		await user.click( within( notice ).getByRole( 'button', { name: 'Dismiss this notice' } ) );
+		expect( screen.queryByText( text ) ).not.toBeInTheDocument();
+	} );
+
+	it( 'shows no mail warning without a failure', async () => {
+		listEntries.mockResolvedValue( result( [ item( 41 ) ] ) );
+
+		render( <Harness screenConfig={ { ...config, mailFailure: null } } /> );
+		await screen.findByText( 'Person 41' );
+
+		expect( screen.queryByText( /notification email could not be sent/ ) ).not.toBeInTheDocument();
+	} );
+
 	it( 'deletes one row after confirmation and returns focus on cancel', async () => {
 		listEntries.mockResolvedValue( result( [ item( 41 ) ] ) );
 		deleteEntry.mockResolvedValue( { id: 41, deleted: true, unread: 0 } );

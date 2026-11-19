@@ -3,6 +3,7 @@ export const LOAD_SUCCEEDED = 'load/succeeded';
 export const LOAD_FAILED = 'load/failed';
 export const SET_TITLE = 'form/setTitle';
 export const SET_SETTING = 'settings/set';
+export const SET_NOTIFICATION = 'notifications/set';
 export const SAVE_STARTED = 'save/started';
 export const SAVE_SUCCEEDED = 'save/succeeded';
 export const SAVE_FAILED = 'save/failed';
@@ -14,6 +15,7 @@ export const loadFailed = ( error ) => ( { type: LOAD_FAILED, error } );
 
 export const setTitle = ( title ) => ( { type: SET_TITLE, title } );
 export const setSetting = ( key, value ) => ( { type: SET_SETTING, key, value } );
+export const setNotification = ( key, value ) => ( { type: SET_NOTIFICATION, key, value } );
 
 export const saveStarted = () => ( { type: SAVE_STARTED } );
 export const saveSucceeded = ( form ) => ( { type: SAVE_SUCCEEDED, form } );

@@ -7,6 +7,7 @@ namespace Quoteform\Support;
 use Quoteform\Entries\EntriesTable;
 use Quoteform\Entries\EntryPreferences;
 use Quoteform\Forms\FormPostType;
+use Quoteform\Notifications\AdminNotifier;
 
 /**
  * Plugin silinərkən aparılan tam təmizlik — bax `Activation` sinfinin
@@ -69,6 +70,8 @@ final class Uninstaller
         self::deleteAllForms();
 
         EntriesTable::drop();
+
+        delete_option( AdminNotifier::FAILURE_OPTION );
     }
 
     private static function deleteAllForms(): void

@@ -10,6 +10,7 @@ use Quoteform\Admin\BuilderPage;
 use Quoteform\Admin\EntriesPage;
 use Quoteform\Entries\EntriesTable;
 use Quoteform\Forms\FormPostType;
+use Quoteform\Notifications\AdminNotifier;
 use Quoteform\Support\Capabilities;
 use Quoteform\Tests\Integration\Support\SeedsEntries;
 use WP_UnitTestCase;
@@ -249,6 +250,56 @@ final class EntriesPageTest extends WP_UnitTestCase
         $this->assertTrue( $config['hasDeletedForms'] );
         $this->assertFalse( $config['canDelete'] );
         $this->assertFalse( $config['canExport'] );
+    }
+
+    public function testTheConfigReportsAFailedNotificationEmail(): void
+    {
+        $this->signInWith( 'administrator' );
+        delete_option( AdminNotifier::FAILURE_OPTION );
+        $this->assertNull( EntriesPage::config()['mailFailure'] );
+
+        update_option( AdminNotifier::FAILURE_OPTION, [ 'entry_id' => 41, 'time' => time() ] );
+        $this->assertSame( [ 'entryId' => 41 ], EntriesPage::config()['mailFailure'] );
+
+        update_option( AdminNotifier::FAILURE_OPTION, 'x' );
+        $this->assertNull( EntriesPage::config()['mailFailure'] );
+
+        update_option( AdminNotifier::FAILURE_OPTION, [ 'entry_id' => 0, 'time' => time() ] );
+        $this->assertNull( EntriesPage::config()['mailFailure'] );
+
+        delete_option( AdminNotifier::FAILURE_OPTION );
+    }
+
+    public function testAnOldNotificationFailureIsNotReportedAndIsKept(): void
+    {
+        $this->signInWith( 'administrator' );
+        update_option( AdminNotifier::FAILURE_OPTION, [ 'entry_id' => 41, 'time' => time() - 8 * DAY_IN_SECONDS ] );
+        $this->assertNull( EntriesPage::config()['mailFailure'] );
+        $this->assertNotFalse( get_option( AdminNotifier::FAILURE_OPTION ) );
+
+        update_option( AdminNotifier::FAILURE_OPTION, [ 'entry_id' => 41, 'time' => time() - 6 * DAY_IN_SECONDS ] );
+        $this->assertSame( [ 'entryId' => 41 ], EntriesPage::config()['mailFailure'] );
+    }
+
+    public function testANotificationFailureWithoutAnIntegerTimeIsNotReported(): void
+    {
+        $this->signInWith( 'administrator' );
+        update_option( AdminNotifier::FAILURE_OPTION, [ 'entry_id' => 41 ] );
+        $this->assertNull( EntriesPage::config()['mailFailure'] );
+
+        update_option( AdminNotifier::FAILURE_OPTION, [ 'entry_id' => 41, 'time' => (string) time() ] );
+        $this->assertNull( EntriesPage::config()['mailFailure'] );
+    }
+
+    public function testOnlyAFormManagerSeesTheNotificationFailure(): void
+    {
+        update_option( AdminNotifier::FAILURE_OPTION, [ 'entry_id' => 41, 'time' => time() ] );
+
+        $this->signInWith( 'subscriber', [ Capabilities::VIEW_ENTRIES ] );
+        $this->assertNull( EntriesPage::config()['mailFailure'] );
+
+        $this->signInWith( 'subscriber', [ Capabilities::MANAGE_FORMS ] );
+        $this->assertSame( [ 'entryId' => 41 ], EntriesPage::config()['mailFailure'] );
     }
 
     public function testTheBadgeTextIsTranslatableAndEscaped(): void
